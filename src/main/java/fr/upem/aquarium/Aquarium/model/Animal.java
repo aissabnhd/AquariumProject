@@ -1,8 +1,9 @@
 package fr.upem.aquarium.Aquarium.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import fr.upem.aquarium.Aquarium.service.EspeceService;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import javax.persistence.*;
 
 import java.util.Date;
 import java.util.Objects;
@@ -19,7 +20,8 @@ public class Animal {
 
     private Sexe sexe;
 
-    //private Espece espece;
+    @ManyToOne
+    private Espece espece;
 
     private String signe_distinctif;
 
@@ -33,10 +35,16 @@ public class Animal {
     public Animal(String nom){
         this.nom = nom;
     }
-    public Animal(String nom, Sexe sexe, String signe_distinctif, Date date_arrive){
+    public Animal(String nom, String signe_distinctif){
+        this.nom = nom;
+        this.signe_distinctif = "test_espece";
+        this.signe_distinctif = "test_espece2";
+    }
+
+    public Animal(String nom, Sexe sexe, Espece espece, String signe_distinctif, Date date_arrive){
         this.nom = nom;
         this.sexe = sexe;
-        //this.espece = espece;
+        this.espece = espece;
         this.signe_distinctif = signe_distinctif;
         this.date_arrive = date_arrive;
     }
@@ -57,13 +65,13 @@ public class Animal {
         this.sexe = sexe;
     }
 
-   /* public Espece getEspece() {
+   public Espece getEspece() {
         return espece;
     }
 
     public void setEspece(Espece espece) {
         this.espece = espece;
-    }*/
+    }
 
     public String getSigne_distinctif() {
         return signe_distinctif;

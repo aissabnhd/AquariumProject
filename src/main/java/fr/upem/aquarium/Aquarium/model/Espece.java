@@ -32,6 +32,10 @@ public class Espece {
         this.id = id;
     }
 
+    public Long getId(){
+        return this.id;
+    }
+
     public Espece(String nom, int esperance, String regime, int menace){
         this.nom = nom;
         this.esperance = esperance;
@@ -85,5 +89,10 @@ public class Espece {
     @Override
     public int hashCode() {
         return Objects.hash(nom, esperance, regime, menace);
+    }
+
+    @Override
+    public String toString(){
+        return "espece : " + nom;
     }
 }
