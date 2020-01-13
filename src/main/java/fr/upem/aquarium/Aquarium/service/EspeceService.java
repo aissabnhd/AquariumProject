@@ -41,4 +41,7 @@ public class EspeceService {
     }
 
 
+    public void deleteAll() {
+        especeRepository.deleteAll();
+    }
 }

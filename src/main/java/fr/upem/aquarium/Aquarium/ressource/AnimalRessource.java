@@ -45,6 +45,9 @@ public class AnimalRessource {
         animalService.deleteAnimal(id);
     }
 
+    @DeleteMapping("animal")
+    public void deleteAll(){ animalService.deleteAll() ;}
+
     @PostMapping("animal/{id}")
     public Animal putAnimal(@PathVariable Long id, @RequestBody Animal animal) {
         return animalService.updateAnimal(id, animal);

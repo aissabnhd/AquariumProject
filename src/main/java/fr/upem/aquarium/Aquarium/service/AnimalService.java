@@ -41,4 +41,7 @@ public class AnimalService {
         }
 
 
+    public void deleteAll() {
+            animalRepository.deleteAll();
+    }
 }

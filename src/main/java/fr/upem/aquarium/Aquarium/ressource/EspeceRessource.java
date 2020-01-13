@@ -35,6 +35,9 @@ public class EspeceRessource {
         especeService.deleteEspece(id);
     }
 
+    @DeleteMapping("espece")
+    public void deleteAll(){ especeService.deleteAll(); }
+
     @PostMapping("espece/{id}")
     public Espece putEspece(@PathVariable Long id, @RequestBody Espece espece) {
         return especeService.updateEspece(id, espece);
