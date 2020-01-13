@@ -1,8 +1,18 @@
 package fr.upem.aquarium.Aquarium.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
+import static javax.persistence.GenerationType.AUTO;
+
+@Entity
 public class Espece {
+
+    @Id
+    @GeneratedValue(strategy = AUTO)
+    private Long id;
 
     private String nom;
 
@@ -16,6 +26,10 @@ public class Espece {
 
     public Espece(){
 
+    }
+
+    public void setId(Long id){
+        this.id = id;
     }
 
     public Espece(String nom, int esperance, String regime, int menace){
