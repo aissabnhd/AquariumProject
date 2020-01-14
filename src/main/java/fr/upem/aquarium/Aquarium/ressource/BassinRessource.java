@@ -36,12 +36,16 @@ public class BassinRessource {
 
     @GetMapping("bassins/{id}/{id2}")
     public void assignEspeceBassin(@PathVariable Long id, @PathVariable Long id2) {
-        //@PathVariable {id}
 
         bassinService.addEsepece(bassinService.getOne(id), especeService.getOne(id2));
-        //return bassinService.getOne(id);
+
     }
 
+
+    @DeleteMapping("bassins/{id}/{id2}")
+    public void removeEspeceBassin(@PathVariable Long id, @PathVariable Long id2){
+        bassinService.removeEspece(bassinService.getOne(id), especeService.getOne(id2));
+    }
 
     @DeleteMapping("bassin/{id}")
     public void deleteBassin(@PathVariable Long id) {

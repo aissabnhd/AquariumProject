@@ -91,6 +91,10 @@ public class Bassin {
         lst.add(espece);
     }
 
+    public void removeLst(Espece espece){
+        lst.remove(espece);
+    }
+
     public Bassin(){
 
     }

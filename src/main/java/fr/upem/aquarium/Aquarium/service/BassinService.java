@@ -53,4 +53,10 @@ public class BassinService {
         b.addLst(one.get());
         return bassinRepository.save(b);
     }
+
+    public Bassin removeEspece(Optional<Bassin> one, Optional<Espece> one1) {
+        Bassin b = one.get();
+        b.removeLst(one1.get());
+        return bassinRepository.save(b);
+    }
 }
