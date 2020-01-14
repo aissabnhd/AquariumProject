@@ -87,14 +87,6 @@ public class Bassin {
         this.lst = lst;
     }
 
-    public void addLst(Espece espece){
-        lst.add(espece);
-    }
-
-    public void removeLst(Espece espece){
-        lst.remove(espece);
-    }
-
     public Bassin(){
 
     }
