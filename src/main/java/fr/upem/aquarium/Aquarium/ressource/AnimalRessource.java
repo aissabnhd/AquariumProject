@@ -32,9 +32,9 @@ public class AnimalRessource {
         return animalService.getOne(id);
     }
 
-    @PostMapping("/animal_espece")
-    public Animal postAnimalWithEspece(@RequestBody Animal animal) {
-        Optional<Espece> e = (especeService.getOne(animal.getEspece().getId()));
+    @PostMapping("/animal_espece/{id}")
+    public Animal postAnimalWithEspece(@RequestBody Animal animal, @PathVariable Long id) {
+        Optional<Espece> e = (especeService.getOne(id));
         animal.setEspece(e.get());
         return animalService.createAnimal(animal);
     }
