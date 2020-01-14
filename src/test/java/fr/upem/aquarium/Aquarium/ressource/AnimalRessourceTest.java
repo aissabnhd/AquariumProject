@@ -5,9 +5,11 @@ import fr.upem.aquarium.Aquarium.model.Espece;
 import fr.upem.aquarium.Aquarium.model.Sexe;
 import fr.upem.aquarium.Aquarium.repository.AnimalRepository;
 import fr.upem.aquarium.Aquarium.service.AnimalService;
+import fr.upem.aquarium.Aquarium.service.EspeceService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -38,6 +40,9 @@ public class AnimalRessourceTest {
     @MockBean
     private AnimalRepository animalRepository;
 
+    @MockBean
+    private EspeceService especeService;
+
     @Autowired
     private TestRestTemplate restTemplate;
 
@@ -61,15 +66,23 @@ public class AnimalRessourceTest {
 
     @Test
     public void postAnimalEspece(){
-        // TODO
-        /*Espece espece = new Espece("Poisson", 10, "aucun", 0);
-        espece.setId(2L);
-        Animal animal = new Animal("Requin", Sexe.F, espece, null, new Date());
-        animal.setId(1L);
-        when(animalService.createAnimal(animal)).thenReturn(animal);
 
-        Animal result = this.restTemplate.postForObject("http://localhost:" + port + "/animal_espece", animal, Animal.class);
-        assertEquals(animal, result);*/
+        Espece espece = new Espece("Poisson", 10, "aucun", 0);
+        espece.setId(1L);
+        when(especeService.createEspece(espece)).thenReturn(espece);
+        Animal animal = new Animal("Requin", Sexe.F, null, null, null);
+        animal.setId(2L);
+        Animal animal2 = new Animal("Requin", Sexe.F, espece, null, null);
+        animal2.setId(1L);
+        when(animalService.createAnimalEspece(animal, espece)).thenReturn(animal2);
+        when(especeService.getOne(1L)).thenReturn(Optional.of(espece));
+
+        this.restTemplate.postForObject("http://localhost:" + port + "/espece", espece, Espece.class);
+        HttpEntity<Animal> request = new HttpEntity<>(animal);
+
+        Animal result = this.restTemplate.exchange("http://localhost:" + port + "/animal_espece/1",
+                HttpMethod.POST, request, Animal.class).getBody();
+        assertEquals(result, animal2);
     }
 
 

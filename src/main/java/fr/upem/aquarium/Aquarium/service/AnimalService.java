@@ -1,6 +1,7 @@
 package fr.upem.aquarium.Aquarium.service;
 
 import fr.upem.aquarium.Aquarium.model.Animal;
+import fr.upem.aquarium.Aquarium.model.Espece;
 import fr.upem.aquarium.Aquarium.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,10 @@ public class AnimalService {
 
     public void deleteAll() {
             animalRepository.deleteAll();
+    }
+
+    public Animal createAnimalEspece(Animal animal, Espece espece) {
+            animal.setEspece(espece);
+            return animalRepository.save(animal);
     }
 }
