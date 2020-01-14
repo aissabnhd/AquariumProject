@@ -35,6 +35,7 @@ public class Animal {
     public Animal(String nom){
         this.nom = nom;
     }
+
     public Animal(String nom, String signe_distinctif){
         this.nom = nom;
         this.signe_distinctif = "test_espece";

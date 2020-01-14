@@ -1,8 +1,7 @@
 package fr.upem.aquarium.Aquarium.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.AUTO;
