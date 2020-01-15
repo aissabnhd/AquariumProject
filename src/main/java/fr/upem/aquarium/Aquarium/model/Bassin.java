@@ -14,6 +14,8 @@ public class Bassin {
     @GeneratedValue(strategy = AUTO)
     private Long id;
 
+    private String nom;
+
     private int capacite_max;
 
     private int volume;
@@ -23,7 +25,8 @@ public class Bassin {
     @OneToMany
     private List<Espece> lst = new ArrayList<>();
 
-    public Bassin(int capacite_max, int volume, State etat){
+    public Bassin(String nom, int capacite_max, int volume, State etat){
+        this.nom = nom;
         this.capacite_max = capacite_max;
         this.volume = volume;
         this.etat = etat;
@@ -85,6 +88,14 @@ public class Bassin {
 
     public void setLst(List<Espece> lst) {
         this.lst = lst;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getNom(){
+        return nom;
     }
 
     public Bassin(){

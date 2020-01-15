@@ -55,7 +55,7 @@ public class BassinRessourceTest {
 
     @Test
     public void postBassin() {
-        Bassin bassin = new Bassin(100, 10, State.sale);
+        Bassin bassin = new Bassin("bassin 1", 100, 10, State.sale);
         bassin.setId(1L);
         when(bassinService.createBassin(bassin)).thenReturn(bassin);
 
@@ -75,7 +75,7 @@ public class BassinRessourceTest {
 
     @Test
     public void getOne() {
-        Bassin bassin = new Bassin(100, 10, State.propre);
+        Bassin bassin = new Bassin("bassin 1", 100, 10, State.propre);
         bassin.setId(1L);
         when(bassinService.getOne(1L)).thenReturn(Optional.of(bassin));
 
@@ -100,10 +100,10 @@ public class BassinRessourceTest {
 
     @Test
     public void putBassin() {
-        Bassin bassin = new Bassin(100, 10, State.propre);
+        Bassin bassin = new Bassin("bassin 1", 100, 10, State.propre);
         bassin.setId(1L);
 
-        Bassin bassin2 = new Bassin(500, 50, State.sale);
+        Bassin bassin2 = new Bassin("bassin 2", 500, 50, State.sale);
         bassin2.setId(1L);
 
         when(bassinService.createBassin(bassin)).thenReturn(bassin);

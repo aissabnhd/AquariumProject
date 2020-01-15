@@ -80,7 +80,7 @@ public class ActiviteRessourceTest {
 
     @Test
     public void postActiviteWithBassin(){
-        Bassin bassin = new Bassin(100, 10, State.sale);
+        Bassin bassin = new Bassin("bassin 1", 100, 10, State.sale);
         bassin.setId(1L);
 
         Activite activite = new Activite("Repas", null, null, true, null );
