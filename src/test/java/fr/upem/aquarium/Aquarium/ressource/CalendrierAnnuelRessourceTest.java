@@ -33,7 +33,7 @@ public class CalendrierAnnuelRessourceTest {
     private CalendrierAnnuelRepository calendrierAnnuelRepository;
 
     @MockBean
-    private ActiviteService activiteService;
+    private CalendrierHebdomadaire calendrierHebdomadaire;
 
     @Autowired
     private TestRestTemplate restTemplate;
