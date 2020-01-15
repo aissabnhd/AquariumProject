@@ -1,0 +1,9 @@
+<p>especes works!</p>
+<ul class="especes">
+  <li *ngFor="let e of especes">
+    <app-espece [espece]="e" (deleteEspece)="refreshEspeces($event)">
+
+    </app-espece>
+
+  </li>
+</ul>
