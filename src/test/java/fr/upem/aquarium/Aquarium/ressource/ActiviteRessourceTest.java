@@ -1,14 +1,12 @@
 package fr.upem.aquarium.Aquarium.ressource;
 
-import fr.upem.aquarium.Aquarium.model.Activite;
-import fr.upem.aquarium.Aquarium.model.Animal;
-import fr.upem.aquarium.Aquarium.model.Espece;
-import fr.upem.aquarium.Aquarium.model.Sexe;
+import fr.upem.aquarium.Aquarium.model.*;
 import fr.upem.aquarium.Aquarium.repository.ActiviteRepository;
 import fr.upem.aquarium.Aquarium.repository.AnimalRepository;
 import fr.upem.aquarium.Aquarium.repository.EspeceRepository;
 import fr.upem.aquarium.Aquarium.service.ActiviteService;
 import fr.upem.aquarium.Aquarium.service.AnimalService;
+import fr.upem.aquarium.Aquarium.service.BassinService;
 import fr.upem.aquarium.Aquarium.service.EspeceService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -43,6 +41,8 @@ public class ActiviteRessourceTest {
     private ActiviteService activiteService;
     @MockBean
     private ActiviteRepository activiteRepository;
+    @MockBean
+    private BassinService bassinService;
 
 
     @Autowired
@@ -57,7 +57,7 @@ public class ActiviteRessourceTest {
 
     @Test
     public void postActivite() {
-        Activite activite = new Activite("Repas", null, null, true);
+        Activite activite = new Activite("Repas", null, null, true, null);
         activite.setId(1L);
         when(activiteService.createActivite(activite)).thenReturn(activite);
 
@@ -67,7 +67,7 @@ public class ActiviteRessourceTest {
 
     @Test
     public void getOne() {
-        Activite activite = new Activite("Repas", null, null, true);
+        Activite activite = new Activite("Repas", null, null, true, null );
         activite.setId(1L);
         when(activiteService.getOne(1L)).thenReturn(Optional.of(activite));
         HttpEntity<Activite> request = new HttpEntity<>(activite);
@@ -76,6 +76,28 @@ public class ActiviteRessourceTest {
 
         Activite resultGet = this.restTemplate.getForObject("http://localhost:" + port + "/activite/1", Activite.class);
         assertEquals(activite, resultGet);
+    }
+
+    @Test
+    public void postActiviteWithBassin(){
+        Bassin bassin = new Bassin(100, 10, State.sale);
+        bassin.setId(1L);
+
+        Activite activite = new Activite("Repas", null, null, true, null );
+        activite.setId(2L);
+        Activite activite2 = new Activite("Repas", null, null, true, bassin );
+        activite2.setId(2L);
+
+        when(bassinService.createBassin(bassin)).thenReturn(bassin);
+        when(activiteService.createActiviteBassin(activite, bassin)).thenReturn(activite2);
+        when(bassinService.getOne(1L)).thenReturn(Optional.of(bassin));
+
+        this.restTemplate.postForObject("http://localhost:" + port + "/bassin", bassin, Bassin.class);
+        HttpEntity<Activite> request = new HttpEntity<>(activite);
+
+        Activite result = this.restTemplate.exchange("http://localhost:" + port + "/activite_bassin/1",
+                HttpMethod.POST, request, Activite.class).getBody();
+        assertEquals(result, activite2);
     }
 
     @Test
@@ -91,9 +113,9 @@ public class ActiviteRessourceTest {
 
     @Test
     public void putActivite() {
-        Activite activite = new Activite("Repas", null, null, false);
+        Activite activite = new Activite("Repas", null, null, false, null);
         activite.setId(1L);
-        Activite activite2 = new Activite("Jouer", null, null, true);
+        Activite activite2 = new Activite("Jouer", null, null, true, null);
         activite2.setId(1L);
         when(activiteService.createActivite(activite)).thenReturn(activite);
         when(activiteService.updateActivite(1L, activite2)).thenReturn(activite2);

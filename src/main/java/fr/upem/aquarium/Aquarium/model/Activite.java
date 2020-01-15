@@ -3,6 +3,7 @@ package fr.upem.aquarium.Aquarium.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import java.util.Date;
 import java.util.Objects;
@@ -24,11 +25,14 @@ public class Activite {
 
     private boolean public_act;
 
+    @OneToOne
+    private Bassin bassin;
+
     public Activite(){
 
     }
 
-    public Activite(String nom, Date date_debut, Date date_fin, boolean public_act){
+    public Activite(String nom, Date date_debut, Date date_fin, boolean public_act, Bassin b){
         this.nom = nom;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
@@ -73,6 +77,14 @@ public class Activite {
 
     public void setPublic_act(boolean public_act) {
         this.public_act = public_act;
+    }
+
+    public void setBassin(Bassin bassin){
+        this.bassin = bassin;
+    }
+
+    public Bassin getBassin(){
+        return this.bassin;
     }
 
     @Override

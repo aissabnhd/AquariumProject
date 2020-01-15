@@ -1,6 +1,7 @@
 package fr.upem.aquarium.Aquarium.service;
 
 import fr.upem.aquarium.Aquarium.model.Activite;
+import fr.upem.aquarium.Aquarium.model.Bassin;
 import fr.upem.aquarium.Aquarium.model.Espece;
 import fr.upem.aquarium.Aquarium.repository.ActiviteRepository;
 import fr.upem.aquarium.Aquarium.repository.EspeceRepository;
@@ -45,5 +46,11 @@ public class ActiviteService {
 
     public void deleteAll() {
         activiteRepository.deleteAll();
+    }
+
+    public Activite createActiviteBassin(Activite activite, Bassin bassin) {
+        activite.setBassin(bassin);
+        return activiteRepository.save(activite);
+
     }
 }
