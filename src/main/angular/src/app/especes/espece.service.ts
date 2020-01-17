@@ -22,4 +22,12 @@ export class EspeceService {
   createEspece(espece : Espece) : Observable<Espece>{
     return this.httpClient.post<Espece>('/espece', espece);
   }
+
+  updateEspece(espece : Espece, id : number) : Observable<Espece>{
+      return this.httpClient.post<Espece>('/espece/' + id, espece);
+    }
+
+    getEspece(id: number) : Observable<Espece>{
+    return this.httpClient.get<Espece>('/espece' + id);
+    }
 }

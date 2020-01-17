@@ -1,0 +1,27 @@
+<h2> CREATE : </h2>
+
+<form [formGroup]="especeForm">
+
+  <label>
+    Nom :
+    <input type="text" formControlName="nom">
+  </label>
+
+  <label>
+    Esperance :
+    <input type="text" formControlName="esperance">
+  </label>
+
+  <label>
+    Regime :
+    <input type="text" formControlName="regime">
+  </label>
+
+  <label>
+    Menace :
+    <input type="text" formControlName="menace">
+  </label>
+
+  <button (click)="onSubmit()">+</button>
+</form>
+

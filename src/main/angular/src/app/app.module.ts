@@ -7,12 +7,16 @@ import { EspecesComponent } from './especes/especes.component';
 import { EspeceComponent } from './especes/espece/espece.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EspeceCreateComponent } from './especes/espece-create/espece-create.component';
+import { EspeceUpdateComponent } from './especes/espece-update/espece-update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EspecesComponent,
     EspeceComponent,
+    EspeceCreateComponent,
+    EspeceUpdateComponent,
   ],
   imports: [
     BrowserModule,
