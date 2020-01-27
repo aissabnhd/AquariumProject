@@ -1,22 +1,12 @@
-<h1> Aquarium </h1>
 
-<input type="hidden" #selection>
-<div class="card-container">
-  <div class="card card-small" (click)="selection.value = 'espece'" tabindex="0">
-    <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+<div class="back">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <a routerLink="/especes">  Especes </a>
 
-    <span>Espece</span>
-  </div>
-  <div class="card card-small" (click)="selection.value = 'animal'" tabindex="0">
-    <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-    <span>Animal</span>
-  </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+<div class="data">
+  <router-outlet></router-outlet>
 </div>
-
-<!-- Terminal -->
-<div [ngSwitch]="selection.value">
-  <pre *ngSwitchCase="'espece'"><app-especes></app-especes></pre>
-  <pre *ngSwitchCase="'animal'"><p>Not available !</p></pre>
-
 </div>

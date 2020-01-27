@@ -28,6 +28,6 @@ export class EspeceService {
     }
 
     getEspece(id: number) : Observable<Espece>{
-    return this.httpClient.get<Espece>('/espece' + id);
+    return this.httpClient.get<Espece>('/espece/' + id);
     }
 }

@@ -10,6 +10,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EspeceCreateComponent } from './especes/espece-create/espece-create.component';
 import { EspeceUpdateComponent } from './especes/espece-update/espece-update.component';
 
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatIconModule} from "@angular/material/icon";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +26,10 @@ import { EspeceUpdateComponent } from './especes/espece-update/espece-update.com
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

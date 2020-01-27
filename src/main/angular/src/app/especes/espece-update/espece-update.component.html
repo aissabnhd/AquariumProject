@@ -1,10 +1,13 @@
 <h2> UPDATE : </h2>
 
+
 <form [formGroup]="especeForm">
+
   <label>
     Id :
-    <input type="text" formControlName="id">
+    <input type="text" formControlName="id" disabled>
   </label>
+
   <label>
     Nom :
     <input type="text" formControlName="nom">
@@ -25,6 +28,6 @@
     <input type="text" formControlName="menace">
   </label>
 
-  <button (click)="onSubmit()"> Change </button>
+  <button (click)="onSubmit()" routerLink="/especes"> Change </button>
 </form>
 
