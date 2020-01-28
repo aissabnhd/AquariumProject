@@ -1,33 +1,42 @@
-<h2> UPDATE : </h2>
+<br>
 
+<div class="title"> Modifiez votre espèce :</div>
+<br>
+<br>
 
 <form [formGroup]="especeForm">
-
+  <div class="item">
   <label>
     Id :
     <input type="text" formControlName="id" disabled>
   </label>
-
+  </div>
+  <div class="item">
   <label>
     Nom :
     <input type="text" formControlName="nom">
   </label>
-
+  </div>
+  <div class="item">
   <label>
     Esperance :
     <input type="text" formControlName="esperance">
   </label>
-
+  </div>
+  <div class="item">
   <label>
     Regime :
     <input type="text" formControlName="regime">
   </label>
-
+  </div>
+  <div class="item">
   <label>
     Menace :
     <input type="text" formControlName="menace">
   </label>
-
-  <button (click)="onSubmit()" routerLink="/especes"> Change </button>
+  </div>
 </form>
 
+<div class="submit">
+  <a title="Create" (click)="onSubmit()"  mat-fab routerLink="/especes">Change <mat-icon >person_add</mat-icon></a>
+</div>

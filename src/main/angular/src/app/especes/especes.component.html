@@ -1,12 +1,12 @@
-<button routerLink="/especes_create">Create</button>
-
-<h2> DISPLAY :</h2>
-
+<div class="title"> <span class="titleee">Voici les espèces disponibles :</span>
+  <a title="create" mat-fab routerLink="/especes_create"> Ajouter une espèce <mat-icon >create </mat-icon></a>
+</div>
 <ul class="especes">
   <li *ngFor="let e of especes">
     <app-espece [espece]="e" (deleteEspece)="refreshEspeces($event)">
 
     </app-espece>
-
+    <p><br /></p>
   </li>
 </ul>
+

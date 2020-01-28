@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {FormControl, FormGroup } from '@angular/forms';
+import {FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Espece } from '../espece';
 import { EspeceService } from '../espece.service'
 
@@ -9,16 +9,16 @@ import { EspeceService } from '../espece.service'
   styleUrls: ['./espece-create.component.css']
 })
 export class EspeceCreateComponent implements OnInit {
-  especeForm = new FormGroup({
-        nom: new FormControl(''),
-        esperance: new FormControl(''),
-        regime: new FormControl(''),
-        menace: new FormControl('')
+  especeForm = this.formBuilder.group({
+        nom: [null, Validators.required],
+        esperance: [null, Validators.required],
+        regime: [null, Validators.required],
+        menace: [null, Validators.required],
       });
 
    @Output()
    createEspece = new EventEmitter<Espece>();
-  constructor(private especeService : EspeceService) { }
+  constructor(private especeService : EspeceService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
   }

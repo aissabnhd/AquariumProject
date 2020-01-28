@@ -1,27 +1,36 @@
-<h2> CREATE : </h2>
+<br>
 
-<form [formGroup]="especeForm">
+<div class="title"> Créez votre nouvelle espèce :</div>
+<br>
+<br>
 
+  <div class="formulaire"><form [formGroup]="especeForm">
+  <div class="item">
   <label>
     Nom :
     <input type="text" formControlName="nom">
   </label>
-
-  <label>
-    Esperance :
+  </div>
+  <div class="item">
+    <label>
+    Espérance :
     <input type="text" formControlName="esperance">
   </label>
-
-  <label>
-    Regime :
+  </div>
+  <div class="item">
+    <label>
+    Régime :
     <input type="text" formControlName="regime">
   </label>
-
-  <label>
-    Menace :
+  </div>
+  <div class="item">
+    <label>
+    Menacé :
     <input type="text" formControlName="menace">
   </label>
-
-  <button (click)="onSubmit()"  routerLink="/especes">+</button>
+  </div>
 </form>
-
+    <div class="submit">
+    <a title="Create" (click)="onSubmit()"  mat-fab routerLink="/especes">Valider <mat-icon >person_add</mat-icon></a>
+    </div>
+  </div>

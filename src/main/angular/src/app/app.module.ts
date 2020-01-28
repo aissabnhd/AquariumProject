@@ -14,6 +14,12 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
+
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { EspeceFicheComponent } from './especes/espece-fiche/espece-fiche.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EspeceComponent,
     EspeceCreateComponent,
     EspeceUpdateComponent,
+    EspeceFicheComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -29,7 +37,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
