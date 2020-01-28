@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { EspeceFicheComponent } from './especes/espece-fiche/espece-fiche.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { EspeceFicheComponent } from './especes/espece-fiche/espece-fiche.compon
     EspeceCreateComponent,
     EspeceUpdateComponent,
     EspeceFicheComponent,
+    HomeComponent,
 
   ],
   imports: [
