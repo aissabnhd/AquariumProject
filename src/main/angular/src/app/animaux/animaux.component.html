@@ -1,0 +1,13 @@
+<div class="title"> <span class="titleee">Voici les animaux disponibles :</span>
+  <a title="create" mat-fab routerLink="/animal_create" (createAnimal)="refreshAnimaux($event)"> Ajouter un animal <mat-icon >create </mat-icon></a>
+
+</div>
+<ul class="especes">
+  <li *ngFor="let animal of animaux">
+    <app-animal [animal]="animal" (deleteAnimal)="refreshAnimaux($event)">
+
+    </app-animal>
+    <p><br /></p>
+  </li>
+</ul>
+

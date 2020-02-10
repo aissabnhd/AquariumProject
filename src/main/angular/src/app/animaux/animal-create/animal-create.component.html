@@ -1,0 +1,52 @@
+<br>
+
+<div class="title"> Créez votre nouvel animal :</div>
+<br>
+<br>
+
+<div class="formulaire"><form [formGroup]="animalForm">
+  <div class="item">
+    <label>
+      Nom :
+      <input type="text" formControlName="nom">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+    Sexe :
+    <select formControlName="sexe">
+      <option *ngFor="let sexe of sexes" [value]="sexe" >{{sexe.toString()}}</option>
+    </select>
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Espèce :
+      <select formControlName="espece">
+        <option *ngFor="let espece of especes" [value]="espece.id" >{{espece.nom}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Signe distinctif :
+      <input type="text" formControlName="signe_distinctif">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Date d'arrivée :
+      <input type="date" formControlName="date_arrivee">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Date départ :
+      <input type="date" formControlName="date_depart">
+    </label>
+  </div>
+</form>
+  <div class="submit">
+    <a title="Create" (click)="onSubmit()"  mat-fab routerLink="/animaux">Valider <mat-icon >person_add</mat-icon></a>
+  </div>
+</div>

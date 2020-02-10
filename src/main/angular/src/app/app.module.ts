@@ -20,6 +20,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { EspeceFicheComponent } from './especes/espece-fiche/espece-fiche.component';
 import { HomeComponent } from './home/home.component';
+import { AnimauxComponent } from './animaux/animaux.component';
+import { AnimalComponent } from './animaux/animal/animal.component';
+import { AnimalCreateComponent } from './animaux/animal-create/animal-create.component';
+import { AnimalUpdateComponent } from './animaux/animal-update/animal-update.component';
+import { AnimalFicheComponent } from './animaux/animal-fiche/animal-fiche.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +35,11 @@ import { HomeComponent } from './home/home.component';
     EspeceUpdateComponent,
     EspeceFicheComponent,
     HomeComponent,
+    AnimauxComponent,
+    AnimalComponent,
+    AnimalCreateComponent,
+    AnimalUpdateComponent,
+    AnimalFicheComponent,
 
   ],
   imports: [

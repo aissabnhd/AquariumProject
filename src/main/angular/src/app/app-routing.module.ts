@@ -7,6 +7,10 @@ import { EspeceCreateComponent } from './especes/espece-create/espece-create.com
 import { EspeceFicheComponent } from './especes/espece-fiche/espece-fiche.component';
 
 import {AppComponent} from './app.component'
+import {AnimauxComponent} from "./animaux/animaux.component";
+import {AnimalCreateComponent} from "./animaux/animal-create/animal-create.component";
+import {AnimalUpdateComponent} from "./animaux/animal-update/animal-update.component";
+import {AnimalFicheComponent} from "./animaux/animal-fiche/animal-fiche.component";
 
 
 const routes: Routes = [
@@ -14,8 +18,14 @@ const routes: Routes = [
   { path: 'especes_update/:id', component: EspeceUpdateComponent },
   { path: 'especes_create', component: EspeceCreateComponent },
   { path: 'especes', component: EspecesComponent },
+  { path: 'espece_fiche/:id', component: EspeceFicheComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'espece_fiche/:id', component: EspeceFicheComponent }
+  { path: 'animaux', component: AnimauxComponent },
+  { path: 'animal_create', component: AnimalCreateComponent },
+  { path: 'animal_update/:id', component: AnimalUpdateComponent },
+  { path: 'animal_fiche/:id', component: AnimalFicheComponent }
+
+
 ];
 
 @NgModule({
