@@ -11,10 +11,12 @@ import {AnimauxComponent} from "./animaux/animaux.component";
 import {AnimalCreateComponent} from "./animaux/animal-create/animal-create.component";
 import {AnimalUpdateComponent} from "./animaux/animal-update/animal-update.component";
 import {AnimalFicheComponent} from "./animaux/animal-fiche/animal-fiche.component";
+import {ConnexionComponent} from "./connexion/connexion.component";
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home',pathMatch: 'full' },
+  { path: 'connexion', component: ConnexionComponent },
   { path: 'especes_update/:id', component: EspeceUpdateComponent },
   { path: 'especes_create', component: EspeceCreateComponent },
   { path: 'especes', component: EspecesComponent },

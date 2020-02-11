@@ -35,8 +35,9 @@
     <input type="text" formControlName="menace">
   </label>
   </div>
-</form>
 
-<div class="submit">
-  <a title="Create" (click)="onSubmit()"  mat-fab routerLink="/especes">Change <mat-icon >person_add</mat-icon></a>
-</div>
+  <div class="button">
+    <button routerLink="/animaux" (click)="onSubmit()" type="submit" class="button" [disabled]="!especeForm.valid">Changer</button>
+
+  </div>
+</form>

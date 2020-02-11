@@ -28,4 +28,18 @@ export class AnimalComponent implements OnInit {
     )
   }
 
+
+
+  formatDate(nombre : number, chiffre : number) {
+    var temp = '' + nombre;
+    while ((temp.length < chiffre) && (temp = '0' + temp)) {}
+    return temp;
+  }
+
+  dateToString(d : Date){
+    let d2 = new Date(d);
+    return "" + this.formatDate(d2.getDay(), 2) + "/" + this.formatDate(d2.getMonth(), 2) + "/" + this.formatDate(d2.getFullYear(), 4);
+  }
+
+
 }

@@ -1,3 +1,18 @@
+li {
+  list-style: none;
+  display:block; float:left;;
+  width:20%;
+  margin-left: 20px;
+
+}
+
+div.title{
+  text-align: center;
+}
+
+span.titleee{
+  font-style: bold;
+}
 
 div.item{
   text-align: center;
@@ -8,16 +23,9 @@ div.item{
   margin-bottom: 20px;
   background: linear-gradient(#F4F9DC, #D09AC1);}
 
-div.title{
-  text-align: center;
-}
 
-div.submit{
-  text-align: center;
 
-}
-
-div.button {
+div.button{
   text-align: center;
 
 }

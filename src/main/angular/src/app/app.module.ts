@@ -25,6 +25,7 @@ import { AnimalComponent } from './animaux/animal/animal.component';
 import { AnimalCreateComponent } from './animaux/animal-create/animal-create.component';
 import { AnimalUpdateComponent } from './animaux/animal-update/animal-update.component';
 import { AnimalFicheComponent } from './animaux/animal-fiche/animal-fiche.component';
+import { ConnexionComponent } from './connexion/connexion.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AnimalFicheComponent } from './animaux/animal-fiche/animal-fiche.compon
     AnimalCreateComponent,
     AnimalUpdateComponent,
     AnimalFicheComponent,
+    ConnexionComponent,
 
   ],
   imports: [

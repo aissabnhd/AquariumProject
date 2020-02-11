@@ -25,19 +25,23 @@ export class AnimalUpdateComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     let animal: Animal;
-    this.animalService.getAnimal(this.id).subscribe(data => {
 
+
+      this.animalService.getAnimal(this.id).subscribe(data => {
         this.animalForm = new FormGroup({
           id: new FormControl(this.id),
           nom: new FormControl(data.nom),
           sexe: new FormControl(data.sexe),
           espece: new FormControl(data.espece.id),
           signe_distinctif: new FormControl(data.signe_distinctif),
-          date_arrivee: new FormControl(data.date_arrive),
+          date_arrive: new FormControl(data.date_arrive),
           date_depart: new FormControl(data.date_depart)
         });
+
       }
     );
+
+
     this.especeService.getAllEspeces().subscribe(
       data => this.especes = data
 

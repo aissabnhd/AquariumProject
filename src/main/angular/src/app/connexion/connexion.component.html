@@ -1,0 +1,22 @@
+<div class="title"> <span class="titleee">Connexion :</span>
+
+</div>
+<div class="formulaire"><form [formGroup]="connexionForm">
+  <div class="item">
+    <label>
+      Login :
+      <input type="text" formControlName="login">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Mot de passe :
+      <input type="password" formControlName="password">
+    </label>
+  </div>
+  <div class="button">
+    <button routerLink="/especes" (click)="onSubmit()" type="submit" class="button" [disabled]="!connexionForm.valid">Se connecter</button>
+
+  </div>
+</form>
+

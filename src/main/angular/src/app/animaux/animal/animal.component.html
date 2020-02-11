@@ -7,9 +7,9 @@
   <br>
   <div class="menace"> Signe distinctif : {{animal.signe_distinctif}} </div>
   <br>
-  <div class="date1"> Date d'arrivée : {{animal.date_arrive}} </div>
+  <div class="date1" *ngIf="animal.date_arrive"> Date d'arrivée : {{dateToString(animal.date_arrive)}} </div>
   <br>
-  <div class="date2"> Date de départ : {{animal.date_depart}} </div>
+  <div class="date2" *ngIf="animal.date_depart"> Date de départ : {{dateToString(animal.date_depart)}} </div>
   <br>
   <div class="plus"><a routerLink="/animal_fiche/{{animal.id}}">En savoir plus ...</a></div>
 

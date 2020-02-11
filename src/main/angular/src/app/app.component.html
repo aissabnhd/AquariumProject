@@ -3,8 +3,24 @@
   <mat-toolbar color="primary">
     <mat-toolbar-row>
       <span><a title="Home" class="icone" routerLink="home"> <img class="home" src="../../assets/img/logo.png" /> </a></span>
-      <span><a routerLink="/especes">  Especes </a></span>
-      <span><a routerLink="/animaux">  Animaux </a></span>
+      <a class="head" routerLink="/especes">  <span class="title">Especes </span></a>
+      <a class="head" routerLink="/animaux">  <span class="title">Animaux </span></a>
+     <span class="log" *ngIf="!isConnected">
+       <div class="updown">
+       Connexion anonyme :
+       </div>
+       <div class="updown">
+         <a class="login" routerLink="/connexion"> Se connecter </a>
+       </div>
+     </span>
+      <span class="log" *ngIf="isConnected">
+       <div class="updown">
+       Bienvenu Blaze :
+       </div>
+       <div class="updown">
+         <a class="login" routerLink="/home"> Se déconnecter </a>
+       </div>
+      </span>
 
     </mat-toolbar-row>
   </mat-toolbar>

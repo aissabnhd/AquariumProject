@@ -42,7 +42,7 @@
   <div class="item">
     <label>
       Date d'arrivée :
-      <input type="date" formControlName="date_arrivee">
+      <input type="date" formControlName="date_arrive">
     </label>
   </div>
   <div class="item">
@@ -51,8 +51,8 @@
       <input type="date" formControlName="date_depart">
     </label>
   </div>
-</form>
+  <div class="button">
+    <button routerLink="/animaux" (click)="onSubmit()" type="submit" class="button" [disabled]="!animalForm.valid">Changer</button>
 
-<div class="submit">
-  <a title="Create" (click)="onSubmit()"  mat-fab routerLink="/animaux">Change <mat-icon >person_add</mat-icon></a>
-</div>
+  </div>
+</form>
