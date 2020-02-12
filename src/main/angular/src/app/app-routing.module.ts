@@ -13,6 +13,8 @@ import {AnimalUpdateComponent} from "./animaux/animal-update/animal-update.compo
 import {AnimalFicheComponent} from "./animaux/animal-fiche/animal-fiche.component";
 import {ConnexionComponent} from "./connexion/connexion.component";
 
+import {BassinsComponent} from "./bassins/bassins.component";
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home',pathMatch: 'full' },
@@ -25,7 +27,8 @@ const routes: Routes = [
   { path: 'animaux', component: AnimauxComponent },
   { path: 'animal_create', component: AnimalCreateComponent },
   { path: 'animal_update/:id', component: AnimalUpdateComponent },
-  { path: 'animal_fiche/:id', component: AnimalFicheComponent }
+  { path: 'animal_fiche/:id', component: AnimalFicheComponent },
+  { path: 'bassins', component: BassinsComponent }
 
 
 ];

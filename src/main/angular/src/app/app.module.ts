@@ -26,6 +26,7 @@ import { AnimalCreateComponent } from './animaux/animal-create/animal-create.com
 import { AnimalUpdateComponent } from './animaux/animal-update/animal-update.component';
 import { AnimalFicheComponent } from './animaux/animal-fiche/animal-fiche.component';
 import { ConnexionComponent } from './connexion/connexion.component';
+import { BassinsComponent } from './bassins/bassins.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ConnexionComponent } from './connexion/connexion.component';
     AnimalUpdateComponent,
     AnimalFicheComponent,
     ConnexionComponent,
+    BassinsComponent,
 
   ],
   imports: [
