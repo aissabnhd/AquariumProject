@@ -1,0 +1,38 @@
+<div class="title"> Modifiez les espèces de votre bassin :</div>
+<br>
+<br>
+
+<div class="item">
+<ul class="especes"*ngIf="bassin" >
+  <p> Espèce(s) présente(s) : </p>
+  <p *ngIf="!bassin"> Aucune espèce dans ce bassin </p>
+
+  <li  *ngFor="let e of bassin.lst">
+    {{e.nom}}
+    <a title="delete" mat-fab (click)="onDelete(e.id)"><mat-icon>delete</mat-icon></a>
+
+    <p><br /></p>
+  </li>
+</ul>
+</div>
+
+<div class="formulaire">
+  <form [formGroup]="bassinAjoutForm" *ngIf="bassinAjoutForm">
+
+  <div class="item">
+    <label>
+      Espèce(s) à ajouter (Encore {{bassin.capacite_max - bassin.lst.length}} place(s) disponible(s)) :
+      <select formControlName="ajout">
+        <option *ngFor="let espece of espece_ajout" [value]="espece.id" >{{espece.nom}}</option>
+      </select>
+    </label>
+  </div>
+
+
+</form>
+  <div class="button">
+    <button (click)="onSubmit()"class="button"  *ngIf="bassinAjoutForm" [disabled]="espece_ajout.length == 0">Ajouter cette espèce</button>
+
+  </div>
+
+</div>

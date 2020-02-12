@@ -31,6 +31,7 @@ import { BassinCreateComponent } from './bassins/bassin-create/bassin-create.com
 import { BassinComponent } from './bassins/bassin/bassin.component';
 import { BassinUpdateComponent } from './bassins/bassin-update/bassin-update.component';
 import { BassinFicheComponent } from './bassins/bassin-fiche/bassin-fiche.component';
+import { BassinModifierEspeceComponent } from './bassins/bassin-modifier-espece/bassin-modifier-espece.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { BassinFicheComponent } from './bassins/bassin-fiche/bassin-fiche.compon
     BassinComponent,
     BassinUpdateComponent,
     BassinFicheComponent,
+    BassinModifierEspeceComponent,
 
   ],
   imports: [
