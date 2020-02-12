@@ -1,0 +1,17 @@
+<div class="block">
+  <div class="nom"> Nom : {{bassin.nom}} </div>
+  <br>
+  <div class="esperance"> Etat : {{bassin.etat}} </div>
+  <br>
+  <div class="regime"> Volume : {{bassin.volume}} </div>
+  <br>
+  <div class="menace"> Capacité maximale : {{bassin.capacite_max}} </div>
+
+  <br>
+  <div class="plus"><a routerLink="/bassin_fiche/{{bassin.id}}">En savoir plus ...</a></div>
+
+  <div class="links">
+    <a title="delete" mat-fab (click)="onDelete()" routerLink="/bassins"><mat-icon>delete</mat-icon></a>
+    <a title="update" mat-fab routerLink="/bassin_update/{{bassin.id}}"> <mat-icon >ballot</mat-icon></a>
+  </div>
+</div>

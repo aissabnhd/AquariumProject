@@ -1,0 +1,44 @@
+<div class="title"> Modifiez votre bassin :</div>
+<br>
+<br>
+
+<div class="formulaire"><form [formGroup]="bassinForm">
+  <div class="item">
+    <label>
+      Id :
+      <input type="text" formControlName="id" disabled>
+    </label>
+  </div><br>
+  <div class="item">
+    <label>
+      Nom :
+      <input type="text" formControlName="nom">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Capacité maximale :
+      <input type="number" formControlName="capacite_max">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Volume :
+      <input type="number" formControlName="volume">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Etat :
+      <select formControlName="etat">
+        <option *ngFor="let state of states" [value]="state" >{{state.toString()}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="button">
+    <button routerLink="/bassins" (click)="onSubmit()" type="submit" class="button" [disabled]="!bassinForm.valid">Créer</button>
+
+  </div>
+
+</form>
+</div>

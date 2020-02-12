@@ -14,6 +14,9 @@ import {AnimalFicheComponent} from "./animaux/animal-fiche/animal-fiche.componen
 import {ConnexionComponent} from "./connexion/connexion.component";
 
 import {BassinsComponent} from "./bassins/bassins.component";
+import {BassinCreateComponent} from "./bassins/bassin-create/bassin-create.component";
+import {BassinUpdateComponent} from "./bassins/bassin-update/bassin-update.component";
+import {BassinFicheComponent} from "./bassins/bassin-fiche/bassin-fiche.component";
 
 
 const routes: Routes = [
@@ -28,7 +31,12 @@ const routes: Routes = [
   { path: 'animal_create', component: AnimalCreateComponent },
   { path: 'animal_update/:id', component: AnimalUpdateComponent },
   { path: 'animal_fiche/:id', component: AnimalFicheComponent },
-  { path: 'bassins', component: BassinsComponent }
+  { path: 'bassins', component: BassinsComponent },
+  { path: 'bassin_create', component: BassinCreateComponent },
+    { path: 'bassin_update/:id', component: BassinUpdateComponent },
+      { path: 'bassin_fiche/:id', component: BassinFicheComponent },
+
+
 
 
 ];

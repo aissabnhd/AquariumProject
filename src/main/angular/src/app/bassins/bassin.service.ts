@@ -19,8 +19,8 @@ export class BassinService {
     return this.httpClient.delete('/bassin/' + id);
   }
 
-  createBassin(bassin : Bassin, id : number) : Observable<Bassin>{
-    return this.httpClient.post<Bassin>('/bassin/' + id, bassin);
+  createBassin(bassin : Bassin) : Observable<Bassin>{
+    return this.httpClient.post<Bassin>('/bassin', bassin);
   }
 
   updateBassin(bassin : Bassin, id : number) : Observable<Bassin>{

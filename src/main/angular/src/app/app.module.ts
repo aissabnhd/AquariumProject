@@ -27,6 +27,10 @@ import { AnimalUpdateComponent } from './animaux/animal-update/animal-update.com
 import { AnimalFicheComponent } from './animaux/animal-fiche/animal-fiche.component';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { BassinsComponent } from './bassins/bassins.component';
+import { BassinCreateComponent } from './bassins/bassin-create/bassin-create.component';
+import { BassinComponent } from './bassins/bassin/bassin.component';
+import { BassinUpdateComponent } from './bassins/bassin-update/bassin-update.component';
+import { BassinFicheComponent } from './bassins/bassin-fiche/bassin-fiche.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,10 @@ import { BassinsComponent } from './bassins/bassins.component';
     AnimalFicheComponent,
     ConnexionComponent,
     BassinsComponent,
+    BassinCreateComponent,
+    BassinComponent,
+    BassinUpdateComponent,
+    BassinFicheComponent,
 
   ],
   imports: [
