@@ -28,7 +28,10 @@ export class BassinModifierEspeceComponent implements OnInit {
           data2 => {
             this.bassin = data,
             this.espece_ajout = data2,
-              this.extracted()
+              this.extracted(),
+              this.bassinAjoutForm.get('ajout').reset()
+              console.log('espece_ajout :'),
+              console.log(this.espece_ajout)
 
           }
         );
@@ -57,20 +60,6 @@ export class BassinModifierEspeceComponent implements OnInit {
 
     }
   }
-
-  onSubmit() {
-
-    let id = this.bassinAjoutForm.get('ajout').value;
-    console.log(id);
-    this.bassinService.assignEspeceBassin(this.bassin.id, id).subscribe(
-      data => {
-        this.updateBassin.emit(data),
-          this.refresh()
-      }
-
-    )
-  }
-
   onDelete(id : number) {
     this.bassinService.removeEspeceBassin(this.bassin.id, id).subscribe(
       data => {
@@ -81,4 +70,15 @@ export class BassinModifierEspeceComponent implements OnInit {
     )
 
   }
+
+   onAdd(id : number) {
+      this.bassinService.assignEspeceBassin(this.bassin.id, id).subscribe(
+        data => {
+          this.updateBassin.emit(data),
+            this.refresh()
+        }
+
+      )
+
+    }
 }
