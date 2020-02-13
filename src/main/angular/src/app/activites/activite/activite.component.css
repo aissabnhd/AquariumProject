@@ -1,0 +1,18 @@
+.nom{
+  background-color: green;
+  text-align: center;
+
+}
+
+div.links{
+  text-align : right;
+}
+
+div.block{
+  border:1px solid;
+
+}
+
+div.plus{
+  text-align: left;
+}

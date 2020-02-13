@@ -1,0 +1,64 @@
+<br>
+
+<div class="title"> Créez votre nouvelle activité :</div>
+<br>
+<br>
+
+<div class="formulaire"><form [formGroup]="activiteForm">
+  <div class="item">
+    <label>
+      Nom :
+      <input type="text" formControlName="nom">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Public :
+      <select formControlName="public_act">
+        <option [value]="true" > Oui</option>
+        <option [value]="false" > Non</option>
+      </select>
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Bassin :
+      <select formControlName="bassin">
+        <option *ngFor="let bassin of bassins" [value]="bassin.id" >{{bassin.nom}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Date de début :
+      <input type="date" formControlName="date_debut">
+    </label>
+  </div>
+  <div class="item">
+  <label>
+    Heure de début :
+    <input type="time" formControlName="heure_debut" name="appt"
+           min="09:00" max="23:00" required>
+  </label>
+</div>
+
+  <div class="item">
+    <label>
+      Date de fin :
+      <input type="date" formControlName="date_fin">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Heure de fin :
+      <input type="time" formControlName="heure_fin" name="appt"
+             min="09:00" max="23:00" required>
+    </label>
+  </div>
+  <div class="button">
+    <button routerLink="/activites" (click)="onSubmit()" type="submit" class="button" [disabled]="!activiteForm.valid">Créer</button>
+
+  </div>
+
+</form>
+</div>

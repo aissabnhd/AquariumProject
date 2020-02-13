@@ -37,6 +37,7 @@ public class Activite {
         this.date_debut = date_debut;
         this.date_fin = date_fin;
         this.public_act = public_act;
+        this.bassin = b;
     }
 
     public Long getId() {

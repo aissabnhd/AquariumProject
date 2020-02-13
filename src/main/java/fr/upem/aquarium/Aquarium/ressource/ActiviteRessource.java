@@ -55,4 +55,11 @@ public class ActiviteRessource {
     public Activite putActivite(@PathVariable Long id, @RequestBody Activite activite) {
         return activiteService.updateActivite(id, activite);
     }
+
+    @PostMapping("activite_update/{id}/{id2}")
+    public Activite putActivite(@PathVariable Long id, @PathVariable Long id2, @RequestBody Activite activite) {
+        Optional<Bassin> e = (bassinService.getOne(id2));
+        activite.setBassin(e.get());
+        return activiteService.updateActivite(id, activite);
+    }
 }

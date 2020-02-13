@@ -38,6 +38,11 @@ import { SecteurCreateComponent } from './secteurs/secteur-create/secteur-create
 import { SecteurUpdateComponent } from './secteurs/secteur-update/secteur-update.component';
 import { SecteurFicheComponent } from './secteurs/secteur-fiche/secteur-fiche.component';
 import { SecteurModifierBassinComponent } from './secteurs/secteur-modifier-bassin/secteur-modifier-bassin.component';
+import { ActivitesComponent } from './activites/activites.component';
+import { ActiviteComponent } from './activites/activite/activite.component';
+import { ActiviteCreateComponent } from './activites/activite-create/activite-create.component';
+import { ActiviteFicheComponent } from './activites/activite-fiche/activite-fiche.component';
+import { ActiviteUpdateComponent } from './activites/activite-update/activite-update.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +71,11 @@ import { SecteurModifierBassinComponent } from './secteurs/secteur-modifier-bass
     SecteurUpdateComponent,
     SecteurFicheComponent,
     SecteurModifierBassinComponent,
+    ActivitesComponent,
+    ActiviteComponent,
+    ActiviteCreateComponent,
+    ActiviteFicheComponent,
+    ActiviteUpdateComponent,
 
   ],
   imports: [

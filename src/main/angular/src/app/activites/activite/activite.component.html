@@ -1,0 +1,21 @@
+<div class="block">
+  <div class="nom"> Nom : {{activite.nom}} </div>
+  <div class="esperance">
+    <p *ngIf="activite.public_act"> Activité publique </p>
+    <p *ngIf="!activite.public_act"> Activité privée </p>
+     </div>
+  <div class="esperance">
+    Bassin : {{activite.bassin.nom}}
+  </div>
+  <br>
+  <div class="date1" *ngIf="activite.date_debut"> Date de début : {{dateToString(activite.date_debut)}} </div>
+  <br>
+  <div class="date2" *ngIf="activite.date_fin"> Date de fin : {{dateToString(activite.date_fin)}} </div>
+  <br>
+  <div class="plus"><a routerLink="/activite_fiche/{{activite.id}}">En savoir plus ...</a></div>
+
+  <div class="links">
+    <a title="delete" mat-fab (click)="onDelete()" routerLink="/activites"><mat-icon>delete</mat-icon></a>
+   <a title="update" mat-fab routerLink="/activite_update/{{activite.id}}"> <mat-icon >ballot</mat-icon></a>
+  </div>
+</div>

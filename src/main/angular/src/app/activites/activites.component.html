@@ -1,0 +1,15 @@
+<div class="title"> <span class="titleee">Voici les activites disponibles :</span>
+  <a title="create" mat-fab routerLink="/activite_create" (createActivite)="refreshActivites($event)"> Ajouter une activite <mat-icon >create </mat-icon></a>
+
+</div>
+
+<ul class="especes">
+  <li *ngFor="let activite of activites">
+    <app-activite [activite]="activite" (deleteActivite)="refreshActivites($event)">
+
+    </app-activite>
+    <p><br /></p>
+  </li>
+</ul>
+
+
