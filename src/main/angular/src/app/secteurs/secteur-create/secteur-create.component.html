@@ -1,0 +1,26 @@
+<br>
+
+<div class="title"> Créez votre nouveau secteur :</div>
+<br>
+<br>
+
+<div class="formulaire"><form [formGroup]="secteurForm">
+  <div class="item">
+    <label>
+      Nom :
+      <input type="text" formControlName="nom">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Localisation :
+      <input type="text" formControlName="localisation">
+    </label>
+  </div>
+  <div class="button">
+    <button routerLink="/secteurs" (click)="onSubmit()" type="submit" class="button" [disabled]="!secteurForm.valid">Créer</button>
+
+  </div>
+
+</form>
+</div>

@@ -1,0 +1,15 @@
+<div class="title"> <span class="titleee">Voici les secteurs disponibles :</span>
+  <a title="create" mat-fab routerLink="/secteur_create" (createSecteur)="refreshSecteur($event)"> Ajouter un secteur <mat-icon >create </mat-icon></a>
+
+</div>
+
+
+<ul class="especes">
+  <li *ngFor="let secteur of secteurs">
+    <app-secteur [secteur]="secteur" (deleteSecteur)="refreshSecteurs($event)">
+
+    </app-secteur>
+    <p><br /></p>
+  </li>
+</ul>
+

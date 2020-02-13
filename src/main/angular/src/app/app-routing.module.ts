@@ -19,6 +19,12 @@ import {BassinUpdateComponent} from "./bassins/bassin-update/bassin-update.compo
 import {BassinFicheComponent} from "./bassins/bassin-fiche/bassin-fiche.component";
 import {BassinModifierEspeceComponent} from "./bassins/bassin-modifier-espece/bassin-modifier-espece.component";
 
+import {SecteursComponent} from "./secteurs/secteurs.component";
+import {SecteurCreateComponent} from "./secteurs/secteur-create/secteur-create.component";
+import {SecteurUpdateComponent} from "./secteurs/secteur-update/secteur-update.component";
+import {SecteurFicheComponent} from "./secteurs/secteur-fiche/secteur-fiche.component";
+import {SecteurModifierBassinComponent} from "./secteurs/secteur-modifier-bassin/secteur-modifier-bassin.component";
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home',pathMatch: 'full' },
@@ -37,6 +43,15 @@ const routes: Routes = [
   { path: 'bassin_update/:id', component: BassinUpdateComponent },
   { path: 'bassin_fiche/:id', component: BassinFicheComponent },
   { path: 'bassin_modifier_espece/:id', component: BassinModifierEspeceComponent },
+  { path: 'secteurs', component: SecteursComponent },
+  { path: 'secteur_create', component: SecteurCreateComponent },
+  { path: 'secteur_update/:id', component: SecteurUpdateComponent },
+  { path: 'secteur_fiche/:id', component: SecteurFicheComponent },
+  { path: 'secteur_modifier_bassin/:id', component: SecteurModifierBassinComponent },
+
+
+
+
 
 
 

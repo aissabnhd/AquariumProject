@@ -1,0 +1,31 @@
+<div class="title"> Modifiez les bassins de votre secteurs :</div>
+<br>
+<br>
+
+<div class="item">
+  <ul class="especes">
+    <p class="titre" *ngIf="secteur.lstBassin.length != 0" > Bassin(s) présente(s) : </p>
+    <p class="titre" *ngIf="secteur.lstBassin.length == 0"> Aucun bassin dans ce secteur </p>
+
+    <li  *ngFor="let b of secteur.lstBassin">
+      {{b.nom}}
+      <a title="delete" mat-fab (click)="onDelete(b.id)"><mat-icon>delete</mat-icon></a>
+
+      <p><br /></p>
+    </li>
+  </ul>
+</div>
+
+<div class="item">
+  <ul class="especes" >
+    <p class="titre" *ngIf="bassin_ajout.length != 0"> Bassin(s) à ajouter :</p>
+    <p  class="titre" *ngIf="bassin_ajout.length == 0"> Aucun bassin disponible </p>
+
+    <li  *ngFor="let b of bassin_ajout">
+      {{b.nom}}
+      <a title="delete"  mat-fab (click)="onAdd(b.id)"><mat-icon>add_shopping_cart</mat-icon></a>
+
+      <p><br /></p>
+    </li>
+  </ul>
+</div>

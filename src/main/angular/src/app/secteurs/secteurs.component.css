@@ -1,0 +1,15 @@
+li {
+  list-style: none;
+  display:block; float:left;;
+  width:20%;
+  margin-left: 20px;
+
+}
+
+div.title{
+  text-align: center;
+}
+
+span.titleee{
+  font-style: bold;
+}

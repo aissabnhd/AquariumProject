@@ -1,0 +1,16 @@
+<div class="block">
+  <div class="nom"> Nom : {{secteur.nom}} </div>
+  <br>
+  <div class="esperance"> Localisation : {{secteur.localisation}} </div>
+  <br>
+ <div class="plus"><a routerLink="/secteur_modifier_bassin/{{secteur.id}}">Modifier ses bassins</a></div>
+
+
+  <br>
+  <div class="plus"><a routerLink="/secteur_fiche/{{secteur.id}}">En savoir plus ...</a></div>
+
+  <div class="links">
+    <a title="delete" mat-fab (click)="onDelete()" routerLink="/secteurs"><mat-icon>delete</mat-icon></a>
+    <a title="update" mat-fab routerLink="/secteur_update/{{secteur.id}}"> <mat-icon >ballot</mat-icon></a>
+  </div>
+</div>

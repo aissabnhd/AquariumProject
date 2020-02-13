@@ -32,6 +32,12 @@ import { BassinComponent } from './bassins/bassin/bassin.component';
 import { BassinUpdateComponent } from './bassins/bassin-update/bassin-update.component';
 import { BassinFicheComponent } from './bassins/bassin-fiche/bassin-fiche.component';
 import { BassinModifierEspeceComponent } from './bassins/bassin-modifier-espece/bassin-modifier-espece.component';
+import { SecteursComponent } from './secteurs/secteurs.component';
+import { SecteurComponent } from './secteurs/secteur/secteur.component';
+import { SecteurCreateComponent } from './secteurs/secteur-create/secteur-create.component';
+import { SecteurUpdateComponent } from './secteurs/secteur-update/secteur-update.component';
+import { SecteurFicheComponent } from './secteurs/secteur-fiche/secteur-fiche.component';
+import { SecteurModifierBassinComponent } from './secteurs/secteur-modifier-bassin/secteur-modifier-bassin.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +60,12 @@ import { BassinModifierEspeceComponent } from './bassins/bassin-modifier-espece/
     BassinUpdateComponent,
     BassinFicheComponent,
     BassinModifierEspeceComponent,
+    SecteursComponent,
+    SecteurComponent,
+    SecteurCreateComponent,
+    SecteurUpdateComponent,
+    SecteurFicheComponent,
+    SecteurModifierBassinComponent,
 
   ],
   imports: [
