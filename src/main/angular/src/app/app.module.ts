@@ -44,6 +44,7 @@ import { ActiviteCreateComponent } from './activites/activite-create/activite-cr
 import { ActiviteFicheComponent } from './activites/activite-fiche/activite-fiche.component';
 import { ActiviteUpdateComponent } from './activites/activite-update/activite-update.component';
 import { EspeceSearchComponent } from './especes/espece-search/espece-search.component';
+import { AnimalSearchComponent } from './animaux/animal-search/animal-search.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { EspeceSearchComponent } from './especes/espece-search/espece-search.com
     ActiviteFicheComponent,
     ActiviteUpdateComponent,
     EspeceSearchComponent,
+    AnimalSearchComponent,
 
   ],
   imports: [

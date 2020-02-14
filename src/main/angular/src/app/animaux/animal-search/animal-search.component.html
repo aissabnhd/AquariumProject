@@ -1,0 +1,69 @@
+<br>
+
+<div class="title"> Recherche sur les animaux :</div>
+<br>
+<br>
+
+<form [formGroup]="animalForm">
+  <div class="item">
+    <label>
+      Id :
+      <input type="number" formControlName="id">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Nom :
+      <input type="text" formControlName="nom">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Sexe :
+      <select formControlName="sexe">
+        <option  [value]="null" > Aucun </option>
+        <option *ngFor="let sexe of sexes" [value]="sexe" >{{sexe.toString()}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Espèce :
+      <select formControlName="espece">
+        <option  [value]="null" > Aucune </option>
+        <option *ngFor="let espece of especes" [value]="espece.id" >{{espece.nom}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Signe distinctif :
+      <input type="text" formControlName="signe_distinctif">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Date d'arrivée :
+      <input type="date" formControlName="date_arrive">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Date départ :
+      <input type="date" formControlName="date_depart">
+    </label>
+  </div>
+  <div class="button">
+    <button  (click)="onSubmit()" type="submit" class="button">Rechercher</button>
+    <button routerLink="/animaux" type="submit" class="button">Retour</button>
+  </div>
+</form>
+
+<ul class="especes">
+  <li *ngFor="let animal of animaux">
+    <app-animal [animal]="animal" (deleteAnimal)="refreshAnimaux($event)">
+
+    </app-animal>
+    <p><br /></p>
+  </li>
+</ul>

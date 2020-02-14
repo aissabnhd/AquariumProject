@@ -12,6 +12,8 @@ import {AnimauxComponent} from "./animaux/animaux.component";
 import {AnimalCreateComponent} from "./animaux/animal-create/animal-create.component";
 import {AnimalUpdateComponent} from "./animaux/animal-update/animal-update.component";
 import {AnimalFicheComponent} from "./animaux/animal-fiche/animal-fiche.component";
+import {AnimalSearchComponent} from "./animaux/animal-search/animal-search.component";
+
 import {ConnexionComponent} from "./connexion/connexion.component";
 
 import {BassinsComponent} from "./bassins/bassins.component";
@@ -47,6 +49,7 @@ const routes: Routes = [
   { path: 'animal_create', component: AnimalCreateComponent },
   { path: 'animal_update/:id', component: AnimalUpdateComponent },
   { path: 'animal_fiche/:id', component: AnimalFicheComponent },
+  { path: 'animal_search', component: AnimalSearchComponent },
 
   { path: 'bassins', component: BassinsComponent },
   { path: 'bassin_create', component: BassinCreateComponent },

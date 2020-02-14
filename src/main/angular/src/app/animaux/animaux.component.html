@@ -2,6 +2,10 @@
   <a title="create" mat-fab routerLink="/animal_create" (createAnimal)="refreshAnimaux($event)"> Ajouter un animal <mat-icon >create </mat-icon></a>
 
 </div>
+<div class="title">
+  <span class="titleee">Effectuer une recherche : </span>
+  <a title="create" routerLink="/animal_search">Rechercher un animal</a>
+</div>
 <ul class="especes">
   <li *ngFor="let animal of animaux">
     <app-animal [animal]="animal" (deleteAnimal)="refreshAnimaux($event)">

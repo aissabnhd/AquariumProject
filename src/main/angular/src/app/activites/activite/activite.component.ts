@@ -36,7 +36,7 @@ export class ActiviteComponent implements OnInit {
 
   dateToString(d : Date){
     let d2 = new Date(d);
-    return "" + this.formatDate(d2.getDay(), 2) + "/" + this.formatDate(d2.getMonth(), 2) + "/" + this.formatDate(d2.getFullYear(), 4) + '-> ' + this.formatDate(d2.getHours(), 2) + 'h' + this.formatDate(d2.getMinutes(), 2);
+    return "" + this.formatDate(d2.getDate(), 2) + "/" + this.formatDate(d2.getMonth()+1, 2) + "/" + this.formatDate(d2.getFullYear(), 4)+ '-> ' + this.formatDate(d2.getHours(), 2) + 'h' + this.formatDate(d2.getMinutes(), 2);
   }
 
 }
