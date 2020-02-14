@@ -2,6 +2,10 @@
   <a title="create" mat-fab routerLink="/bassin_create" (createBassin)="refreshBassins($event)"> Ajouter un bassin <mat-icon >create </mat-icon></a>
 
 </div>
+<div class="title">
+  <span class="titleee">Effectuer une recherche : </span>
+  <a title="create" routerLink="/bassin_search">Rechercher un bassin</a>
+</div>
 
 <ul class="especes">
   <li *ngFor="let bassin of bassins">

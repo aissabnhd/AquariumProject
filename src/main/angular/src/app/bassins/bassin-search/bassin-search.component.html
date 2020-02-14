@@ -1,4 +1,4 @@
-<div class="title"> Modifiez votre bassin :</div>
+<div class="title"> Rechercher dans les bassins :</div>
 <br>
 <br>
 
@@ -6,7 +6,7 @@
   <div class="item">
     <label>
       Id :
-      <input type="text" formControlName="id" disabled>
+      <input type="number" formControlName="id">
     </label>
   </div><br>
   <div class="item">
@@ -31,14 +31,34 @@
     <label>
       Etat :
       <select formControlName="etat">
+        <option  [value]="null" > Aucun </option>
         <option *ngFor="let state of states" [value]="state" >{{state.toString()}}</option>
       </select>
     </label>
   </div>
+  <div class="item">
+    <label>
+      Espèce :
+      <select formControlName="espece">
+        <option  [value]="null" > Aucune </option>
+        <option *ngFor="let espece of especes" [value]="espece.id" >{{espece.nom}}</option>
+      </select>
+    </label>
+  </div>
   <div class="button">
-    <button routerLink="/bassins" (click)="onSubmit()" type="submit" class="button" [disabled]="!bassinForm.valid">Modifier</button>
+    <button (click)="onSubmit()" type="submit" class="button" >Chercher</button>
     <button routerLink="/bassins" type="submit" class="button">Retour</button>
   </div>
 
 </form>
 </div>
+<ul class="especes">
+  <li *ngFor="let bassin of bassins">
+    <app-bassin [bassin]="bassin" (deleteBassin)="refreshBassins($event)">
+
+    </app-bassin>
+    <p><br /></p>
+  </li>
+</ul>
+
+
