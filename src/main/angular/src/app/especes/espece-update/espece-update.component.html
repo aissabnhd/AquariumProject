@@ -20,7 +20,7 @@
   <div class="item">
   <label>
     Esperance :
-    <input type="text" formControlName="esperance">
+    <input type="number" formControlName="esperance">
   </label>
   </div>
   <div class="item">
@@ -32,12 +32,12 @@
   <div class="item">
   <label>
     Menace :
-    <input type="text" formControlName="menace">
+    <input type="number" formControlName="menace">
   </label>
   </div>
 
   <div class="button">
     <button routerLink="/animaux" (click)="onSubmit()" type="submit" class="button" [disabled]="!especeForm.valid">Changer</button>
-
+    <button routerLink="/especes" type="submit" class="button">Retour</button>
   </div>
 </form>

@@ -5,6 +5,7 @@ import { EspeceUpdateComponent } from './especes/espece-update/espece-update.com
 import { EspecesComponent } from './especes/especes.component';
 import { EspeceCreateComponent } from './especes/espece-create/espece-create.component';
 import { EspeceFicheComponent } from './especes/espece-fiche/espece-fiche.component';
+import { EspeceSearchComponent } from './especes/espece-search/espece-search.component';
 
 import {AppComponent} from './app.component'
 import {AnimauxComponent} from "./animaux/animaux.component";
@@ -40,7 +41,7 @@ const routes: Routes = [
   { path: 'especes_create', component: EspeceCreateComponent },
   { path: 'especes_update/:id', component: EspeceUpdateComponent },
   { path: 'espece_fiche/:id', component: EspeceFicheComponent },
-
+  { path: 'espece_search', component: EspeceSearchComponent },
 
   { path: 'animaux', component: AnimauxComponent },
   { path: 'animal_create', component: AnimalCreateComponent },
