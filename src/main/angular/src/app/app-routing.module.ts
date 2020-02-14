@@ -28,6 +28,7 @@ import {SecteurCreateComponent} from "./secteurs/secteur-create/secteur-create.c
 import {SecteurUpdateComponent} from "./secteurs/secteur-update/secteur-update.component";
 import {SecteurFicheComponent} from "./secteurs/secteur-fiche/secteur-fiche.component";
 import {SecteurModifierBassinComponent} from "./secteurs/secteur-modifier-bassin/secteur-modifier-bassin.component";
+import {SecteurSearchComponent} from "./secteurs/secteur-search/secteur-search.component";
 
 import {ActivitesComponent} from "./activites/activites.component";
 import {ActiviteCreateComponent} from "./activites/activite-create/activite-create.component";
@@ -64,6 +65,7 @@ const routes: Routes = [
   { path: 'secteur_update/:id', component: SecteurUpdateComponent },
   { path: 'secteur_fiche/:id', component: SecteurFicheComponent },
   { path: 'secteur_modifier_bassin/:id', component: SecteurModifierBassinComponent },
+  { path: 'secteur_search', component: SecteurSearchComponent },
 
   { path: 'activites', component: ActivitesComponent },
   { path: 'activite_create', component: ActiviteCreateComponent },

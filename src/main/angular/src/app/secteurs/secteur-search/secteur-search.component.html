@@ -1,0 +1,51 @@
+<div class="title"> Modifiez votre secteur :</div>
+<br>
+<br>
+
+<div class="formulaire"><form [formGroup]="secteurForm">
+  <div class="item">
+    <label>
+      Id :
+      <input type="text" formControlName="id">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Nom :
+      <input type="text" formControlName="nom">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Localisation :
+      <input type="text" formControlName="localisation">
+    </label>
+  </div>
+
+  <div class="item">
+    <label>
+      Bassin :
+      <select formControlName="bassin_id">
+        <option  [value]="null" > Aucun </option>
+        <option *ngFor="let bassin of bassins" [value]="bassin.id" >{{bassin.nom}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="button">
+    <button (click)="onSubmit()" type="submit" class="button">Recherche</button>
+    <button routerLink="/secteurs" type="submit" class="button">Retour</button>
+
+  </div>
+
+</form>
+</div>
+
+<ul class="especes">
+  <li *ngFor="let secteur of secteurs">
+    <app-secteur [secteur]="secteur" (deleteSecteur)="refreshSecteurs($event)">
+
+    </app-secteur>
+    <p><br /></p>
+  </li>
+</ul>
+
