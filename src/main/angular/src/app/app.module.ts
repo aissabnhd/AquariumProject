@@ -48,6 +48,12 @@ import { AnimalSearchComponent } from './animaux/animal-search/animal-search.com
 import { BassinSearchComponent } from './bassins/bassin-search/bassin-search.component';
 import { SecteurSearchComponent } from './secteurs/secteur-search/secteur-search.component';
 import { ActiviteSearchComponent } from './activites/activite-search/activite-search.component';
+import { EmployesComponent } from './employes/employes.component';
+import { EmployeComponent } from './employes/employe/employe.component';
+import { EmployeCreateComponent } from './employes/employe-create/employe-create.component';
+import { EmployeUpdateComponent } from './employes/employe-update/employe-update.component';
+import { EmployeFicheComponent } from './employes/employe-fiche/employe-fiche.component';
+import { EmployeSearchComponent } from './employes/employe-search/employe-search.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +92,12 @@ import { ActiviteSearchComponent } from './activites/activite-search/activite-se
     BassinSearchComponent,
     SecteurSearchComponent,
     ActiviteSearchComponent,
+    EmployesComponent,
+    EmployeComponent,
+    EmployeCreateComponent,
+    EmployeUpdateComponent,
+    EmployeFicheComponent,
+    EmployeSearchComponent,
 
   ],
   imports: [

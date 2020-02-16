@@ -1,0 +1,67 @@
+<br>
+
+<div class="title"> Recherche sur les employés :</div>
+<br>
+<br>
+
+<form [formGroup]="employeForm">
+  <div class="item">
+    <label>
+      Id :
+      <input type="number" formControlName="id">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Nom :
+      <input type="text" formControlName="nom">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Prénom :
+      <input type="text" formControlName="prenom">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Adresse :
+      <input type="text" formControlName="adresse">
+    </label>
+  </div>
+
+  <div class="item">
+    <label>
+      Date de naissance :
+      <input type="date" formControlName="date_naissance">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Numéro sécurité sociale :
+      <input type="number" formControlName="num_secu_sociale">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Rôle :
+      <select formControlName="role">
+        <option [value]="null"> Aucun </option>
+        <option *ngFor="let role of roles" [value]="role" >{{role.toString()}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="button">
+    <button (click)="onSubmit()" type="submit" class="button">Rechercher</button>
+    <button routerLink="/employes" type="submit" class="button">Retour</button>
+  </div>
+</form>
+
+<ul class="especes">
+  <li *ngFor="let e of employes">
+    <app-employe [employe]="e">
+
+    </app-employe>
+    <p><br /></p>
+  </li>
+</ul>

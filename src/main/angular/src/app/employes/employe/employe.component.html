@@ -1,0 +1,20 @@
+<div class="block">
+  <div class="nom"> Nom : {{employe.nom}} {{employe.prenom}} </div>
+  <br>
+  <div class="esperance"> Adresse : {{employe.adresse}} </div>
+  <br>
+  <div class="regime"> Date de naissance : {{dateToString(employe.date_naissance)}} </div>
+  <br>
+  <div class="menace"> Numéro de sécurité sociale : {{employe.num_secu_sociale}} </div>
+  <br>
+  <div class="menace"> Rôle : {{employe.role.toString()}} </div>
+  <br>
+  <div class="plus">
+    <a routerLink="/employe_fiche/{{employe.id}}">En savoir plus ...</a>
+  </div>
+
+  <div class="links">
+    <a title="delete" mat-fab (click)="onDelete()" routerLink="/employes"><mat-icon>delete</mat-icon></a>
+    <a title="update" mat-fab routerLink="/employe_update/{{employe.id}}"> <mat-icon >ballot</mat-icon></a>
+  </div>
+</div>

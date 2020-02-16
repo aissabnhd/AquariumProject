@@ -35,6 +35,11 @@ import {ActiviteCreateComponent} from "./activites/activite-create/activite-crea
 import {ActiviteUpdateComponent} from "./activites/activite-update/activite-update.component";
 import {ActiviteFicheComponent} from "./activites/activite-fiche/activite-fiche.component";
 import {ActiviteSearchComponent} from "./activites/activite-search/activite-search.component";
+import {EmployesComponent} from "./employes/employes.component";
+import {EmployeCreateComponent} from "./employes/employe-create/employe-create.component";
+import {EmployeUpdateComponent} from "./employes/employe-update/employe-update.component";
+import {EmployeFicheComponent} from "./employes/employe-fiche/employe-fiche.component";
+import {EmployeSearchComponent} from "./employes/employe-search/employe-search.component";
 
 
 const routes: Routes = [
@@ -74,6 +79,11 @@ const routes: Routes = [
   { path: 'activite_fiche/:id', component: ActiviteFicheComponent },
   { path: 'activite_search', component: ActiviteSearchComponent },
 
+  { path: 'employes', component: EmployesComponent },
+  { path: 'employe_create', component: EmployeCreateComponent },
+  { path: 'employe_update/:id', component: EmployeUpdateComponent },
+  { path: 'employe_fiche/:id', component: EmployeFicheComponent },
+  { path: 'employe_search', component: EmployeSearchComponent }
 
 
 
