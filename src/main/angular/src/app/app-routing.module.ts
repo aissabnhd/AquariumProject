@@ -34,6 +34,7 @@ import {ActivitesComponent} from "./activites/activites.component";
 import {ActiviteCreateComponent} from "./activites/activite-create/activite-create.component";
 import {ActiviteUpdateComponent} from "./activites/activite-update/activite-update.component";
 import {ActiviteFicheComponent} from "./activites/activite-fiche/activite-fiche.component";
+import {ActiviteSearchComponent} from "./activites/activite-search/activite-search.component";
 
 
 const routes: Routes = [
@@ -71,6 +72,7 @@ const routes: Routes = [
   { path: 'activite_create', component: ActiviteCreateComponent },
   { path: 'activite_update/:id', component: ActiviteUpdateComponent },
   { path: 'activite_fiche/:id', component: ActiviteFicheComponent },
+  { path: 'activite_search', component: ActiviteSearchComponent },
 
 
 

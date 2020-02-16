@@ -2,7 +2,10 @@
   <a title="create" mat-fab routerLink="/activite_create" (createActivite)="refreshActivites($event)"> Ajouter une activite <mat-icon >create </mat-icon></a>
 
 </div>
-
+<div class="title">
+  <span class="titleee">Effectuer une recherche : </span>
+  <a title="create" routerLink="/activite_search">Rechercher une activite </a>
+</div>
 <ul class="especes">
   <li *ngFor="let activite of activites">
     <app-activite [activite]="activite" (deleteActivite)="refreshActivites($event)">
