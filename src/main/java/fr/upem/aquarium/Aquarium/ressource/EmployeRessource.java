@@ -44,4 +44,9 @@ public class EmployeRessource {
     public Employe putEmploye(@PathVariable Long id, @RequestBody Employe employe) {
         return employeService.updateEmploye(id, employe);
     }
+
+    @GetMapping("employe/{login}/{password}")
+    public Optional<Employe> getOne(@PathVariable String login, @PathVariable String password) {
+        return employeService.connect(login, password);
+    }
 }

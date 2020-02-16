@@ -1,5 +1,6 @@
 package fr.upem.aquarium.Aquarium.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -28,16 +29,23 @@ public class Employe {
 
     private Role role;
 
+    @Column(unique = true)
+    private String login;
+
+    private String password;
+
     public Employe() {
     }
 
-    public Employe(String nom, String prenom, String adresse, Date date_naissance, Long num_secu_sociale, Role role) {
+    public Employe(String nom, String prenom, String adresse, Date date_naissance, Long num_secu_sociale, Role role, String login, String password) {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.date_naissance = date_naissance;
         this.num_secu_sociale = num_secu_sociale;
         this.role = role;
+        this.login = login;
+        this.password = password;
     }
 
     public Long getId() {
@@ -96,6 +104,22 @@ public class Employe {
         this.role = role;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -107,11 +131,13 @@ public class Employe {
                 Objects.equals(adresse, employe.adresse) &&
                 Objects.equals(date_naissance, employe.date_naissance) &&
                 Objects.equals(num_secu_sociale, employe.num_secu_sociale) &&
-                role == employe.role;
+                role == employe.role &&
+                Objects.equals(login, employe.login) &&
+                Objects.equals(password, employe.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nom, prenom, adresse, date_naissance, num_secu_sociale, role);
+        return Objects.hash(id, nom, prenom, adresse, date_naissance, num_secu_sociale, role, login, password);
     }
 }

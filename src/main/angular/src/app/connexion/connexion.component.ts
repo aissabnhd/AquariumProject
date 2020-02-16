@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
+import {EmployeService} from "../employes/employe.service";
+import {Employe} from "../employes/employe";
 
 @Component({
   selector: 'app-connexion',
@@ -13,14 +15,36 @@ export class ConnexionComponent implements OnInit {
     password: [null, Validators.required]
   })
 
+  show = false;
+  private employe: Employe = null;
 
-  constructor(private formBuilder : FormBuilder) { }
+  @Output()
+  connectEmploye = new EventEmitter<Employe | boolean >();
+
+  constructor(private formBuilder : FormBuilder, private employeService : EmployeService) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    console.log("Login : " + this.connexionForm.get('login').value);
-    console.log("Password : " + this.connexionForm.get('password').value);
+    let login = this.connexionForm.get('login').value;
+    let password = this.connexionForm.get('password').value;
+    let e = this.employeService.connect(login, password);
+    e.subscribe(
+      data => this.connectEmploye.emit(data),
+
+            error => console.log("error")
+    )
+    this.connexionForm.get('password').reset();
+
+
+  }
+
+  cancel(){
+    this.connectEmploye.emit(false);
+  }
+
+  showPassword() {
+    this.show = !this.show;
   }
 }

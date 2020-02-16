@@ -14,6 +14,7 @@ export class EmployeUpdateComponent implements OnInit {
   employeForm: FormGroup;
 
   id:number;
+  show = false;
 
   roles = [Role.employe, Role.gestionnaire, Role.admin];
 
@@ -33,7 +34,9 @@ export class EmployeUpdateComponent implements OnInit {
           adresse: new FormControl(data.adresse),
           date_naissance: new FormControl(data.date_naissance),
           num_secu_sociale: new FormControl(data.num_secu_sociale),
-          role: new FormControl(data.role)
+          role: new FormControl(data.role),
+          login: new FormControl(data.login),
+          password: new FormControl(data.password)
         });
       }
     );
@@ -47,5 +50,9 @@ export class EmployeUpdateComponent implements OnInit {
       error => console.log(error)
     );
 
+  }
+
+  showPassword() {
+    this.show = !this.show;
   }
 }

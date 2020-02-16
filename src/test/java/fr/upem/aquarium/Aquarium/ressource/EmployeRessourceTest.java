@@ -54,7 +54,7 @@ public class EmployeRessourceTest {
 
     @Test
     public void postEmploye() {
-        Employe employe = new Employe("Benhamida", "Aïssa", "Torcy", null,1L, Role.employe);
+        Employe employe = new Employe("Benhamida", "Aïssa", "Torcy", null,1L, Role.employe, "login", "password");
         employe.setId(1L);
         when(employeService.createEmploye(employe)).thenReturn(employe);
 
@@ -64,7 +64,7 @@ public class EmployeRessourceTest {
 
     @Test
     public void getOne() {
-        Employe employe = new Employe("Benhamida", "Aïssa", "Torcy", null,1L, Role.employe);
+        Employe employe = new Employe("Benhamida", "Aïssa", "Torcy", null,1L, Role.employe, "login", "password");
         employe.setId(1L);
         when(employeService.getOne(1L)).thenReturn(Optional.of(employe));
         HttpEntity<Employe> request = new HttpEntity<>(employe);
@@ -88,12 +88,12 @@ public class EmployeRessourceTest {
 
     @Test
     public void putEmploye() {
-        Employe employe = new Employe("Benhamida", "Aïssa", "Torcy", null,1L, Role.employe);
+        Employe employe = new Employe("Benhamida", "Aïssa", "Torcy", null,1L, Role.employe, "login", "password");
         employe.setId(1L);
 
         when(employeService.createEmploye(employe)).thenReturn(employe);
 
-        Employe employe2 = new Employe("Nom", "Prénom", "Paris", null,2L, Role.admin);
+        Employe employe2 = new Employe("Nom", "Prénom", "Paris", null,2L, Role.admin, "log2", "pwd");
         employe2.setId(1L);
 
         when(employeService.updateEmploye(1L, employe2)).thenReturn(employe2);

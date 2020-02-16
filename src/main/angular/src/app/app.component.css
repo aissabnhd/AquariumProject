@@ -1,3 +1,15 @@
+.connexion{
+  position: absolute;
+  top:0;
+  right:0;
+  height: 25%;
+  width: 25%;
+  background-color: thistle;
+  border: 1px black solid;
+
+}
+
+
 div.back{
      position: absolute;
     top: 0;
@@ -56,4 +68,9 @@ div.updown{
   height: 50%;
   text-align: center;
 
+}
+
+a.login{
+  cursor: pointer;
+  color: darkblue;
 }

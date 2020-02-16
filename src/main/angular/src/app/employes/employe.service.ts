@@ -30,4 +30,8 @@ export class EmployeService {
   getEmploye(id: number) : Observable<Employe>{
     return this.httpClient.get<Employe>('/employe/' + id);
   }
+
+  connect(login: string, password : string) : Observable<Employe>{
+    return this.httpClient.get<Employe>('/employe/' + login + '/' + password);
+  }
 }

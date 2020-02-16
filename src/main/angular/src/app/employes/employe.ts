@@ -11,4 +11,6 @@ export interface Employe{
   date_naissance : Date;
   num_secu_sociale : number;
   role : Role;
+  login : string;
+  password : string;
 }

@@ -10,26 +10,30 @@
       <a class="head" routerLink="/activites">  <span class="title">Activites </span></a>
       <a class="head" routerLink="/employes">  <span class="title">Employes </span></a>
 
-      <span class="log" *ngIf="!isConnected">
+      <span class="log" *ngIf="!isConnected && !tryToConnect">
        <div class="updown">
        Connexion anonyme :
        </div>
        <div class="updown">
-         <a class="login" routerLink="/connexion"> Se connecter </a>
+         <a class="login" (click)="tryConnect()"> Se connecter </a>
        </div>
      </span>
-      <span class="log" *ngIf="isConnected">
+      <span class="log" *ngIf="isConnected && !tryToConnect">
        <div class="updown">
-       Bienvenu Blaze :
+       Bienvenue {{employe.prenom}} :
        </div>
        <div class="updown">
-         <a class="login" routerLink="/home"> Se déconnecter </a>
+         <a class="login" (click)="disconnect()"> Se déconnecter </a>
        </div>
       </span>
 
     </mat-toolbar-row>
   </mat-toolbar>
 <div class="data">
-  <router-outlet></router-outlet>
+
+  <router-outlet ></router-outlet>
 </div>
 </div>
+<span class="connexion" *ngIf="tryToConnect">
+         <app-connexion (connectEmploye)="isNowConnected($event)"></app-connexion>
+</span>

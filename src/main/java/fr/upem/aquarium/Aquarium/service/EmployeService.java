@@ -10,6 +10,9 @@ import fr.upem.aquarium.Aquarium.repository.EspeceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,4 +54,16 @@ public class EmployeService {
     }
 
 
+    public Optional<Employe> connect(String login, String password) {
+        Iterable<Employe> it = employeRepository.findAll();
+        List<Employe> result = new ArrayList<Employe>();
+        it.forEach(result::add);
+        for(int i = 0; i < result.size(); i++){
+            if(result.get(i).getLogin().equals(login) && result.get(i).getPassword().equals(password))
+                return Optional.of(result.get(i));
+
+        }
+
+        return Optional.empty();
+    }
 }

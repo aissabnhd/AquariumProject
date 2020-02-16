@@ -20,6 +20,7 @@ export class EmployeSearchComponent implements OnInit {
     date_naissance: [null, Validators.required],
     num_secu_sociale: [null, Validators.required],
     role: [null, Validators.required],
+    login: [null, Validators.required]
   });
 
   roles = [Role.employe, Role.gestionnaire, Role.admin];
@@ -51,6 +52,10 @@ export class EmployeSearchComponent implements OnInit {
 
   searchEmployes(){
     let id_search = this.employeForm.get('id').value;
+    let login_search : string = null;
+    if( this.employeForm.get('login').value != null){
+      login_search = this.employeForm.get('login').value.trim().toLowerCase();
+    }
     let nom_search : string = null;
     if( this.employeForm.get('nom').value != null){
       nom_search = this.employeForm.get('nom').value.trim().toLowerCase();
@@ -74,10 +79,12 @@ export class EmployeSearchComponent implements OnInit {
     let date_naissance : number;
     let num_secu_sociale : number;
     let role : Role;
+    let login : string;
 
 
     for(let i = 0; i < this.employes.length; i++){
       id = this.employes[i].id;
+      login = this.employes[i].login;
       nom = this.employes[i].nom.toLowerCase();
       prenom = this.employes[i].prenom.toLowerCase();
       adresse = this.employes[i].adresse.toLowerCase();
@@ -86,6 +93,10 @@ export class EmployeSearchComponent implements OnInit {
       role = this.employes[i].role;
 
       if(id_search != null &&  id != id_search){
+        this.employes.splice(i, 1);
+        i--;
+      }
+      else if(this.isNotEmpty(login_search) && !login.includes(login_search)){
         this.employes.splice(i, 1);
         i--;
       }

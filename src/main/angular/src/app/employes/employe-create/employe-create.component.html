@@ -44,6 +44,20 @@
       </select>
     </label>
   </div>
+  <div class="item">
+    <label>
+      Login :
+      <input type="text" formControlName="login">
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Password :
+      <input *ngIf="!show" type="password" formControlName="password">
+      <input *ngIf="show" type="text" formControlName="password">
+      <button (click)="showPassword()" class="button">Afficher/Masquer</button>
+    </label>
+  </div>
   <div class="button">
     <button routerLink="/employes" (click)="onSubmit()" type="submit" class="button" [disabled]="!employeForm.valid">Créer</button>
     <button routerLink="/employes" type="submit" class="button">Retour</button>

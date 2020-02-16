@@ -17,7 +17,11 @@ export class EmployeCreateComponent implements OnInit {
     role: [null, Validators.required],
     date_naissance: [null, Validators.required],
     num_secu_sociale: [null, Validators.required],
+    login: [null, Validators.required],
+    password: [null, Validators.required]
   });
+
+  show = false;
 
   roles = [Role.admin, Role.gestionnaire, Role.employe];
 
@@ -37,6 +41,7 @@ export class EmployeCreateComponent implements OnInit {
   }
 
 
-
-
+  showPassword() {
+    this.show = !this.show;
+  }
 }

@@ -11,12 +11,15 @@
   <div class="item">
     <label>
       Mot de passe :
-      <input type="password" formControlName="password">
+      <input *ngIf="!show" type="password" formControlName="password">
+      <input *ngIf="show" type="text" formControlName="password">
+      <a title="Observer les espèces" class="icone"(click)="showPassword()">  <img class="logo" src="../../assets/img/logo_affiche.png" />
+      </a>
     </label>
   </div>
   <div class="button">
-    <button routerLink="/especes" (click)="onSubmit()" type="submit" class="button" [disabled]="!connexionForm.valid">Se connecter</button>
-
+    <button (click)="onSubmit()" *ngIf="employe == null" type="submit" class="button" [disabled]="!connexionForm.valid">Connexion</button>
+    <button (click)="cancel()" class="button">Annuler</button>
   </div>
 </form>
 
