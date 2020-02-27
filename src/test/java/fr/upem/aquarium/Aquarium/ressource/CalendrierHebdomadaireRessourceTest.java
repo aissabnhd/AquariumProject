@@ -54,7 +54,7 @@ public class CalendrierHebdomadaireRessourceTest {
 
     @Test
     public void postCalendrierHebdomadaire() {
-        CalendrierHebdomadaire calendrierHebdomadaire = new CalendrierHebdomadaire();
+        CalendrierHebdomadaire calendrierHebdomadaire = new CalendrierHebdomadaire(1L);
         calendrierHebdomadaire.setId(1L);
         when(calendrierHebdomadaireService.createCalendrierHebdomadaire(calendrierHebdomadaire)).thenReturn(calendrierHebdomadaire);
 
@@ -74,7 +74,7 @@ public class CalendrierHebdomadaireRessourceTest {
 
     @Test
     public void getOne() {
-        CalendrierHebdomadaire calendrierHebdomadaire = new CalendrierHebdomadaire();
+        CalendrierHebdomadaire calendrierHebdomadaire = new CalendrierHebdomadaire(1L);
         calendrierHebdomadaire.setId(1L);
         when(calendrierHebdomadaireService.getOne(1L)).thenReturn(Optional.of(calendrierHebdomadaire));
 
@@ -99,10 +99,10 @@ public class CalendrierHebdomadaireRessourceTest {
 
     @Test
     public void putCalendrierHebdomadaire() {
-        CalendrierHebdomadaire calendrierHebdomadaire = new CalendrierHebdomadaire();
+        CalendrierHebdomadaire calendrierHebdomadaire = new CalendrierHebdomadaire(1L);
         calendrierHebdomadaire.setId(1L);
 
-        CalendrierHebdomadaire calendrierHebdomadaire2 = new CalendrierHebdomadaire();
+        CalendrierHebdomadaire calendrierHebdomadaire2 = new CalendrierHebdomadaire(2L);
         calendrierHebdomadaire2.setId(2L);
 
         when(calendrierHebdomadaireService.createCalendrierHebdomadaire(calendrierHebdomadaire)).thenReturn(calendrierHebdomadaire);

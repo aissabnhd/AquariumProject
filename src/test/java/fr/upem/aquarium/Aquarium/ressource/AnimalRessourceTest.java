@@ -1,9 +1,10 @@
 package fr.upem.aquarium.Aquarium.ressource;
 
-import fr.upem.aquarium.Aquarium.model.*;
+import fr.upem.aquarium.Aquarium.model.Animal;
+import fr.upem.aquarium.Aquarium.model.Espece;
+import fr.upem.aquarium.Aquarium.model.Sexe;
 import fr.upem.aquarium.Aquarium.repository.AnimalRepository;
 import fr.upem.aquarium.Aquarium.service.AnimalService;
-import fr.upem.aquarium.Aquarium.service.BassinService;
 import fr.upem.aquarium.Aquarium.service.EspeceService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -42,9 +43,6 @@ public class AnimalRessourceTest {
     @MockBean
     private EspeceService especeService;
 
-    @MockBean
-    private BassinService bassinService;
-
     @Autowired
     private TestRestTemplate restTemplate;
 
@@ -68,23 +66,18 @@ public class AnimalRessourceTest {
 
     @Test
     public void postAnimalEspece(){
-        Bassin bassin = new Bassin("bassin 1", 100, 10, State.sale);
-        bassin.setId(3L);
+
         Espece espece = new Espece("Poisson", 10, "aucun", 0);
         espece.setId(1L);
-        when(especeService.createEspece(espece, Optional.of(bassin))).thenReturn(espece);
-        when(bassinService.createBassin(bassin)).thenReturn(bassin);
-
+        when(especeService.createEspece(espece)).thenReturn(espece);
         Animal animal = new Animal("Requin", Sexe.F, null, null, null);
         animal.setId(2L);
         Animal animal2 = new Animal("Requin", Sexe.F, espece, null, null);
         animal2.setId(1L);
         when(animalService.createAnimalEspece(animal, espece)).thenReturn(animal2);
         when(especeService.getOne(1L)).thenReturn(Optional.of(espece));
-        when(bassinService.getOne(3L)).thenReturn(Optional.of(bassin));
 
-
-        this.restTemplate.postForObject("http://localhost:" + port + "/especeCreate/" + 3L, espece, Espece.class);
+        this.restTemplate.postForObject("http://localhost:" + port + "/espece", espece, Espece.class);
         HttpEntity<Animal> request = new HttpEntity<>(animal);
 
         Animal result = this.restTemplate.exchange("http://localhost:" + port + "/animal_espece/1",

@@ -35,14 +35,6 @@
     <input type="number" formControlName="menace">
   </label>
   </div>
-  <div class="item">
-    <label>
-      Bassin :
-      <select formControlName="bassin">
-        <option *ngFor="let bassin of bassins" [value]="bassin.id" >{{bassin.nom}}</option>
-      </select>
-    </label>
-  </div>
 
   <div class="button">
     <button routerLink="/especes" (click)="onSubmit()" type="submit" class="button" [disabled]="!especeForm.valid">Changer</button>

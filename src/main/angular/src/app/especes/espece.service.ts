@@ -19,12 +19,12 @@ export class EspeceService {
   return this.httpClient.delete('/espece/' + id);
   }
 
-  createEspece(espece : Espece, idBassin : number) : Observable<Espece>{
-    return this.httpClient.post<Espece>('/especeBassin/' + idBassin, espece);
+  createEspece(espece : Espece) : Observable<Espece>{
+    return this.httpClient.post<Espece>('/espece', espece);
   }
 
   updateEspece(espece : Espece, id : number) : Observable<Espece>{
-      return this.httpClient.post<Espece>('/especeUpdate/' + espece.id + '/' + id, espece);
+      return this.httpClient.post<Espece>('/espece/' + id, espece);
     }
 
     getEspece(id: number) : Observable<Espece>{
