@@ -22,6 +22,17 @@ public class Bassin {
 
     private State etat;
 
+    @ManyToOne
+    private Employe responsable;
+
+    public Employe getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(Employe responsable) {
+        this.responsable = responsable;
+    }
+
     @OneToMany
     private List<Espece> lst = new ArrayList<>();
 

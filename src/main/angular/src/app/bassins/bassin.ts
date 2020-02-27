@@ -1,4 +1,5 @@
 import {Espece } from '../especes/espece';
+import {Employe} from "../employes/employe";
 
 export enum State{
    propre='propre', sale='sale'
@@ -11,5 +12,6 @@ export interface Bassin{
   volume : number;
   etat : State;
   lst : Array<Espece>;
+  responsable : Employe;
 }
 

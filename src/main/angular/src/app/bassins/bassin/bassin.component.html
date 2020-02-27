@@ -1,6 +1,10 @@
 <div class="block">
   <div class="nom"> Nom : {{bassin.nom}} </div>
   <br>
+
+  <div class="menace" *ngIf="bassin.responsable"> Responsable  : {{bassin.responsable.nom}} {{bassin.responsable.prenom}} </div>
+
+  <br>
   <div class="esperance"> Etat : {{bassin.etat}} </div>
   <br>
   <div class="regime"> Volume : {{bassin.volume}} </div>

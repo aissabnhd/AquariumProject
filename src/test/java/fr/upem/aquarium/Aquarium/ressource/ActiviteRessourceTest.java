@@ -4,10 +4,7 @@ import fr.upem.aquarium.Aquarium.model.*;
 import fr.upem.aquarium.Aquarium.repository.ActiviteRepository;
 import fr.upem.aquarium.Aquarium.repository.AnimalRepository;
 import fr.upem.aquarium.Aquarium.repository.EspeceRepository;
-import fr.upem.aquarium.Aquarium.service.ActiviteService;
-import fr.upem.aquarium.Aquarium.service.AnimalService;
-import fr.upem.aquarium.Aquarium.service.BassinService;
-import fr.upem.aquarium.Aquarium.service.EspeceService;
+import fr.upem.aquarium.Aquarium.service.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,6 +40,8 @@ public class ActiviteRessourceTest {
     private ActiviteRepository activiteRepository;
     @MockBean
     private BassinService bassinService;
+    @MockBean
+    private EmployeService employeService;
 
 
     @Autowired
@@ -80,6 +79,8 @@ public class ActiviteRessourceTest {
 
     @Test
     public void postActiviteWithBassin(){
+        Employe employe = new Employe("Benhamida", "Aïssa", "Torcy", null,1L, Role.employe, "login", "password");
+        employe.setId(10L);
         Bassin bassin = new Bassin("bassin 1", 100, 10, State.sale);
         bassin.setId(1L);
 
@@ -88,11 +89,12 @@ public class ActiviteRessourceTest {
         Activite activite2 = new Activite("Repas", null, null, true, bassin );
         activite2.setId(2L);
 
-        when(bassinService.createBassin(bassin)).thenReturn(bassin);
+        when(employeService.getOne(10L)).thenReturn(Optional.of(employe));
+        when(bassinService.createBassin(bassin, Optional.of(employe))).thenReturn(bassin);
         when(activiteService.createActiviteBassin(activite, bassin)).thenReturn(activite2);
         when(bassinService.getOne(1L)).thenReturn(Optional.of(bassin));
 
-        this.restTemplate.postForObject("http://localhost:" + port + "/bassin", bassin, Bassin.class);
+        this.restTemplate.postForObject("http://localhost:" + port + "/bassinCreate/10", bassin, Bassin.class);
         HttpEntity<Activite> request = new HttpEntity<>(activite);
 
         Activite result = this.restTemplate.exchange("http://localhost:" + port + "/activite_bassin/1",

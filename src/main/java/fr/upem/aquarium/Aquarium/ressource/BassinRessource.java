@@ -2,9 +2,11 @@ package fr.upem.aquarium.Aquarium.ressource;
 
 import fr.upem.aquarium.Aquarium.model.Animal;
 import fr.upem.aquarium.Aquarium.model.Bassin;
+import fr.upem.aquarium.Aquarium.model.Employe;
 import fr.upem.aquarium.Aquarium.model.Espece;
 import fr.upem.aquarium.Aquarium.service.AnimalService;
 import fr.upem.aquarium.Aquarium.service.BassinService;
+import fr.upem.aquarium.Aquarium.service.EmployeService;
 import fr.upem.aquarium.Aquarium.service.EspeceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +19,18 @@ public class BassinRessource {
     private BassinService bassinService;
     @Autowired
     private EspeceService especeService;
+    @Autowired
+    private EmployeService employeService;
 
     @GetMapping("/bassin")
     public Iterable<Bassin> getAll() {
         return bassinService.getAll();
     }
 
-    @PostMapping("/bassin")
-    public Bassin postBassin(@RequestBody Bassin bassin) {
-        return bassinService.createBassin(bassin);
+    @PostMapping("/bassinCreate/{idEmploye}")
+    public Bassin postBassin(@RequestBody Bassin bassin, @PathVariable Long idEmploye) {
+        Optional<Employe> emp = employeService.getOne(idEmploye);
+        return bassinService.createBassin(bassin, emp);
     }
 
     @GetMapping("bassin/{id}")
@@ -55,8 +60,9 @@ public class BassinRessource {
     @DeleteMapping("bassin")
     public void deleteAll(){ bassinService.deleteAll() ;}
 
-    @PostMapping("bassin/{id}")
-    public Bassin putBassin(@PathVariable Long id, @RequestBody Bassin bassin) {
-        return bassinService.updateBassin(id, bassin);
+    @PostMapping("bassin/{id}/{idEmploye}")
+    public Bassin putBassin(@PathVariable Long id, @RequestBody Bassin bassin, @PathVariable Long idEmploye) {
+        Optional<Employe> emp = employeService.getOne(idEmploye);
+        return bassinService.updateBassin(id, bassin, emp);
     }
 }

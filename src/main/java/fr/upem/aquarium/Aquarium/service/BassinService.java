@@ -2,6 +2,7 @@ package fr.upem.aquarium.Aquarium.service;
 
 import fr.upem.aquarium.Aquarium.model.Animal;
 import fr.upem.aquarium.Aquarium.model.Bassin;
+import fr.upem.aquarium.Aquarium.model.Employe;
 import fr.upem.aquarium.Aquarium.model.Espece;
 import fr.upem.aquarium.Aquarium.repository.AnimalRepository;
 import fr.upem.aquarium.Aquarium.repository.BassinRepository;
@@ -21,7 +22,8 @@ public class BassinService {
         return bassinRepository.findAll();
     }
 
-    public Bassin createBassin(Bassin bassin){
+    public Bassin createBassin(Bassin bassin, Optional<Employe> emp){
+        bassin.setResponsable(emp.get());
 
         return bassinRepository.save(bassin);
     }
@@ -37,8 +39,9 @@ public class BassinService {
         bassinRepository.deleteById(id);
     }
 
-    public Bassin updateBassin(Long id, Bassin bassin) {
+    public Bassin updateBassin(Long id, Bassin bassin, Optional<Employe> emp) {
         bassinRepository.findById(id);
+        bassin.setResponsable(emp.get());
         bassin.setId(id);
         return bassinRepository.save(bassin);
     }

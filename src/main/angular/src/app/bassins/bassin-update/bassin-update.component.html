@@ -35,6 +35,14 @@
       </select>
     </label>
   </div>
+  <div class="item">
+    <label>
+      Responsable :
+      <select formControlName="employe">
+        <option *ngFor="let employe of employes" [value]="employe.id" >{{employe.nom}} {{employe.prenom}}</option>
+      </select>
+    </label>
+  </div>
   <div class="button">
     <button routerLink="/bassins" (click)="onSubmit()" type="submit" class="button" [disabled]="!bassinForm.valid">Modifier</button>
     <button routerLink="/bassins" type="submit" class="button">Retour</button>

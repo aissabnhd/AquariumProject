@@ -19,12 +19,12 @@ export class BassinService {
     return this.httpClient.delete('/bassin/' + id);
   }
 
-  createBassin(bassin : Bassin) : Observable<Bassin>{
-    return this.httpClient.post<Bassin>('/bassin', bassin);
+  createBassin(bassin : Bassin, idEmploye : number) : Observable<Bassin>{
+    return this.httpClient.post<Bassin>('/bassinCreate/' + idEmploye, bassin);
   }
 
-  updateBassin(bassin : Bassin, id : number) : Observable<Bassin>{
-    return this.httpClient.post<Bassin>('/bassin/' + id, bassin);
+  updateBassin(bassin : Bassin, id : number, idEmploye : number) : Observable<Bassin>{
+    return this.httpClient.post<Bassin>('/bassinUpdate/' + id + '/' + idEmploye, bassin);
   }
 
   getBassin(id: number) : Observable<Bassin>{
