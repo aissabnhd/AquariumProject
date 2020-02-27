@@ -19,12 +19,23 @@ public class Espece {
 
     private String regime;
 
+    @ManyToOne
+    private Bassin bassin;
+
     //  0 (préoccupation mineure) à 10 (espèce éteinte au niveau
     //  sauvage, survivant uniquement en captivité).
     private int menace;
 
     public Espece(){
 
+    }
+
+    public Bassin getBassin() {
+        return bassin;
+    }
+
+    public void setBassin(Bassin bassin) {
+        this.bassin = bassin;
     }
 
     public void setId(Long id){

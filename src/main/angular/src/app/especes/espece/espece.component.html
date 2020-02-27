@@ -7,6 +7,9 @@
 <br>
 <div class="menace"> Menacé : {{espece.menace}} </div>
 <br>
+
+  <div class="menace" *ngIf="espece.bassin"> Bassin : {{espece.bassin.nom}} </div>
+  <br>
   <div class="plus"><a routerLink="/espece_fiche/{{espece.id}}">En savoir plus ...</a></div>
 
   <div class="links">

@@ -3,6 +3,8 @@ import {FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { Espece } from '../espece';
 import { EspeceService } from '../espece.service'
+import {BassinService} from "../../bassins/bassin.service";
+import {Bassin} from "../../bassins/bassin";
 
 @Component({
   selector: 'app-espece-update',
@@ -16,7 +18,8 @@ export class EspeceUpdateComponent implements OnInit {
 
        @Output()
        updateEspece = new EventEmitter<Espece>();
-  constructor(private especeService : EspeceService, private route: ActivatedRoute) { }
+   bassins: Array<Bassin>;
+  constructor(private especeService : EspeceService, private bassinService: BassinService, private route: ActivatedRoute) { }
 
   ngOnInit() {
       this.id = this.route.snapshot.params['id'];
@@ -28,16 +31,23 @@ export class EspeceUpdateComponent implements OnInit {
               nom: new FormControl(data.nom),
               esperance: new FormControl(data.esperance),
               regime: new FormControl(data.regime),
-              menace: new FormControl(data.menace)
-            });
+              menace: new FormControl(data.menace),
+              bassin: new FormControl(data.bassin.id)
+
+       });
            }
             );
+      this.bassinService.getAllBassins().subscribe(
+        data => this.bassins = data
+
+      )
   }
 
   onSubmit(){
             let espece: Espece =  this.especeForm.value;
             espece.id = this.id;
-            this.especeService.updateEspece(espece, espece.id).subscribe(
+            espece.bassin = null;
+            this.especeService.updateEspece(espece, this.especeForm.get("bassin").value).subscribe(
               data => this.updateEspece.emit(espece),
               error => console.log(error)
             );

@@ -1,11 +1,10 @@
 package fr.upem.aquarium.Aquarium.ressource;
 
-import fr.upem.aquarium.Aquarium.model.Animal;
-import fr.upem.aquarium.Aquarium.model.Espece;
-import fr.upem.aquarium.Aquarium.model.Sexe;
+import fr.upem.aquarium.Aquarium.model.*;
 import fr.upem.aquarium.Aquarium.repository.AnimalRepository;
 import fr.upem.aquarium.Aquarium.repository.EspeceRepository;
 import fr.upem.aquarium.Aquarium.service.AnimalService;
+import fr.upem.aquarium.Aquarium.service.BassinService;
 import fr.upem.aquarium.Aquarium.service.EspeceService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -40,6 +39,8 @@ public class EspeceRessourceTest {
     private EspeceService especeService;
     @MockBean
     private EspeceRepository especeRepository;
+    @MockBean
+    private BassinService bassinService;
 
 
     @Autowired
@@ -54,11 +55,18 @@ public class EspeceRessourceTest {
 
     @Test
     public void postEspece() {
-        Espece espece = new Espece("Poisson", 10, "aucun", 0);
-        espece.setId(1L);
-        when(especeService.createEspece(espece)).thenReturn(espece);
 
-        Espece result = this.restTemplate.postForObject("http://localhost:" + port + "/espece", espece, Espece.class);
+        Bassin bassin = new Bassin("bassin 1", 100, 10, State.sale);
+        bassin.setId(3L);
+       Espece espece = new Espece("Poisson", 10, "aucun", 0);
+        espece.setId(1L);
+        when(bassinService.createBassin(bassin)).thenReturn(bassin);
+        when(bassinService.getOne(3L)).thenReturn(Optional.of(bassin));
+
+        when(especeService.createEspece(espece, Optional.of(bassin))).thenReturn(espece);
+
+
+        Espece result = this.restTemplate.postForObject("http://localhost:" + port + "/especeBassin/3", espece, Espece.class);
         assertEquals(espece, result);
     }
 
@@ -67,6 +75,7 @@ public class EspeceRessourceTest {
         Espece espece = new Espece("Poisson", 10, "aucun", 0);
         espece.setId(1L);
         when(especeService.getOne(1L)).thenReturn(Optional.of(espece));
+
         HttpEntity<Espece> request = new HttpEntity<>(espece);
         this.restTemplate.exchange("http://localhost:" + port + "/espece",
                 HttpMethod.POST, request, Espece.class);
@@ -88,20 +97,24 @@ public class EspeceRessourceTest {
 
     @Test
     public void putEspece() {
+        Bassin bassin = new Bassin("bassin 1", 100, 10, State.sale);
+        bassin.setId(3L);
         Espece espece = new Espece("Poisson", 10, "aucun", 0);
         espece.setId(1L);
 
-        when(especeService.createEspece(espece)).thenReturn(espece);
+        when(bassinService.createBassin(bassin)).thenReturn(bassin);
+        when(especeService.createEspece(espece, Optional.of(bassin))).thenReturn(espece);
 
+        when(bassinService.getOne(3L)).thenReturn(Optional.of(bassin));
         Espece espece2 = new Espece("Poisson-clown", 5, "aucun", 4);
         espece.setId(1L);
 
-        when(especeService.updateEspece(1L, espece2)).thenReturn(espece2);
+        when(especeService.updateEspece(1L, espece2, Optional.of(bassin))).thenReturn(espece2);
 
-        this.restTemplate.postForObject("http://localhost:" + port + "/espece", espece, Espece.class);
+        this.restTemplate.postForObject("http://localhost:" + port + "/especeCreate/3", espece, Espece.class);
         HttpEntity<Espece> request = new HttpEntity<>(espece2);
 
-        Espece result = this.restTemplate.exchange("http://localhost:" + port + "/espece/1",
+        Espece result = this.restTemplate.exchange("http://localhost:" + port + "/especeUpdate/1/3",
                 HttpMethod.POST, request, Espece.class).getBody();
 
         assertEquals(result, espece2);
