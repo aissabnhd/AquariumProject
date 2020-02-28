@@ -48,7 +48,8 @@ public class ActiviteRessource {
         List<Employe> l_emp = activite.getResponsables();
 
         for(int i = 0; i < list.size(); i++){
-            l_emp.add(employeService.getOne(list.get(i)).get());
+            if(!l_emp.contains(employeService.getOne(list.get(i)).get()))
+              l_emp.add(employeService.getOne(list.get(i)).get());
         }
         activite.setResponsables(l_emp);
         return activiteService.createActiviteBassin(activite, activite.getBassin());
