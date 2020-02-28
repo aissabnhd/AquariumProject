@@ -19,8 +19,25 @@ export class ActiviteService {
     return this.httpClient.delete('/activite/' + id);
   }
 
-  createActivite(activite : Activite, id : number) : Observable<Activite>{
-    return this.httpClient.post<Activite>('/activite_bassin/' + id, activite);
+  createActivite(activite: Activite, id: number, tab: Array<number>) : Observable<Activite>{
+    return this.httpClient.post<Activite>('/activite_bassin/' + id, activite)
+
+
+
+
+  }
+
+  createActiviteBis(id: number, tab_emp : Array<number>) : Observable<Activite>{
+    return this.httpClient.post<Activite>('/activite_update_employe/' + id, tab_emp)
+
+
+
+
+  }
+
+  addEmployes(activite: Activite, id: number, i: number) : Observable<Activite>{
+      return this.httpClient.post<Activite>('/activite_add_employe/' + id + '/' + i, activite)
+
   }
 
   updateActivite(activite : Activite, id : number, idBassin : number) : Observable<Activite>{

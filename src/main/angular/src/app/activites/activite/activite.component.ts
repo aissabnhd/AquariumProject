@@ -39,4 +39,15 @@ export class ActiviteComponent implements OnInit {
     return "" + this.formatDate(d2.getDate(), 2) + "/" + this.formatDate(d2.getMonth()+1, 2) + "/" + this.formatDate(d2.getFullYear(), 4)+ '-> ' + this.formatDate(d2.getHours(), 2) + 'h' + this.formatDate(d2.getMinutes(), 2);
   }
 
+  responsablesToString() {
+    let s = "[";
+    for(let i = 0; i < this.activite.responsables.length; i++){
+        s+= this.activite.responsables[i].nom;
+        if(i < this.activite.responsables.length -  1 )
+          s+= " - ";
+
+    }
+    s += "]";
+    return s;
+  }
 }

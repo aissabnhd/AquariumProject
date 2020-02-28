@@ -1,16 +1,11 @@
 package fr.upem.aquarium.Aquarium.ressource;
 
-import fr.upem.aquarium.Aquarium.model.Activite;
-import fr.upem.aquarium.Aquarium.model.Animal;
-import fr.upem.aquarium.Aquarium.model.Bassin;
-import fr.upem.aquarium.Aquarium.model.Espece;
-import fr.upem.aquarium.Aquarium.service.ActiviteService;
-import fr.upem.aquarium.Aquarium.service.AnimalService;
-import fr.upem.aquarium.Aquarium.service.BassinService;
-import fr.upem.aquarium.Aquarium.service.EspeceService;
+import fr.upem.aquarium.Aquarium.model.*;
+import fr.upem.aquarium.Aquarium.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,6 +15,9 @@ public class ActiviteRessource {
 
     @Autowired
     private BassinService bassinService;
+
+    @Autowired
+    private EmployeService employeService;
 
     @GetMapping("/activite")
     public Iterable<Activite> getAll() {
@@ -43,6 +41,19 @@ public class ActiviteRessource {
         return activiteService.createActiviteBassin(activite, e.get());
     }
 
+    @PostMapping("/activite_update_employe/{id}")
+    public Activite updateEmploye(@RequestBody List<Long> list, @PathVariable Long id) {
+        System.out.println("here");
+        Activite activite = activiteService.getOne(id).get();
+        List<Employe> l_emp = activite.getResponsables();
+
+        for(int i = 0; i < list.size(); i++){
+            l_emp.add(employeService.getOne(list.get(i)).get());
+        }
+        activite.setResponsables(l_emp);
+        return activiteService.createActiviteBassin(activite, activite.getBassin());
+    }
+
     @DeleteMapping("activite/{id}")
     public void deleteActivite(@PathVariable Long id) {
         activiteService.deleteActivite(id);
@@ -61,5 +72,13 @@ public class ActiviteRessource {
         Optional<Bassin> e = (bassinService.getOne(id2));
         activite.setBassin(e.get());
         return activiteService.updateActivite(id, activite);
+    }
+
+
+
+    @PostMapping("activite_add_employe/{id}/{idEmploye}")
+    public Activite putNewEmploye(@PathVariable Long id, @RequestBody Activite activite, @PathVariable Long idEmploye) {
+
+        return activiteService.updateActiviteAddEmploye(id, activite, employeService.getOne(idEmploye));
     }
 }

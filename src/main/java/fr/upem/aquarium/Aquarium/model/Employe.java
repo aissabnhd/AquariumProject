@@ -1,11 +1,12 @@
 package fr.upem.aquarium.Aquarium.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.AUTO;
@@ -28,6 +29,7 @@ public class Employe {
     private Long num_secu_sociale;
 
     private Role role;
+
 
     @Column(unique = true)
     private String login;

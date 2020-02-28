@@ -12,6 +12,8 @@
   <br>
   <div class="date2" *ngIf="activite.date_fin"> Date de fin : {{dateToString(activite.date_fin)}} </div>
   <br>
+  <div class="date2" *ngIf="activite.responsables"> Responsables : {{responsablesToString()}} </div>
+  <br>
   <div class="plus"><a routerLink="/activite_fiche/{{activite.id}}">En savoir plus ...</a></div>
 
   <div class="links">

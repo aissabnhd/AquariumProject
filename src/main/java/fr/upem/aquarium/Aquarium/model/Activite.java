@@ -1,11 +1,10 @@
 package fr.upem.aquarium.Aquarium.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.AUTO;
@@ -25,8 +24,11 @@ public class Activite {
 
     private boolean public_act;
 
-    @OneToOne
+    @ManyToOne
     private Bassin bassin;
+
+    @ManyToMany
+    private List<Employe> responsables = new ArrayList<>();
 
     public Activite(){
 
@@ -38,6 +40,14 @@ public class Activite {
         this.date_fin = date_fin;
         this.public_act = public_act;
         this.bassin = b;
+    }
+
+    public List<Employe> getResponsables() {
+        return responsables;
+    }
+
+    public void setResponsables(List<Employe> responsables) {
+        this.responsables = responsables;
     }
 
     public Long getId() {

@@ -5,6 +5,8 @@ import {Espece} from "../../especes/espece";
 import {EspeceService} from "../../especes/espece.service";
 import {BassinService} from "../bassin.service";
 import {Bassin, State} from "../bassin";
+import {Employe} from "../../employes/employe";
+import {EmployeService} from "../../employes/employe.service";
 
 @Component({
   selector: 'app-bassin-search',
@@ -15,6 +17,7 @@ export class BassinSearchComponent implements OnInit {
 
 
     bassins : Array<Bassin>;
+    employes: Array<Employe>;
 
     states = [State.propre, State.sale];
 
@@ -23,7 +26,7 @@ export class BassinSearchComponent implements OnInit {
 
   private especes: Array<Espece>;
 
-  constructor(private bassinService : BassinService, private especeService : EspeceService, private formBuilder: FormBuilder) { }
+  constructor(private bassinService : BassinService, private especeService : EspeceService, private employeService : EmployeService, private formBuilder: FormBuilder) { }
   ngOnInit() {
        this.especeService.getAllEspeces().subscribe(
              data => {
@@ -32,6 +35,10 @@ export class BassinSearchComponent implements OnInit {
                              data =>   this.bassins = data
 
                     )
+                this.employeService.getAllEmployes().subscribe(
+                  data => this.employes = data
+
+                )
                  this.bassinForm = this.formBuilder.group({
                    id: [null, Validators.required],
                    nom: [null, Validators.required],
@@ -39,6 +46,7 @@ export class BassinSearchComponent implements OnInit {
                    volume:  [null, Validators.required],
                    etat: [null, Validators.required],
                    espece: [null, Validators.required],
+                   responsable: [null, Validators.required]
                  });
 
              }
@@ -80,6 +88,8 @@ export class BassinSearchComponent implements OnInit {
 
    let id_espece_search = this.bassinForm.get('espece').value;
 
+    let id_employe_search = this.bassinForm.get('responsable').value;
+
 
     let id : number;
     let nom : string;
@@ -87,6 +97,7 @@ export class BassinSearchComponent implements OnInit {
     let volume : number;
     let etat : State;
     let lst_espece : Array<Espece>;
+    let employe : Employe;
 
   for(let i = 0; i < this.bassins.length; i++){
         id = this.bassins[i].id;
@@ -94,6 +105,7 @@ export class BassinSearchComponent implements OnInit {
         capacite_max = this.bassins[i].capacite_max;
         volume = this.bassins[i].volume;
         lst_espece = this.bassins[i].lst;
+        employe = this.bassins[i].responsable;
         etat = this.bassins[i].etat;
 
 
@@ -132,6 +144,11 @@ export class BassinSearchComponent implements OnInit {
                   this.bassins.splice(i, 1);
                  i--;
          }
+         else if(id_employe_search != null && id_employe_search != employe.id){
+          this.bassins.splice(i, 1);
+          i--;
+
+        }
      }
 
   }
