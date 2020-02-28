@@ -32,7 +32,7 @@ export class EmployeUpdateComponent implements OnInit {
           nom: new FormControl(data.nom),
           prenom: new FormControl(data.prenom),
           adresse: new FormControl(data.adresse),
-          date_naissance: new FormControl(data.date_naissance),
+          date_naissance: new FormControl(new Date(data.date_naissance).toISOString().substring(0, 10)),
           num_secu_sociale: new FormControl(data.num_secu_sociale),
           role: new FormControl(data.role),
           login: new FormControl(data.login),

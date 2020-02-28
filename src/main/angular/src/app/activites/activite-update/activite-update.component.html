@@ -4,7 +4,7 @@
 <br>
 <br>
 
-<form [formGroup]="activiteForm">
+<form [formGroup]="activiteForm" *ngIf="activiteForm">
   <div class="item">
     <label>
       Id :
@@ -61,6 +61,21 @@
       <input type="time" formControlName="heure_fin" name="appt"
              min="09:00" max="23:00" required>
     </label>
+  </div>
+
+  <div class="item" formArrayName="employes">
+    <label  *ngFor="let number of activiteForm.controls.employes.controls let i = index">
+      Reponsable :
+      <select formControlName="{{i}}">
+        <option *ngFor="let employe of employes" [value]="employe.id" >{{employe.nom}} {{employe.prenom}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="item">
+    Ajouter/Supprimer des responsables
+    <button (click)="addReponsable()">+</button>
+    <button (click)="removeReponsable()">-</button>
+
   </div>
   <div class="button">
 

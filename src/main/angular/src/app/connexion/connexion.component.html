@@ -1,7 +1,7 @@
 <div class="title"> <span class="titleee">Connexion :</span>
 
 </div>
-<div class="formulaire"><form [formGroup]="connexionForm">
+<div class="formulaire"><form [formGroup]="connexionForm" *ngIf="connexionForm">
   <div class="item">
     <label>
       Login :

@@ -34,8 +34,8 @@ export class AnimalUpdateComponent implements OnInit {
           sexe: new FormControl(data.sexe),
           espece: new FormControl(data.espece.id),
           signe_distinctif: new FormControl(data.signe_distinctif),
-          date_arrive: new FormControl(data.date_arrive),
-          date_depart: new FormControl(data.date_depart)
+          date_arrive: new FormControl(new Date(data.date_arrive).toISOString().substring(0, 10)),
+          date_depart: new FormControl(new Date(data.date_depart).toISOString().substring(0, 10))
         });
 
       }

@@ -1,10 +1,12 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Bassin} from "../../bassins/bassin";
 import {BassinService} from "../../bassins/bassin.service";
 import {Activite} from "../activite";
 import {ActiviteService} from "../activite.service";
 import {ActivatedRoute} from "@angular/router";
+import {Employe} from "../../employes/employe";
+import {EmployeService} from "../../employes/employe.service";
 
 
 @Component({
@@ -16,12 +18,14 @@ export class ActiviteUpdateComponent implements OnInit {
 
   activiteForm: FormGroup;
   bassins : Array<Bassin>;
+  nbResponsable = [1];
 
+  employes : Array<Employe>;
   id:number;
 
   @Output()
   updateActivite = new EventEmitter<Activite>();
-  constructor(private bassinService : BassinService, private activiteService : ActiviteService, private route: ActivatedRoute) { }
+  constructor(private bassinService : BassinService, private employeService : EmployeService, private activiteService : ActiviteService, private route: ActivatedRoute, private formBuilder : FormBuilder) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -29,16 +33,28 @@ export class ActiviteUpdateComponent implements OnInit {
 
 
       this.activiteService.getActivite(this.id).subscribe(data => {
+        console.log(data);
+
+        this.employeService.getAllEmployes().subscribe(
+          data2 => this.employes = data2
+        )
         this.activiteForm = new FormGroup({
           id: new FormControl(this.id),
           nom: new FormControl(data.nom),
           public_act: new FormControl(data.public_act),
            bassin: new FormControl(data.bassin.id),
-          date_debut: new FormControl(data.date_debut),
-           heure_debut:  new FormControl(),
-          date_fin: new FormControl(data.date_fin),
-          heure_fin:  new FormControl(),
+          date_debut: new FormControl(new Date(data.date_debut).toISOString().substring(0, 10)),
+           heure_debut:  new FormControl( this.formatDate(new Date(data.date_debut).getHours(), 2)+":"+ this.formatDate(new Date(data.date_debut).getMinutes(), 2)),
+          date_fin: new FormControl(new Date(data.date_fin).toISOString().substring(0, 10)),
+          heure_fin:  new FormControl(this.formatDate(new Date(data.date_fin).getHours(), 2)+":"+ this.formatDate(new Date(data.date_fin).getMinutes(), 2)),
+          employes: this.formBuilder.array([
+
+          ])
         });
+        const control = <FormArray>this.activiteForm.controls['employes'];
+        for(let i = 0; i < data.responsables.length; i++){
+          control.push(new FormControl(data.responsables[i].id))
+        }
 
       }
     );
@@ -48,6 +64,12 @@ export class ActiviteUpdateComponent implements OnInit {
       data => this.bassins = data
 
     )
+  }
+
+  formatDate(nombre : number, chiffre : number) {
+    var temp = '' + nombre;
+    while ((temp.length < chiffre) && (temp = '0' + temp)) {}
+    return temp;
   }
 
     onSubmit(){
@@ -66,8 +88,38 @@ export class ActiviteUpdateComponent implements OnInit {
       activite.date_fin = d3;
       activite.bassin = null;
       this.activiteService.updateActivite(activite, activite.id, (this.activiteForm.get('bassin').value)).subscribe(
-        data => this.updateActivite.emit(activite),
+        data => {
+          const control = <FormArray>this.activiteForm.controls['employes'];
+          tab = [];
+          for(let i = 0; i <  control.length; i++){
+            tab.push(control.get(i.toString()).value);
+            /*this.activiteService.addEmployes(activite, data.id, control.get(i.toString()).value).subscribe(
+              data => console.log(data)
+            )*/
+          }
+          console.log(data);
+          this.activiteService.createActiviteBis(data.id, tab).subscribe(
+            data => this.updateActivite.emit(activite)
+          );
+        },
         error => console.log(error)
       );
+
+
     }
+  removeReponsable() {
+    const control = <FormArray>this.activiteForm.controls['employes'];
+    if(control.length  > 1){
+
+      control.removeAt(0);
+    }
+  }
+
+  addReponsable() {
+    const control = <FormArray>this.activiteForm.controls['employes'];
+    if(control.length < this.employes.length) {
+
+      control.push(new FormControl())
+    }
+  }
 }
