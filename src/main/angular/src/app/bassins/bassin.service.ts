@@ -24,7 +24,7 @@ export class BassinService {
   }
 
   updateBassin(bassin : Bassin, id : number, idEmploye : number) : Observable<Bassin>{
-    return this.httpClient.post<Bassin>('/bassinUpdate/' + id + '/' + idEmploye, bassin);
+    return this.httpClient.post<Bassin>('/bassin/' + id + '/' + idEmploye, bassin);
   }
 
   getBassin(id: number) : Observable<Bassin>{
