@@ -84,4 +84,21 @@ public class ActiviteService {
         }
         return lst;
     }
+
+    public Iterable<Activite> getActivitesOfBassin(Bassin bassin) {
+        Iterable l = activiteRepository.findAll();
+        Iterator<Activite> iterator = l.iterator();
+
+        List<Activite> lst = new ArrayList<>();
+        while (iterator.hasNext()) {
+            lst.add(iterator.next());
+        }
+
+        for(int i = 0; i < lst.size();i++){
+            if(lst.get(i).getBassin().getId() != bassin.getId()){
+                lst.remove(i);
+            }
+        }
+        return lst;
+    }
 }

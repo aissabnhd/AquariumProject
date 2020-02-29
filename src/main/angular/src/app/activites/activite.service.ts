@@ -51,4 +51,10 @@ export class ActiviteService {
   getActivitesOfEmploye(id: number) : Observable<Array<Activite>> {
     return this.httpClient.get<Array<Activite>>('/activiteOfEmploye/' + id);
   }
+
+  getActivitesOfBassin(id: number) : Observable<Array<Activite>> {
+    return this.httpClient.get<Array<Activite>>('/activiteOfBassin/' + id);
+  }
+
+
 }

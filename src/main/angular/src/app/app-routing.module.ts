@@ -42,6 +42,7 @@ import {EmployeFicheComponent} from "./employes/employe-fiche/employe-fiche.comp
 import {EmployeSearchComponent} from "./employes/employe-search/employe-search.component";
 import {CalendriersComponent} from "./calendriers/calendriers.component";
 import {CalendrierComponent} from "./calendriers/calendrier/calendrier.component";
+import {CalendrierBassinComponent} from "./calendriers/calendrier-bassin/calendrier-bassin.component";
 
 
 const routes: Routes = [
@@ -88,7 +89,8 @@ const routes: Routes = [
   { path: 'employe_search', component: EmployeSearchComponent },
 
   { path: 'calendriers', component: CalendriersComponent },
-  { path: 'calendrier/:id', component: CalendrierComponent }
+  { path: 'calendrier/:id', component: CalendrierComponent },
+  { path: 'calendrierBassin/:id', component: CalendrierBassinComponent }
 
 
 

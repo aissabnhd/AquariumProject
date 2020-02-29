@@ -31,6 +31,13 @@ public class ActiviteRessource {
         return activiteService.getActivitesOfEmployes(employeService.getOne(id).get());
     }
 
+    @GetMapping("/activiteOfBassin/{id}")
+    public Iterable<Activite> getActivitesOfBassin(@PathVariable Long id) {
+
+
+        return activiteService.getActivitesOfBassin(bassinService.getOne(id).get());
+    }
+
 
     @PostMapping("/activite")
     public Activite postActivite(@RequestBody Activite activite) {
