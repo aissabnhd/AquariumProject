@@ -24,6 +24,14 @@ public class ActiviteRessource {
         return activiteService.getAll();
     }
 
+    @GetMapping("/activiteOfEmploye/{id}")
+    public Iterable<Activite> getActivitesOfEmployes(@PathVariable Long id) {
+
+
+        return activiteService.getActivitesOfEmployes(employeService.getOne(id).get());
+    }
+
+
     @PostMapping("/activite")
     public Activite postActivite(@RequestBody Activite activite) {
         return activiteService.createActivite(activite);

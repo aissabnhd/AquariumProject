@@ -45,7 +45,6 @@ export class ActiviteUpdateComponent implements OnInit {
            bassin: new FormControl(data.bassin.id),
           date_debut: new FormControl(new Date(data.date_debut).toISOString().substring(0, 10)),
            heure_debut:  new FormControl( this.formatDate(new Date(data.date_debut).getHours(), 2)+":"+ this.formatDate(new Date(data.date_debut).getMinutes(), 2)),
-          date_fin: new FormControl(new Date(data.date_fin).toISOString().substring(0, 10)),
           heure_fin:  new FormControl(this.formatDate(new Date(data.date_fin).getHours(), 2)+":"+ this.formatDate(new Date(data.date_fin).getMinutes(), 2)),
           employes: this.formBuilder.array([
 
@@ -79,7 +78,7 @@ export class ActiviteUpdateComponent implements OnInit {
       d2.setHours(tab[0]);
       d2.setMinutes(tab[1]);
 
-      let d3: Date = new Date(activite.date_fin);
+      let d3: Date = new Date(activite.date_debut);
           let tab2 = this.activiteForm.get('heure_fin').value.split(':')
           d3.setHours(tab2[0]);
           d3.setMinutes(tab2[1]);

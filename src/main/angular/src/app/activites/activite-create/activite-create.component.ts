@@ -36,7 +36,6 @@ export class ActiviteCreateComponent implements OnInit {
             public_act: new FormControl(true),
             bassin: new FormControl(this.bassins[0].id),
             date_debut: [null, Validators.required],
-            date_fin: [null, Validators.required],
             heure_debut: [null, Validators.required],
             heure_fin: [null, Validators.required],
             employes: this.formBuilder.array([
@@ -58,7 +57,7 @@ export class ActiviteCreateComponent implements OnInit {
     d2.setHours(tab[0]);
     d2.setMinutes(tab[1]);
 
-    let d3: Date = new Date(activite.date_fin);
+    let d3: Date = new Date(activite.date_debut);
         let tab2 = this.activiteForm.get('heure_fin').value.split(':')
         d3.setHours(tab2[0]);
         d3.setMinutes(tab2[1]);

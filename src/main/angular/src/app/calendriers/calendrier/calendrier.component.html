@@ -1,27 +1,34 @@
-<table border="1">
-  <tr>
-    <th>Heure</th>
-    <th>Lundi</th>
-    <th>Mardi</th>
-    <th>Mercredi</th>
-    <th>Jeudi</th>
-    <th>Vendredi</th>
-    <th>Samedi</th>
-    <th>Dimanche</th>
-  </tr>
-  <tr>
-    <td>8:00</td>
-    <td>Smith</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>10:00</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
-  <tr>
-    <td>12:00</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
-</table>
+<form [formGroup]="calendrierForm" *ngIf="calendrierForm">
+
+  <div class="item">
+    <label>
+      Année :
+      <select formControlName="annee">
+        <option *ngFor="let annee of annees" [value]="annee" >{{annee}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="item">
+    <label>
+      Semaine :
+      <select formControlName="semaine">
+        <option *ngFor="let semaine of semaines" [value]="semaine" >{{getBeginEndOfWeek(semaine, calendrierForm.get('annee').value)}}</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="button">
+    <button (click)="onSubmit()" type="submit" class="button" [disabled]="!calendrierForm.valid">Recherche</button>
+    <button routerLink="/calendriers" type="submit" class="button">Retour</button>
+  </div>
+
+</form>
+
+<ul class="especes">
+  <li *ngFor="let activite of activites">
+    <app-activite [activite]="activite">
+
+    </app-activite>
+    <p><br /></p>
+  </li>
+</ul>

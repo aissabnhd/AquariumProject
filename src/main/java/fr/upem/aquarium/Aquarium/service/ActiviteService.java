@@ -9,6 +9,8 @@ import fr.upem.aquarium.Aquarium.repository.EspeceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,5 +66,22 @@ public class ActiviteService {
         activite.setId(id);
         activite.setBassin(b);
         return activiteRepository.save(activite);
+    }
+
+    public Iterable<Activite> getActivitesOfEmployes(Employe e) {
+        Iterable l = activiteRepository.findAll();
+        Iterator<Activite> iterator = l.iterator();
+
+        List<Activite> lst = new ArrayList<>();
+        while (iterator.hasNext()) {
+            lst.add(iterator.next());
+        }
+
+        for(int i = 0; i < lst.size();i++){
+            if(!lst.get(i).getResponsables().contains(e)){
+                lst.remove(i);
+            }
+        }
+        return lst;
     }
 }
