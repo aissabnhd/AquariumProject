@@ -54,6 +54,8 @@ import { EmployeCreateComponent } from './employes/employe-create/employe-create
 import { EmployeUpdateComponent } from './employes/employe-update/employe-update.component';
 import { EmployeFicheComponent } from './employes/employe-fiche/employe-fiche.component';
 import { EmployeSearchComponent } from './employes/employe-search/employe-search.component';
+import { CalendriersComponent } from './calendriers/calendriers.component';
+import { CalendrierComponent } from './calendriers/calendrier/calendrier.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +100,8 @@ import { EmployeSearchComponent } from './employes/employe-search/employe-search
     EmployeUpdateComponent,
     EmployeFicheComponent,
     EmployeSearchComponent,
+    CalendriersComponent,
+    CalendrierComponent,
 
   ],
   imports: [

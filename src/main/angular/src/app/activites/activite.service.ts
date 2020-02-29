@@ -47,4 +47,8 @@ export class ActiviteService {
   getActivite(id: number) : Observable<Activite>{
     return this.httpClient.get<Activite>('/activite/' + id);
   }
+
+  getActivitesOfEmploye(id: number) : Observable<Array<Activite>> {
+    return this.httpClient.get<Array<Activite>>('/activiteOfEmploye/' + id);
+  }
 }

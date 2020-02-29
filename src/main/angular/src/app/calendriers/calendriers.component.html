@@ -1,0 +1,29 @@
+<div class="formulaire"><form [formGroup]="employeForm" *ngIf="employeForm">
+<div class="item">
+  <label>
+    Employé :
+    <select formControlName="employe">
+      <option *ngFor="let employe of employes" [value]="employe.id" >{{employe.nom}} {{employe.prenom}}</option>
+    </select>
+  </label>
+</div>
+  <div class="button">
+    <button (click)="onSubmitEmploye()" type="submit" class="button" [disabled]="!employeForm.valid">Calendrier employe</button>
+  </div>
+
+</form>
+  <div class="formulaire"><form [formGroup]="bassinForm" *ngIf="bassinForm">
+
+  <div class="item">
+  <label>
+    Bassin :
+    <select formControlName="bassin">
+      <option *ngFor="let bassin of bassins" [value]="bassin.id" >{{bassin.nom}}</option>
+    </select>
+  </label>
+</div>
+    <div class="button">
+      <button (click)="onSubmitBassin()" type="submit" class="button" [disabled]="!bassinForm.valid">Calendrier bassin</button>
+    </div>
+</form>
+</div>
