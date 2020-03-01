@@ -13,8 +13,6 @@
   <div class="date2" *ngIf="activite.date_fin"> Date de fin : {{dateToString(activite.date_fin)}} </div>
   <br>
   <div class="date2" *ngIf="activite.responsables"> Responsables : {{responsablesToString()}} </div>
-  <br>
-  <div class="plus"><a routerLink="/activite_fiche/{{role}}/{{activite.id}}">En savoir plus ...</a></div>
 
   <div class="links">
     <a *ngIf="role == 'gestionnaire'" title="delete" mat-fab (click)="onDelete()" routerLink="/activites/{{role}}"><mat-icon>delete</mat-icon></a>

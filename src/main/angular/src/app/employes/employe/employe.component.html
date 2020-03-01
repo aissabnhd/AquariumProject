@@ -13,9 +13,7 @@
   <br>
   <div class="menace"> Rôle : {{employe.role.toString()}} </div>
   <br>
-  <div class="plus">
-    <a routerLink="/employe_fiche/{{role}}/{{employe.id}}">En savoir plus ...</a>
-  </div>
+
 
   <div class="links">
     <a *ngIf="role == 'gestionnaire'" title="delete" mat-fab (click)="onDelete()" routerLink="/employes/{{role}}"><mat-icon>delete</mat-icon></a>

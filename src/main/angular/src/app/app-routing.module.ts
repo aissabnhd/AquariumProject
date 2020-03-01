@@ -33,12 +33,10 @@ import {SecteurSearchComponent} from "./secteurs/secteur-search/secteur-search.c
 import {ActivitesComponent} from "./activites/activites.component";
 import {ActiviteCreateComponent} from "./activites/activite-create/activite-create.component";
 import {ActiviteUpdateComponent} from "./activites/activite-update/activite-update.component";
-import {ActiviteFicheComponent} from "./activites/activite-fiche/activite-fiche.component";
 import {ActiviteSearchComponent} from "./activites/activite-search/activite-search.component";
 import {EmployesComponent} from "./employes/employes.component";
 import {EmployeCreateComponent} from "./employes/employe-create/employe-create.component";
 import {EmployeUpdateComponent} from "./employes/employe-update/employe-update.component";
-import {EmployeFicheComponent} from "./employes/employe-fiche/employe-fiche.component";
 import {EmployeSearchComponent} from "./employes/employe-search/employe-search.component";
 import {CalendriersComponent} from "./calendriers/calendriers.component";
 import {CalendrierComponent} from "./calendriers/calendrier/calendrier.component";
@@ -79,13 +77,11 @@ const routes: Routes = [
   { path: 'activites/:role', component: ActivitesComponent },
   { path: 'activite_create/:role', component: ActiviteCreateComponent },
   { path: 'activite_update/:role/:id', component: ActiviteUpdateComponent },
-  { path: 'activite_fiche/:role/:id', component: ActiviteFicheComponent },
   { path: 'activite_search/:role', component: ActiviteSearchComponent },
 
   { path: 'employes/:role', component: EmployesComponent },
   { path: 'employe_create/:role', component: EmployeCreateComponent },
   { path: 'employe_update/:role/:id', component: EmployeUpdateComponent },
-  { path: 'employe_fiche/:role/:id', component: EmployeFicheComponent },
   { path: 'employe_search/:role', component: EmployeSearchComponent },
 
   { path: 'calendriers/:role', component: CalendriersComponent },

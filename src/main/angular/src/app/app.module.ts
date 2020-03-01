@@ -41,7 +41,6 @@ import { SecteurModifierBassinComponent } from './secteurs/secteur-modifier-bass
 import { ActivitesComponent } from './activites/activites.component';
 import { ActiviteComponent } from './activites/activite/activite.component';
 import { ActiviteCreateComponent } from './activites/activite-create/activite-create.component';
-import { ActiviteFicheComponent } from './activites/activite-fiche/activite-fiche.component';
 import { ActiviteUpdateComponent } from './activites/activite-update/activite-update.component';
 import { EspeceSearchComponent } from './especes/espece-search/espece-search.component';
 import { AnimalSearchComponent } from './animaux/animal-search/animal-search.component';
@@ -52,7 +51,6 @@ import { EmployesComponent } from './employes/employes.component';
 import { EmployeComponent } from './employes/employe/employe.component';
 import { EmployeCreateComponent } from './employes/employe-create/employe-create.component';
 import { EmployeUpdateComponent } from './employes/employe-update/employe-update.component';
-import { EmployeFicheComponent } from './employes/employe-fiche/employe-fiche.component';
 import { EmployeSearchComponent } from './employes/employe-search/employe-search.component';
 import { CalendriersComponent } from './calendriers/calendriers.component';
 import { CalendrierComponent } from './calendriers/calendrier/calendrier.component';
@@ -88,7 +86,6 @@ import { CalendrierBassinComponent } from './calendriers/calendrier-bassin/calen
     ActivitesComponent,
     ActiviteComponent,
     ActiviteCreateComponent,
-    ActiviteFicheComponent,
     ActiviteUpdateComponent,
     EspeceSearchComponent,
     AnimalSearchComponent,
@@ -99,7 +96,6 @@ import { CalendrierBassinComponent } from './calendriers/calendrier-bassin/calen
     EmployeComponent,
     EmployeCreateComponent,
     EmployeUpdateComponent,
-    EmployeFicheComponent,
     EmployeSearchComponent,
     CalendriersComponent,
     CalendrierComponent,
