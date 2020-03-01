@@ -6,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Bassin} from "../../bassins/bassin";
 import {BassinService} from "../../bassins/bassin.service";
 import {Role} from "../../employes/employe";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-secteur-modifier-bassin',
@@ -19,7 +20,7 @@ export class SecteurModifierBassinComponent implements OnInit {
   role : Role;
   updateSecteur = new EventEmitter<Secteur>();
 
-  constructor(private secteurService : SecteurService, private bassinService : BassinService, private route: ActivatedRoute) { }
+  constructor(private secteurService : SecteurService, private snackBar : MatSnackBar, private bassinService : BassinService, private route: ActivatedRoute) { }
 
   refresh(){
     this.secteurService.getSecteur(this.id).subscribe(
@@ -59,20 +60,26 @@ export class SecteurModifierBassinComponent implements OnInit {
   onDelete(id : number) {
     this.secteurService.removeBassinSecteur(this.secteur.id, id).subscribe(
       data => {
+        this.snackBar.open('Bassin retiré !', 'OK', { verticalPosition: 'top', duration: 5000 });
         this.updateSecteur.emit(data),
           this.refresh()
-      }
+      },
+    error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
 
-    )
+
+  )
 
   }
 
    onAdd(id : number) {
       this.secteurService.assignBassinSecteur(this.secteur.id, id).subscribe(
         data => {
+          this.snackBar.open('Bassin ajouté !', 'OK', { verticalPosition: 'top', duration: 5000 });
           this.updateSecteur.emit(data),
             this.refresh()
-        }
+        },
+        error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
+
 
       )
 

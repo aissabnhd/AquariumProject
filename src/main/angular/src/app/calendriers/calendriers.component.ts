@@ -48,7 +48,7 @@ export class CalendriersComponent implements OnInit {
 
   onSubmitBassin() {
     console.log(this.bassinForm.get('bassin').value)
-    this.router.navigate(['/calendrierBassin/' + this.bassinForm.get('bassin').value + '/' + this.role]);
+    this.router.navigate(['/calendrierBassin/' + this.role + '/' + this.bassinForm.get('bassin').value]);
 
   }
 }

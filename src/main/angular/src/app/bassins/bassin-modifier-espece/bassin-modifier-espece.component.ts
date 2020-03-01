@@ -6,6 +6,7 @@ import {BassinService} from "../bassin.service";
 import {ActivatedRoute} from "@angular/router";
 import {EspeceService} from "../../especes/espece.service";
 import {Role} from "../../employes/employe";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-bassin-modifier-espece',
@@ -20,7 +21,7 @@ export class BassinModifierEspeceComponent implements OnInit {
   role : Role;
   updateBassin = new EventEmitter<Bassin>();
 
-  constructor(private bassinService : BassinService, private especeService : EspeceService, private route: ActivatedRoute) { }
+  constructor(private bassinService : BassinService, private snackBar : MatSnackBar, private especeService : EspeceService, private route: ActivatedRoute) { }
 
   refresh(){
     this.bassinService.getBassin(this.id).subscribe(
@@ -32,8 +33,6 @@ export class BassinModifierEspeceComponent implements OnInit {
             this.espece_ajout = data2,
               this.extracted(),
               this.bassinAjoutForm.get('ajout').reset()
-              console.log('espece_ajout :'),
-              console.log(this.espece_ajout)
 
           }
         );
@@ -66,9 +65,13 @@ export class BassinModifierEspeceComponent implements OnInit {
   onDelete(id : number) {
     this.bassinService.removeEspeceBassin(this.bassin.id, id).subscribe(
       data => {
+        this.snackBar.open('Espèce retirée !', 'OK', { verticalPosition: 'top', duration: 5000 });
+
         this.updateBassin.emit(data),
           this.refresh()
-      }
+      },
+      error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
+
 
     )
 
@@ -77,9 +80,13 @@ export class BassinModifierEspeceComponent implements OnInit {
    onAdd(id : number) {
       this.bassinService.assignEspeceBassin(this.bassin.id, id).subscribe(
         data => {
+          this.snackBar.open('Espèce ajoutée !', 'OK', { verticalPosition: 'top', duration: 5000 });
+
           this.updateBassin.emit(data),
             this.refresh()
-        }
+        },
+        error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
+
 
       )
 
