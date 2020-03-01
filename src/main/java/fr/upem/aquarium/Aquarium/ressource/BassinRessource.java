@@ -65,4 +65,10 @@ public class BassinRessource {
         Optional<Employe> emp = employeService.getOne(idEmploye);
         return bassinService.updateBassin(id, bassin, emp);
     }
+
+    @GetMapping("bassinFromEspece/{idEspece}")
+    public Optional<Bassin> getFromEspece(@PathVariable Long idEspece) {
+        //@PathVariable {id}
+        return bassinService.getFromEspece(idEspece);
+    }
 }

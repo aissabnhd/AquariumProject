@@ -1,2 +1,24 @@
-<p>Not Available for espece : {{espece.nom}} (id={{espece.id}}) </p>
-<a title="Return" routerLink="/especes/{{role}}">Retour aux espèces </a>
+<div class="block">
+  <div class="nom"> Nom : {{espece.nom}} </div>
+  <br>
+  <div class="esperance"> Espérance : {{espece.esperance}} </div>
+  <br>
+  <div class="regime"> Régime : {{espece.regime}} </div>
+  <br>
+  <div class="menace"> Menacé : {{espece.menace}} </div>
+  <br>
+  <div class="regime" *ngIf="bassin" > Bassin : <a routerLink="/bassin_fiche/{{role}}/{{bassin.id}}">{{bassin.nom}}</a> </div>
+  <div class="regime" *ngIf="!bassin"> Aucun bassin pour {{espece.nom}}</div>
+
+  <br>
+  <div class="regime" *ngIf="secteur" > Secteur : <a routerLink="/secteur_fiche/{{role}}/{{secteur.id}}">{{secteur.nom}}</a> </div>
+  <div class="regime" *ngIf="!secteur"> Aucun secteur pour {{espece.nom}}</div>
+  <br>
+  <div class="regime" *ngIf="animaux" > Animaux :
+    <a *ngFor="let a of animaux" routerLink="/animal_fiche/{{role}}/{{a.id}}">{{a.nom}}, </a>
+  </div>
+  <div class="regime" *ngIf="!animaux"> Aucun Animaux pour {{espece.nom}}</div>
+  <br>
+  <a title="Return" routerLink="/especes/{{role}}">Retour aux espèces </a>
+
+</div>

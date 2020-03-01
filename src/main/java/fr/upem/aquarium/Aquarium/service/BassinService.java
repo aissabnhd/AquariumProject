@@ -1,14 +1,14 @@
 package fr.upem.aquarium.Aquarium.service;
 
-import fr.upem.aquarium.Aquarium.model.Animal;
-import fr.upem.aquarium.Aquarium.model.Bassin;
-import fr.upem.aquarium.Aquarium.model.Employe;
-import fr.upem.aquarium.Aquarium.model.Espece;
+import fr.upem.aquarium.Aquarium.model.*;
 import fr.upem.aquarium.Aquarium.repository.AnimalRepository;
 import fr.upem.aquarium.Aquarium.repository.BassinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -64,4 +64,23 @@ public class BassinService {
 
         return bassinRepository.save(b);
     }
+
+    public Optional<Bassin> getFromEspece(Long idEspece) {
+        Iterable l = bassinRepository.findAll();
+        Iterator<Bassin> iterator = l.iterator();
+
+        List<Bassin> lst = new ArrayList<>();
+        while (iterator.hasNext()) {
+            lst.add(iterator.next());
+        }
+
+        for(int i = 0; i < lst.size();i++){
+            for(int j = 0; j < lst.get(i).getLst().size(); j++){
+                if(lst.get(i).getLst().get(j).getId() == idEspece)
+                    return Optional.of(lst.get(i));
+            }
+        }
+        return Optional.empty();
+    }
+
 }

@@ -31,7 +31,13 @@ export class BassinService {
     return this.httpClient.get<Bassin>('/bassin/' + id);
   }
 
-   assignEspeceBassin(idBassin : number, idEspece : number) : Observable<any>{
+  getBassinFromEspece(id: number) : Observable<Bassin>{
+    return this.httpClient.get<Bassin>('/bassinFromEspece/' + id);
+  }
+
+
+
+  assignEspeceBassin(idBassin : number, idEspece : number) : Observable<any>{
       return this.httpClient.get<Bassin>('/bassins/' + idBassin + '/' + idEspece);
     }
 

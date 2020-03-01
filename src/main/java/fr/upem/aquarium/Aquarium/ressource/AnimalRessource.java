@@ -32,6 +32,14 @@ public class AnimalRessource {
         return animalService.getOne(id);
     }
 
+    @GetMapping("/animauxOfEspece/{idEspece}")
+    public Iterable<Animal> getAnimauxOfEspece(@PathVariable Long idEspece) {
+
+
+        return animalService.getAnimauxOfEspece(idEspece);
+    }
+
+
     @PostMapping("/animal_espece/{id}")
     public Animal postAnimalWithEspece(@RequestBody Animal animal, @PathVariable Long id) {
         Optional<Espece> e = (especeService.getOne(id));

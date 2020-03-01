@@ -1,3 +1,34 @@
-<p>Not Available for bassin : {{bassin.nom}} (id={{bassin.id}}) </p>
+<div class="block">
+  <div class="nom"> Nom : {{bassin.nom}} </div>
+  <br>
 
-<a title="Return" routerLink="/bassins/{{role}}">Retour aux bassins </a>
+  <div class="menace" *ngIf="bassin.responsable"> Responsable  : {{bassin.responsable.nom}} {{bassin.responsable.prenom}} </div>
+
+  <br>
+  <div class="esperance"> Etat : {{bassin.etat}} </div>
+  <br>
+  <div class="regime"> Volume : {{bassin.volume}} </div>
+  <br>
+  <div class="menace"> Capacité maximale : {{bassin.capacite_max}} </div>
+
+  <br>
+  <div class="regime" *ngIf="secteur" > Secteur : <a routerLink="/secteur_fiche/{{role}}/{{secteur.id}}">{{secteur.nom}}</a> </div>
+  <div class="regime" *ngIf="!secteur"> Aucun secteur pour {{bassin.nom}}</div>
+  <br>
+  <div class="regime" *ngIf="bassin.lst" > Espèce :
+    <a *ngFor="let e of bassin.lst" routerLink="/espece_fiche/{{role}}/{{e.id}}">{{e.nom}}, </a>
+  </div>
+  <div class="regime" *ngIf="!bassin.lst"> Aucune espèce pour {{bassin.nom}}</div>
+  <br>
+  <div class="regime" *ngIf="animaux" > Animaux :
+    <a *ngFor="let a of animaux" routerLink="/animal_fiche/{{role}}/{{a.id}}">{{a.nom}}, </a>
+  </div>
+  <div class="regime" *ngIf="!animaux"> Aucun Animaux pour {{bassin.nom}}</div>
+
+
+
+  <br>
+  <a title="Return" routerLink="/bassins/{{role}}">Retour aux bassins </a>
+
+</div>
+

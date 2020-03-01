@@ -15,6 +15,12 @@ export class AnimalService {
     return this.httpClient.get<Array<Animal>>('/animal')
   }
 
+  getAnimauxOfEspece(idEspece : number) : Observable<Array<Animal>> {
+    return this.httpClient.get<Array<Animal>>('/animauxOfEspece/' + idEspece)
+  }
+
+
+
   deleteAnimal(id: number) : Observable<any>{
     return this.httpClient.delete('/animal/' + id);
   }

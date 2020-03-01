@@ -1,3 +1,26 @@
-<p>Not Available for secteur : {{secteur.nom}} (id={{secteur.id}}) </p>
+<div class="block">
+  <div class="nom"> Nom : {{secteur.nom}} </div>
+  <br>
+  <div class="esperance"> Localisation : {{secteur.localisation}} </div>
+  <br>
+  <div class="regime" *ngIf="secteur.lstBassin" > Bassins :
+    <a *ngFor="let b of secteur.lstBassin" routerLink="/bassin_fiche/{{role}}/{{b.id}}">{{b.nom}}, </a>
+  </div>
+  <div class="regime" *ngIf="!secteur.lstBassin"> Aucun bassin pour {{secteur.nom}}</div>
+  <br>
 
-<a title="Return" routerLink="/secteurs/{{role}}">Retour aux secteurs </a>
+  <div class="regime" *ngIf="especes" > Espèce :
+    <a *ngFor="let e of especes" routerLink="/espece_fiche/{{role}}/{{e.id}}">{{e.nom}}, </a>
+  </div>
+  <div class="regime" *ngIf="!especes"> Aucun espèces pour {{secteur.nom}}</div>
+  <br>
+  <div class="regime" *ngIf="animaux" > Animaux :
+    <a *ngFor="let a of animaux" routerLink="/animal_fiche/{{role}}/{{a.id}}">{{a.nom}}, </a>
+  </div>
+  <div class="regime" *ngIf="!animaux"> Aucun Animaux pour {{secteur.nom}}</div>
+  <br>
+
+  <a title="Return" routerLink="/secteurs/{{role}}">Retour aux secteurs </a>
+
+</div>
+

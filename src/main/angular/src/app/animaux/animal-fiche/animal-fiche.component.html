@@ -1,2 +1,25 @@
-<p>Not Available for animal : {{animal.nom}} (id={{animal.id}}) </p>
-<a title="Return" routerLink="/animaux/{{role}}">Retour aux animaux </a>
+<div class="block">
+  <div class="nom"> Nom : {{animal.nom}} </div>
+  <br>
+  <div class="esperance"> Sexe : {{animal.sexe}} </div>
+  <br>
+
+  <div class="menace"> Signe distinctif : {{animal.signe_distinctif}} </div>
+  <br>
+  <div class="date1" *ngIf="animal.date_arrive"> Date d'arrivée : {{dateToString(animal.date_arrive)}} </div>
+  <br>
+  <div class="date2" *ngIf="animal.date_depart"> Date de départ : {{dateToString(animal.date_depart)}} </div>
+  <br>
+  <div class="regime" > Espèce : <a routerLink="/espece_fiche/{{role}}/{{animal.espece.id}}">{{animal.espece.nom}} </a></div>
+  <br>
+  <div class="regime" *ngIf="bassin" > Bassin : <a routerLink="/bassin_fiche/{{role}}/{{bassin.id}}">{{bassin.nom}}</a> </div>
+  <div class="regime" *ngIf="!bassin"> Aucun bassin pour {{animal.nom}}</div>
+
+  <br>
+  <div class="regime" *ngIf="secteur" > Secteur : <a routerLink="/secteur_fiche/{{role}}/{{secteur.id}}">{{secteur.nom}}</a> </div>
+  <div class="regime" *ngIf="!secteur"> Aucun secteur pour {{animal.nom}}</div>
+  <br>
+
+  <a title="Return" routerLink="/animaux/{{role}}">Retour aux animaux </a>
+
+</div>

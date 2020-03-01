@@ -10,6 +10,9 @@ import fr.upem.aquarium.Aquarium.repository.SecteurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -62,5 +65,23 @@ public class SecteurService {
         s.getLstBassin().remove(one1.get());
 
         return secteurRepository.save(s);
+    }
+
+    public Optional<Secteur> getFromBassin(Long idBassin) {
+        Iterable l = secteurRepository.findAll();
+        Iterator<Secteur> iterator = l.iterator();
+
+        List<Secteur> lst = new ArrayList<>();
+        while (iterator.hasNext()) {
+            lst.add(iterator.next());
+        }
+
+        for(int i = 0; i < lst.size();i++){
+            for(int j = 0; j < lst.get(i).getLstBassin().size(); j++){
+                if(lst.get(i).getLstBassin().get(j).getId() == idBassin)
+                    return Optional.of(lst.get(i));
+            }
+        }
+        return Optional.empty();
     }
 }

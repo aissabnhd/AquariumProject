@@ -1,6 +1,7 @@
 package fr.upem.aquarium.Aquarium.ressource;
 
 import fr.upem.aquarium.Aquarium.model.Animal;
+import fr.upem.aquarium.Aquarium.model.Bassin;
 import fr.upem.aquarium.Aquarium.model.Espece;
 import fr.upem.aquarium.Aquarium.model.Secteur;
 import fr.upem.aquarium.Aquarium.service.AnimalService;
@@ -59,5 +60,11 @@ public class SecteurRessource {
     @PostMapping("secteur/{id}")
     public Secteur putSecteur(@PathVariable Long id, @RequestBody Secteur secteur) {
         return secteurService.updateSecteur(id, secteur);
+    }
+
+    @GetMapping("secteurFromBassin/{idBassin}")
+    public Optional<Secteur> getFromBassin(@PathVariable Long idBassin) {
+        //@PathVariable {id}
+        return secteurService.getFromBassin(idBassin);
     }
 }

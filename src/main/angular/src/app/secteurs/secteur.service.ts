@@ -31,13 +31,20 @@ export class SecteurService {
     return this.httpClient.get<Secteur>('/secteur/' + id);
   }
 
-   assignBassinSecteur(idSecteur : number, idBassin : number) : Observable<any>{
+  getSecteurFromBassin(idBassin: number) : Observable<Secteur>{
+    return this.httpClient.get<Secteur>('/secteurFromBassin/' + idBassin);
+  }
+
+
+  assignBassinSecteur(idSecteur : number, idBassin : number) : Observable<any>{
       return this.httpClient.get<Secteur>('/secteurs/' + idSecteur + '/' + idBassin);
     }
 
     removeBassinSecteur(idSecteur : number, idBassin : number) : Observable<any>{
           return this.httpClient.delete<Secteur>('/secteurs/' + idSecteur + '/' + idBassin);
         }
+
+
 
 
 }
