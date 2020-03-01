@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {EmployeService} from "../employes/employe.service";
 import {Employe} from "../employes/employe";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-connexion',
@@ -21,7 +22,7 @@ export class ConnexionComponent implements OnInit {
   @Output()
   connectEmploye = new EventEmitter<Employe | boolean >();
 
-  constructor(private formBuilder : FormBuilder, private employeService : EmployeService) { }
+  constructor(private router : Router, private formBuilder : FormBuilder, private employeService : EmployeService) { }
 
   ngOnInit() {
   }
@@ -31,7 +32,10 @@ export class ConnexionComponent implements OnInit {
     let password = this.connexionForm.get('password').value;
     let e = this.employeService.connect(login, password);
     e.subscribe(
-      data => this.connectEmploye.emit(data),
+      data => {
+        this.router.navigate(['/home/'+data.role]);
+        this.connectEmploye.emit(data)
+      },
 
             error => console.log("error")
     )

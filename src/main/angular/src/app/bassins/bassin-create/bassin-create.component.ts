@@ -4,7 +4,7 @@ import {Bassin, State} from "../bassin";
 import {BassinService} from "../bassin.service";
 import {Employe, Role} from "../../employes/employe";
 import {EmployeService} from "../../employes/employe.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-bassin-create',
@@ -21,7 +21,7 @@ export class BassinCreateComponent implements OnInit {
   @Output()
   createBassin = new EventEmitter<Bassin>();
   states = [State.propre, State.sale];
-  constructor(private bassinService : BassinService, private employeService : EmployeService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
+  constructor(private router : Router, private bassinService : BassinService, private employeService : EmployeService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
 
   ngOnInit() {
     this.role = this.route.snapshot.params['role']
@@ -45,7 +45,10 @@ export class BassinCreateComponent implements OnInit {
     let bassin: Bassin =  this.bassinForm.value;
 
     this.bassinService.createBassin(bassin, this.bassinForm.get('employe').value).subscribe(
-      data => this.createBassin.emit(bassin),
+      data => {
+        this.router.navigate(['/bassins/'+this.role]);
+        this.createBassin.emit(bassin)
+      },
       error => console.log(error)
     );
   }

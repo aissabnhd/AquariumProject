@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {BassinService} from "../bassin.service";
 import {Bassin, State} from "../bassin";
 import {Employe, Role} from "../../employes/employe";
@@ -21,7 +21,7 @@ export class BassinUpdateComponent implements OnInit {
 
   @Output()
   updateBassin = new EventEmitter<Bassin>();
-  constructor(private bassinService : BassinService, private employeService : EmployeService, private route: ActivatedRoute) { }
+  constructor(private router : Router, private bassinService : BassinService, private employeService : EmployeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -52,7 +52,10 @@ export class BassinUpdateComponent implements OnInit {
   onSubmit(){
     let bassin: Bassin =  this.bassinForm.value;
     this.bassinService.updateBassin(bassin, bassin.id, this.bassinForm.get('employe').value).subscribe(
-            data => this.updateBassin.emit(bassin),
+            data => {
+              this.router.navigate(['/bassins/'+this.role]);
+              this.updateBassin.emit(bassin)
+            },
             error => console.log(error)
 
     )

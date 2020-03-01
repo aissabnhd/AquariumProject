@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Secteur} from "../secteur";
 import {SecteurService} from "../secteur.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Role} from "../../employes/employe";
 
 @Component({
@@ -15,7 +15,7 @@ export class SecteurCreateComponent implements OnInit {
   role : Role;
   @Output()
   createSecteur = new EventEmitter<Secteur>();
-  constructor(private secteurService : SecteurService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
+  constructor(private router : Router, private secteurService : SecteurService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
 
   ngOnInit() {
       this.role = this.route.snapshot.params['role']
@@ -31,7 +31,10 @@ export class SecteurCreateComponent implements OnInit {
     let secteur: Secteur =  this.secteurForm.value;
 
     this.secteurService.createSecteur(secteur).subscribe(
-      data => this.createSecteur.emit(secteur),
+      data => {
+        this.router.navigate(['/secteurs/'+this.role]);
+        this.createSecteur.emit(secteur)
+      },
       error => console.log(error)
     );
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, CanActivate, RouterStateSnapshot } from '@angular/router';
+import {ActivatedRoute, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import { Espece } from '../espece';
 import { EspeceService } from '../espece.service'
 import {Role} from "../../employes/employe";
@@ -19,7 +19,7 @@ export class EspeceUpdateComponent implements OnInit {
 
        @Output()
        updateEspece = new EventEmitter<Espece>();
-  constructor(private especeService : EspeceService, private route: ActivatedRoute) { }
+  constructor(private router : Router, private especeService : EspeceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
       this.id = this.route.snapshot.params['id'];
@@ -42,7 +42,10 @@ export class EspeceUpdateComponent implements OnInit {
             let espece: Espece =  this.especeForm.value;
             espece.id = this.id;
             this.especeService.updateEspece(espece, espece.id).subscribe(
-              data => this.updateEspece.emit(espece),
+              data => {
+                this.router.navigate(['/especes/'+this.role]);
+                this.updateEspece.emit(espece)
+              },
               error => console.log(error)
             );
 

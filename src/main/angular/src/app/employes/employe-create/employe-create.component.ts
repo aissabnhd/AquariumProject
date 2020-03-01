@@ -3,7 +3,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {Espece} from "../../especes/espece";
 import {Employe, Role} from "../employe";
 import {EmployeService} from "../employe.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-employe-create',
@@ -29,7 +29,7 @@ export class EmployeCreateComponent implements OnInit {
 
   @Output()
   createEmploye = new EventEmitter<Employe>();
-  constructor(private employeService : EmployeService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
+  constructor(private router : Router, private employeService : EmployeService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
 
   ngOnInit() {
     this.role = this.route.snapshot.params['role']
@@ -38,7 +38,10 @@ export class EmployeCreateComponent implements OnInit {
   onSubmit(){
     let employe: Employe =  this.employeForm.value;
     this.employeService.createEmploye(employe).subscribe(
-      data => this.createEmploye.emit(employe),
+      data => {
+        this.router.navigate(['/employes/'+this.role]);
+        this.createEmploye.emit(employe)
+      },
       error => console.log(error)
     );
   }

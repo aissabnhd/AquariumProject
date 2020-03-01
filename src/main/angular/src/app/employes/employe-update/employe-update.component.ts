@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {EmployeService} from "../employe.service";
 import {Employe, Role} from "../employe";
 
@@ -20,7 +20,7 @@ export class EmployeUpdateComponent implements OnInit {
   role : Role;
   @Output()
   updateEmploye = new EventEmitter<Employe>();
-  constructor(private employeService : EmployeService, private route: ActivatedRoute) { }
+  constructor(private  router : Router, private employeService : EmployeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -46,7 +46,10 @@ export class EmployeUpdateComponent implements OnInit {
     let employe: Employe =  this.employeForm.value;
     employe.id = this.id;
     this.employeService.updateEmploye(employe, employe.id).subscribe(
-      data => this.updateEmploye.emit(employe),
+      data => {
+        this.router.navigate(['/employes/'+this.role]);
+        this.updateEmploye.emit(employe)
+      },
       error => console.log(error)
     );
 

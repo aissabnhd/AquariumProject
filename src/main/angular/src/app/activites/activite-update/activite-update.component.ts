@@ -4,7 +4,7 @@ import {Bassin} from "../../bassins/bassin";
 import {BassinService} from "../../bassins/bassin.service";
 import {Activite} from "../activite";
 import {ActiviteService} from "../activite.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Employe, Role} from "../../employes/employe";
 import {EmployeService} from "../../employes/employe.service";
 
@@ -26,7 +26,7 @@ export class ActiviteUpdateComponent implements OnInit {
 
   @Output()
   updateActivite = new EventEmitter<Activite>();
-  constructor(private bassinService : BassinService, private employeService : EmployeService, private activiteService : ActiviteService, private route: ActivatedRoute, private formBuilder : FormBuilder) { }
+  constructor(private router : Router, private bassinService : BassinService, private employeService : EmployeService, private activiteService : ActiviteService, private route: ActivatedRoute, private formBuilder : FormBuilder) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -99,7 +99,11 @@ export class ActiviteUpdateComponent implements OnInit {
           }
           console.log(data);
           this.activiteService.createActiviteBis(data.id, tab).subscribe(
-            data => this.updateActivite.emit(activite)
+
+            data => {
+              this.router.navigate(['/activites/'+this.role]);
+              this.updateActivite.emit(activite)
+            }
           );
         },
         error => console.log(error)

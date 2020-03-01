@@ -52,7 +52,7 @@
     </label>
   </div>
   <div class="button">
-    <button routerLink="/animaux/{{role}}" (click)="onSubmit()" type="submit" class="button" [disabled]="!animalForm.valid">Changer</button>
+    <button (click)="onSubmit()" type="submit" class="button" [disabled]="!animalForm.valid">Changer</button>
     <button routerLink="/animaux/{{role}}" type="submit" class="button">Retour</button>
   </div>
 </form>
