@@ -4,6 +4,7 @@ import {Secteur} from "../secteur";
 import {SecteurService} from "../secteur.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Role} from "../../employes/employe";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-secteur-create',
@@ -15,7 +16,7 @@ export class SecteurCreateComponent implements OnInit {
   role : Role;
   @Output()
   createSecteur = new EventEmitter<Secteur>();
-  constructor(private router : Router, private secteurService : SecteurService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
+  constructor(private router : Router, private snackBar : MatSnackBar, private secteurService : SecteurService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
 
   ngOnInit() {
       this.role = this.route.snapshot.params['role']
@@ -32,10 +33,11 @@ export class SecteurCreateComponent implements OnInit {
 
     this.secteurService.createSecteur(secteur).subscribe(
       data => {
+        this.snackBar.open('Secteur créé !', 'OK', { verticalPosition: 'top', duration: 5000 });
         this.router.navigate(['/secteurs/'+this.role]);
         this.createSecteur.emit(secteur)
       },
-      error => console.log(error)
+      error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
     );
   }
 

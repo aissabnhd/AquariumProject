@@ -4,6 +4,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {EmployeService} from "../employe.service";
 import {Employe, Role} from "../employe";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-employe-update',
@@ -20,7 +21,7 @@ export class EmployeUpdateComponent implements OnInit {
   role : Role;
   @Output()
   updateEmploye = new EventEmitter<Employe>();
-  constructor(private  router : Router, private employeService : EmployeService, private route: ActivatedRoute) { }
+  constructor(private snackBar : MatSnackBar, private router : Router, private employeService : EmployeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -47,10 +48,11 @@ export class EmployeUpdateComponent implements OnInit {
     employe.id = this.id;
     this.employeService.updateEmploye(employe, employe.id).subscribe(
       data => {
+        this.snackBar.open('Employé modifié !', 'OK', { verticalPosition: 'top', duration: 5000 });
         this.router.navigate(['/employes/'+this.role]);
         this.updateEmploye.emit(employe)
       },
-      error => console.log(error)
+      error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
     );
 
   }

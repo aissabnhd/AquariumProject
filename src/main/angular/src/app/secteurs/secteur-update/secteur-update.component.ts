@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SecteurService} from "../secteur.service";
 import {Secteur} from "../secteur";
 import {Role} from "../../employes/employe";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-secteur-update',
@@ -18,7 +19,7 @@ export class SecteurUpdateComponent implements OnInit {
 
   @Output()
   updateSecteur = new EventEmitter<Secteur>();
-  constructor(private router : Router, private secteurService : SecteurService, private route: ActivatedRoute) { }
+  constructor(private router : Router, private snackBar : MatSnackBar, private secteurService : SecteurService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -42,10 +43,11 @@ export class SecteurUpdateComponent implements OnInit {
     let secteur: Secteur =  this.secteurForm.value;
     this.secteurService.updateSecteur(secteur, secteur.id).subscribe(
             data => {
+              this.snackBar.open('Secteur modifié !', 'OK', { verticalPosition: 'top', duration: 5000 });
               this.router.navigate(['/secteurs/'+this.role]);
               this.updateSecteur.emit(secteur)
             },
-            error => console.log(error)
+      error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
 
     )
 

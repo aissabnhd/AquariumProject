@@ -4,6 +4,7 @@ import {EspeceService} from "../../especes/espece.service";
 import {Animal} from "../animal";
 import {AnimalService} from "../animal.service";
 import {Role} from "../../employes/employe";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-animal',
@@ -20,15 +21,18 @@ export class AnimalComponent implements OnInit {
 
   @Output()
   deleteAnimal = new EventEmitter<Animal>();
-  constructor(private animalService: AnimalService) { }
+  constructor(private snackBar : MatSnackBar, private animalService: AnimalService) { }
 
   ngOnInit() {
   }
 
   onDelete(){
     this.animalService.deleteAnimal(this.animal.id).subscribe(
-      data => this.deleteAnimal.emit(this.animal),
-      error => console.log(error)
+      data => {
+        this.snackBar.open('Animal supprimé !', 'OK', { verticalPosition: 'top', duration: 5000 });
+        this.deleteAnimal.emit(this.animal)
+      },
+      error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
     )
   }
 

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Activite} from "../activite";
 import {ActiviteService} from "../activite.service";
 import {Role} from "../../employes/employe";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-activite',
@@ -18,15 +19,19 @@ export class ActiviteComponent implements OnInit {
 
   @Output()
   deleteActivite = new EventEmitter<Activite>();
-  constructor(private activiteService: ActiviteService) { }
+  constructor(private snackBar : MatSnackBar, private activiteService: ActiviteService) { }
 
   ngOnInit() {
   }
 
   onDelete(){
     this.activiteService.deleteActivite(this.activite.id).subscribe(
-      data => this.deleteActivite.emit(this.activite),
-      error => console.log(error)
+      data => {
+        this.snackBar.open('Activité supprimée !', 'OK', { verticalPosition: 'top', duration: 5000 });
+        this.deleteActivite.emit(this.activite)
+      },
+      error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
+
     )
   }
 

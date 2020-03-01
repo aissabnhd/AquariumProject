@@ -5,6 +5,7 @@ import {BassinService} from "../bassin.service";
 import {Bassin, State} from "../bassin";
 import {Employe, Role} from "../../employes/employe";
 import {EmployeService} from "../../employes/employe.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-bassin-update',
@@ -21,7 +22,7 @@ export class BassinUpdateComponent implements OnInit {
 
   @Output()
   updateBassin = new EventEmitter<Bassin>();
-  constructor(private router : Router, private bassinService : BassinService, private employeService : EmployeService, private route: ActivatedRoute) { }
+  constructor( private snackBar : MatSnackBar, private router : Router, private bassinService : BassinService, private employeService : EmployeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -53,10 +54,11 @@ export class BassinUpdateComponent implements OnInit {
     let bassin: Bassin =  this.bassinForm.value;
     this.bassinService.updateBassin(bassin, bassin.id, this.bassinForm.get('employe').value).subscribe(
             data => {
+              this.snackBar.open('Bassin modifié !', 'OK', { verticalPosition: 'top', duration: 5000 });
               this.router.navigate(['/bassins/'+this.role]);
               this.updateBassin.emit(bassin)
             },
-            error => console.log(error)
+      error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
 
     )
 

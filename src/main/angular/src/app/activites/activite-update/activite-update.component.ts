@@ -7,6 +7,7 @@ import {ActiviteService} from "../activite.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Employe, Role} from "../../employes/employe";
 import {EmployeService} from "../../employes/employe.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 
 @Component({
@@ -26,7 +27,7 @@ export class ActiviteUpdateComponent implements OnInit {
 
   @Output()
   updateActivite = new EventEmitter<Activite>();
-  constructor(private router : Router, private bassinService : BassinService, private employeService : EmployeService, private activiteService : ActiviteService, private route: ActivatedRoute, private formBuilder : FormBuilder) { }
+  constructor(private snackBar : MatSnackBar, private router : Router, private bassinService : BassinService, private employeService : EmployeService, private activiteService : ActiviteService, private route: ActivatedRoute, private formBuilder : FormBuilder) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -101,12 +102,13 @@ export class ActiviteUpdateComponent implements OnInit {
           this.activiteService.createActiviteBis(data.id, tab).subscribe(
 
             data => {
+              this.snackBar.open('Activité modifiée !', 'OK', { verticalPosition: 'top', duration: 5000 });
               this.router.navigate(['/activites/'+this.role]);
               this.updateActivite.emit(activite)
             }
           );
         },
-        error => console.log(error)
+        error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
       );
 
 

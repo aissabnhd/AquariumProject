@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AnimalService} from "../animal.service";
 import {Animal, Sexe} from "../animal";
 import {Role} from "../../employes/employe";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-animal-update',
@@ -23,7 +24,7 @@ export class AnimalUpdateComponent implements OnInit {
 
   @Output()
   updateAnimal = new EventEmitter<Animal>();
-  constructor(private router : Router, private especeService : EspeceService, private animalService : AnimalService, private route: ActivatedRoute) { }
+  constructor(private snackBar : MatSnackBar, private router : Router, private especeService : EspeceService, private animalService : AnimalService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -61,11 +62,12 @@ export class AnimalUpdateComponent implements OnInit {
         animal.espece = data,
         this.animalService.updateAnimal(animal, animal.id).subscribe(
           data2 => {
+            this.snackBar.open('Animal modifié !', 'OK', { verticalPosition: 'top', duration: 5000 });
             this.router.navigate(['/animaux/'+this.role]);
             this.updateAnimal.emit(animal)
           },
 
-          error => console.log(error)
+          error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
         );
       }
     );

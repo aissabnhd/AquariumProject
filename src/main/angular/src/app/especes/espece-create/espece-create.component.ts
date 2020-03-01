@@ -4,6 +4,7 @@ import { Espece } from '../espece';
 import { EspeceService } from '../espece.service'
 import {ActivatedRoute, Router} from "@angular/router";
 import {Role} from "../../employes/employe";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-espece-create',
@@ -21,7 +22,7 @@ export class EspeceCreateComponent implements OnInit {
   role : Role;
    @Output()
    createEspece = new EventEmitter<Espece>();
-  constructor(private router : Router, private especeService : EspeceService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
+  constructor(private snackBar : MatSnackBar, private router : Router, private especeService : EspeceService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
 
   ngOnInit() {
     this.role = this.route.snapshot.params['role'];
@@ -31,10 +32,11 @@ export class EspeceCreateComponent implements OnInit {
         let espece: Espece =  this.especeForm.value;
         this.especeService.createEspece(espece).subscribe(
           data => {
+            this.snackBar.open('Espèce créée !', 'OK', { verticalPosition: 'top', duration: 5000 });
             this.router.navigate(['/especes/'+this.role]);
             this.createEspece.emit(espece)
           },
-          error => console.log(error)
+          error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
         );
       }
 

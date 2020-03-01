@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Espece} from "../../especes/espece";
 import {Employe, Role} from "../employe";
 import {EmployeService} from "../employe.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-employe',
@@ -18,7 +19,7 @@ export class EmployeComponent implements OnInit {
 
   @Output()
   deleteEmploye = new EventEmitter<Employe>();
-  constructor(private employeService: EmployeService) { }
+  constructor(private snackBar : MatSnackBar, private employeService: EmployeService) { }
 
   ngOnInit() {
   }
@@ -36,8 +37,11 @@ export class EmployeComponent implements OnInit {
 
   onDelete(){
     this.employeService.deleteEmploye(this.employe.id).subscribe(
-      data => this.deleteEmploye.emit(this.employe),
-      error => console.log(error)
+      data => {
+        this.snackBar.open('Employé supprimé !', 'OK', { verticalPosition: 'top', duration: 5000 });
+        this.deleteEmploye.emit(this.employe)
+      },
+      error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
     )
   }
 

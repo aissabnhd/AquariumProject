@@ -7,6 +7,7 @@ import {ActiviteService} from "../activite.service";
 import {EmployeService} from "../../employes/employe.service";
 import {Employe, Role} from "../../employes/employe";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-activite-create',
@@ -15,7 +16,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class ActiviteCreateComponent implements OnInit {
   bassins : Array<Bassin>;
-  nbResponsable = [1];
   activiteForm : FormGroup;
   role : Role;
 
@@ -23,7 +23,7 @@ export class ActiviteCreateComponent implements OnInit {
   @Output()
   createActivite = new EventEmitter<Activite>();
   private employes: Array<Employe>;
-  constructor(private activiteService : ActiviteService, private employeService : EmployeService, private formBuilder: FormBuilder, private bassinService : BassinService, private route : ActivatedRoute, private router : Router) { }
+  constructor(private snackBar : MatSnackBar, private activiteService : ActiviteService, private employeService : EmployeService, private formBuilder: FormBuilder, private bassinService : BassinService, private route : ActivatedRoute, private router : Router) { }
 
   ngOnInit() {
     this.role = this.route.snapshot.params['role']
@@ -74,13 +74,10 @@ export class ActiviteCreateComponent implements OnInit {
         tab = [];
         for(let i = 0; i <  control.length; i++){
           tab.push(control.get(i.toString()).value);
-          /*this.activiteService.addEmployes(activite, data.id, control.get(i.toString()).value).subscribe(
-            data => console.log(data)
-          )*/
         }
-        console.log(data);
           this.activiteService.createActiviteBis(data.id, tab).subscribe(
           data => {
+            this.snackBar.open("Activité créée !", 'OK', { verticalPosition: 'top', duration:5000 })
             this.router.navigate(['/activites/'+this.role]);
             this.createActivite.emit(activite);
 
@@ -89,7 +86,7 @@ export class ActiviteCreateComponent implements OnInit {
 
 
       },
-      error => console.log(error)
+      error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
     );
   }
 

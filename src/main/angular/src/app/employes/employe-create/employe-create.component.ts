@@ -4,6 +4,7 @@ import {Espece} from "../../especes/espece";
 import {Employe, Role} from "../employe";
 import {EmployeService} from "../employe.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-employe-create',
@@ -29,7 +30,7 @@ export class EmployeCreateComponent implements OnInit {
 
   @Output()
   createEmploye = new EventEmitter<Employe>();
-  constructor(private router : Router, private employeService : EmployeService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
+  constructor(private router : Router, private snackBar : MatSnackBar, private employeService : EmployeService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
 
   ngOnInit() {
     this.role = this.route.snapshot.params['role']
@@ -39,10 +40,11 @@ export class EmployeCreateComponent implements OnInit {
     let employe: Employe =  this.employeForm.value;
     this.employeService.createEmploye(employe).subscribe(
       data => {
+        this.snackBar.open('Employé créé !', 'OK', { verticalPosition: 'top', duration: 5000 });
         this.router.navigate(['/employes/'+this.role]);
         this.createEmploye.emit(employe)
       },
-      error => console.log(error)
+      error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
     );
   }
 

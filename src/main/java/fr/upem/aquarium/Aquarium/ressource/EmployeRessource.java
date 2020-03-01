@@ -6,8 +6,11 @@ import fr.upem.aquarium.Aquarium.model.Espece;
 import fr.upem.aquarium.Aquarium.service.AnimalService;
 import fr.upem.aquarium.Aquarium.service.EmployeService;
 import fr.upem.aquarium.Aquarium.service.EspeceService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -47,6 +50,10 @@ public class EmployeRessource {
 
     @GetMapping("employe/{login}/{password}")
     public Optional<Employe> getOne(@PathVariable String login, @PathVariable String password) {
+        if(!employeService.connect(login, password).isPresent())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Erreur de login/mot de passe");
+
         return employeService.connect(login, password);
+
     }
 }

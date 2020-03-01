@@ -55,6 +55,7 @@ import { EmployeSearchComponent } from './employes/employe-search/employe-search
 import { CalendriersComponent } from './calendriers/calendriers.component';
 import { CalendrierComponent } from './calendriers/calendrier/calendrier.component';
 import { CalendrierBassinComponent } from './calendriers/calendrier-bassin/calendrier-bassin.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -111,7 +112,8 @@ import { CalendrierBassinComponent } from './calendriers/calendrier-bassin/calen
     MatToolbarModule,
     MatIconModule,
     MatFormFieldModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

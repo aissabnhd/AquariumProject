@@ -6,6 +6,10 @@ import {Animal, Sexe} from "../animal";
 import {AnimalService} from "../animal.service";
 import {Role} from "../../employes/employe";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
+
+
+
 
 @Component({
   selector: 'app-animal-create',
@@ -21,7 +25,7 @@ export class AnimalCreateComponent implements OnInit {
   @Output()
   createAnimal = new EventEmitter<Animal>();
   sexes = [Sexe.F, Sexe.M];
-  constructor(private router : Router, private animalService : AnimalService, private formBuilder: FormBuilder, private especeService : EspeceService, private route : ActivatedRoute) { }
+  constructor(private snackBar : MatSnackBar, private router : Router, private animalService : AnimalService, private formBuilder: FormBuilder, private especeService : EspeceService, private route : ActivatedRoute) { }
 
   ngOnInit() {
     this.role = this.route.snapshot.params['role'];
@@ -50,11 +54,13 @@ export class AnimalCreateComponent implements OnInit {
 
     this.animalService.createAnimal(animal, (this.animalForm.get('espece').value)).subscribe(
       data => {
+        this.snackBar.open('Animal créé !', 'OK', { verticalPosition: 'top', duration:5000 });
         this.router.navigate(['/animaux/'+this.role]);
         this.createAnimal.emit(animal)
       },
-      error => console.log(error)
-    );
+      error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
+
+  );
   }
 
 

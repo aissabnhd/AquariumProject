@@ -4,6 +4,7 @@ import {ActivatedRoute, CanActivate, Router, RouterStateSnapshot} from '@angular
 import { Espece } from '../espece';
 import { EspeceService } from '../espece.service'
 import {Role} from "../../employes/employe";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-espece-update',
@@ -19,7 +20,7 @@ export class EspeceUpdateComponent implements OnInit {
 
        @Output()
        updateEspece = new EventEmitter<Espece>();
-  constructor(private router : Router, private especeService : EspeceService, private route: ActivatedRoute) { }
+  constructor(private router : Router, private snackBar : MatSnackBar, private especeService : EspeceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
       this.id = this.route.snapshot.params['id'];
@@ -43,10 +44,11 @@ export class EspeceUpdateComponent implements OnInit {
             espece.id = this.id;
             this.especeService.updateEspece(espece, espece.id).subscribe(
               data => {
+                this.snackBar.open('Espèce modifiée !', 'OK', { verticalPosition: 'top', duration: 5000 });
                 this.router.navigate(['/especes/'+this.role]);
                 this.updateEspece.emit(espece)
               },
-              error => console.log(error)
+              error => this.snackBar.open(error.error.message, 'OK', { verticalPosition: 'top', duration:5000 })
             );
 
           }
