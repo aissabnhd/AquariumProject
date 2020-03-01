@@ -3,43 +3,43 @@
 <ul class="especes">
 
   <li>
-    <div class="item_navig"><a title="Observer les espèces" class="icone" routerLink="/especes"> <img class="logo" src="../../assets/img/logo_especes.png" />
+    <div class="item_navig"><a title="Observer les espèces" class="icone" routerLink="/especes/{{role}}"> <img class="logo" src="../../assets/img/logo_especes.png" />
     </a></div>
     Voir les espèces
   </li>
 
   <li>
-    <div class="item_navig"><a title="Observer les animaux" class="icone" routerLink="/animaux"> <img class="logo" src="../../assets/img/logo_animaux.jpg" />
+    <div class="item_navig"><a title="Observer les animaux" class="icone" routerLink="/animaux/{{role}}"> <img class="logo" src="../../assets/img/logo_animaux.jpg" />
     </a></div>
     Voir les animaux
   </li>
 
   <li>
-    <div class="item_navig"><a title="Visiter les bassins" class="icone" routerLink="/bassins"> <img class="logo" src="../../assets/img/logo_bassin.jpg" />
+    <div class="item_navig"><a title="Visiter les bassins" class="icone" routerLink="/bassins/{{role}}"> <img class="logo" src="../../assets/img/logo_bassin.jpg" />
     </a></div>
     Voir les bassins
   </li>
 
   <li>
-    <div class="item_navig"><a title="Visiter les secteurs" class="icone" routerLink="/secteurs"> <img class="logo" src="../../assets/img/logo_secteur.jpg" />
+    <div class="item_navig"><a title="Visiter les secteurs" class="icone" routerLink="/secteurs/{{role}}"> <img class="logo" src="../../assets/img/logo_secteur.jpg" />
     </a></div>
     Visiter les secteurs
   </li>
 
   <li>
-    <div class="item_navig"><a title="Voir les activités" class="icone" routerLink="/activites"> <img class="logo" src="../../assets/img/logo_activite.jpg" />
+    <div class="item_navig"><a title="Voir les activités" class="icone" routerLink="/activites/{{role}}"> <img class="logo" src="../../assets/img/logo_activite.jpg" />
     </a></div>
     Voir les activités
   </li>
 
-  <li>
-    <div class="item_navig"><a title="Consulter l'emploi du temps hebdomadaire" class="icone" routerLink="/calendriers"> <img class="logo" src="../../assets/img/logo_edt_hebdo.jpg" />
+  <li *ngIf="role != 'visiteur'">
+    <div class="item_navig"><a title="Consulter l'emploi du temps hebdomadaire" class="icone" routerLink="/calendriers/{{role}}"> <img class="logo" src="../../assets/img/logo_edt_hebdo.jpg" />
     </a></div>
     Consulter l'emploi du temps hebdomadaire (en cours)
   </li>
 
-  <li>
-    <div class="item_navig"><a title="Gestion du personnel" class="icone" routerLink="/employes"> <img class="logo" src="../../assets/img/logo_employes.jpg" />
+  <li *ngIf="role == 'gestionnaire'">
+    <div class="item_navig"><a title="Gestion du personnel" class="icone" routerLink="/employes/{{role}}"> <img class="logo" src="../../assets/img/logo_employes.jpg" />
     </a></div>
     Gestion du personnel
   </li>

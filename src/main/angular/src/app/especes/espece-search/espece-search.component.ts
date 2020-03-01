@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { Espece } from '../espece';
 import { EspeceService } from '../espece.service'
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-espece-search',
@@ -18,12 +19,13 @@ export class EspeceSearchComponent implements OnInit {
          menace: [null, Validators.required],
        });
 
-
+  role : Role;
   private especes: Array<Espece>;
 
-  constructor(private especeService : EspeceService, private formBuilder: FormBuilder) { }
+  constructor(private especeService : EspeceService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role'];
        this.especeService.getAllEspeces().subscribe(
           data => this.especes = data
        )

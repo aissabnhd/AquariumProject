@@ -38,13 +38,13 @@
 
   <div class="button">
     <button (click)="onSubmit()" type="submit" class="button">Rechercher</button>
-    <button routerLink="/especes" type="submit" class="button">Retour</button>
+    <button routerLink="/especes/{{role}}" type="submit" class="button">Retour</button>
   </div>
 </form>
 
 <ul class="especes">
   <li *ngFor="let e of especes">
-    <app-espece [espece]="e" (deleteEspece)="refreshEspeces($event)">
+    <app-espece [espece]="e" [role]="role" (deleteEspece)="refreshEspeces($event)">
 
     </app-espece>
     <p><br /></p>

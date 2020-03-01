@@ -66,9 +66,8 @@
 
   </div>
   <div class="button">
-    <button (click)="print()"></button>
-    <button routerLink="/activites" (click)="onSubmit()" type="submit" class="button" [disabled]="!activiteForm.valid">Créer</button>
-    <button routerLink="/activites" type="submit" class="button">Retour</button>
+    <button routerLink="/activites/{{role}}" (click)="onSubmit()" type="submit" class="button" [disabled]="!activiteForm.valid">Créer</button>
+    <button routerLink="/activites/{{role}}" type="submit" class="button">Retour</button>
   </div>
 
 </form>

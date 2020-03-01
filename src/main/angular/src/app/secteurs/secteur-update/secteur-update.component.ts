@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {SecteurService} from "../secteur.service";
 import {Secteur} from "../secteur";
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-secteur-update',
@@ -13,6 +14,7 @@ export class SecteurUpdateComponent implements OnInit {
 
   secteurForm: FormGroup;
   id:number;
+  role : Role;
 
   @Output()
   updateSecteur = new EventEmitter<Secteur>();
@@ -20,6 +22,7 @@ export class SecteurUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+    this.role = this.route.snapshot.params['role']
     let secteur: Secteur;
 
 

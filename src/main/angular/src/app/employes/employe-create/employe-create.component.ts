@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {Espece} from "../../especes/espece";
 import {Employe, Role} from "../employe";
 import {EmployeService} from "../employe.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-employe-create',
@@ -23,13 +24,15 @@ export class EmployeCreateComponent implements OnInit {
 
   show = false;
 
-  roles = [Role.admin, Role.gestionnaire, Role.employe];
+  roles = [Role.responsable, Role.gestionnaire, Role.employe];
+  role : Role;
 
   @Output()
   createEmploye = new EventEmitter<Employe>();
-  constructor(private employeService : EmployeService, private formBuilder: FormBuilder) { }
+  constructor(private employeService : EmployeService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role']
   }
 
   onSubmit(){

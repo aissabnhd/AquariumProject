@@ -16,15 +16,15 @@ export class EmployeUpdateComponent implements OnInit {
   id:number;
   show = false;
 
-  roles = [Role.employe, Role.gestionnaire, Role.admin];
-
+  roles = [Role.employe, Role.gestionnaire, Role.responsable];
+  role : Role;
   @Output()
   updateEmploye = new EventEmitter<Employe>();
   constructor(private employeService : EmployeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-
+    this.role = this.route.snapshot.params['role']
     this.employeService.getEmploye(this.id).subscribe(data => {
 
         this.employeForm = new FormGroup({

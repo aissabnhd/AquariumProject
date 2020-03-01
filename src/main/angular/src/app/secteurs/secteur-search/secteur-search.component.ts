@@ -5,6 +5,7 @@ import {Secteur} from "../secteur";
 import {SecteurService} from "../secteur.service";
 import {BassinService} from "../../bassins/bassin.service";
 import {Bassin, State} from "../../bassins/bassin";
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-secteur-search',
@@ -18,13 +19,16 @@ export class SecteurSearchComponent implements OnInit {
 
     states = [State.propre, State.sale];
 
+    role : Role;
+
 
   secteurForm : FormGroup;
 
   secteurs: Array<Secteur>;
 
-  constructor(private bassinService : BassinService, private secteurService : SecteurService, private formBuilder: FormBuilder) { }
+  constructor(private bassinService : BassinService, private secteurService : SecteurService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
   ngOnInit() {
+    this.role = this.route.snapshot.params['role']
        this.bassinService.getAllBassins().subscribe(
              data => {
                this.bassins = data,

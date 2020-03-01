@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Bassin} from "../bassin";
 import {BassinService} from "../bassin.service";
+import {ActivatedRoute} from "@angular/router";
+import {Role} from "../../employes/employe";
 @Component({
   selector: 'app-bassin',
   templateUrl: './bassin.component.html',
@@ -9,6 +11,9 @@ import {BassinService} from "../bassin.service";
 export class BassinComponent implements OnInit {
  @Input()
   bassin : Bassin;
+
+ @Input()
+ role : Role;
 
   @Output()
   deleteBassin = new EventEmitter<Bassin>();

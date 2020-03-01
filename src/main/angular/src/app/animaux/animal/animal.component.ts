@@ -3,6 +3,7 @@ import {Espece} from "../../especes/espece";
 import {EspeceService} from "../../especes/espece.service";
 import {Animal} from "../animal";
 import {AnimalService} from "../animal.service";
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-animal',
@@ -13,6 +14,9 @@ export class AnimalComponent implements OnInit {
 
   @Input()
   animal : Animal;
+
+  @Input()
+  role : Role;
 
   @Output()
   deleteAnimal = new EventEmitter<Animal>();

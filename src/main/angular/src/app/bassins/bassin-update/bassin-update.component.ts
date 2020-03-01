@@ -3,7 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {BassinService} from "../bassin.service";
 import {Bassin, State} from "../bassin";
-import {Employe} from "../../employes/employe";
+import {Employe, Role} from "../../employes/employe";
 import {EmployeService} from "../../employes/employe.service";
 
 @Component({
@@ -17,6 +17,7 @@ export class BassinUpdateComponent implements OnInit {
   states = [State.propre, State.sale];
   id:number;
   employes : Array<Employe>;
+  role : Role;
 
   @Output()
   updateBassin = new EventEmitter<Bassin>();
@@ -25,6 +26,7 @@ export class BassinUpdateComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     let bassin: Bassin;
+    this.role = this.route.snapshot.params['role']
 
 
       this.bassinService.getBassin(this.id).subscribe(data => {

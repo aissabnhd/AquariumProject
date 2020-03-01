@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Secteur} from "../secteur";
 import {SecteurService} from "../secteur.service";
+import {ActivatedRoute} from "@angular/router";
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-secteur',
@@ -10,6 +12,9 @@ import {SecteurService} from "../secteur.service";
 export class SecteurComponent implements OnInit {
  @Input()
   secteur : Secteur;
+
+ @Input()
+ role : Role;
 
   @Output()
   deleteSecteur = new EventEmitter<Secteur>();

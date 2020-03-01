@@ -8,6 +8,8 @@ import {Activite} from "../activite";
 import {Bassin} from "../../bassins/bassin";
 import {ActiviteService} from "../activite.service";
 import {BassinService} from "../../bassins/bassin.service";
+import {Role} from "../../employes/employe";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -23,10 +25,12 @@ export class ActiviteSearchComponent implements OnInit {
   activiteForm : FormGroup;
 
   bassins: Array<Bassin>;
+  role : Role;
 
-  constructor(private bassinService : BassinService, private activiteService : ActiviteService, private formBuilder: FormBuilder) { }
+  constructor(private bassinService : BassinService, private activiteService : ActiviteService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role']
     this.bassinService.getAllBassins().subscribe(
       data => {
         this.bassins = data,

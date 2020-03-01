@@ -4,6 +4,7 @@ import {Espece} from "../../especes/espece";
 import {EspeceService} from "../../especes/espece.service";
 import {Employe, Role} from "../employe";
 import {EmployeService} from "../employe.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-employe-search',
@@ -23,13 +24,15 @@ export class EmployeSearchComponent implements OnInit {
     login: [null, Validators.required]
   });
 
-  roles = [Role.employe, Role.gestionnaire, Role.admin];
+  role : Role;
+  roles = [Role.employe, Role.gestionnaire, Role.responsable];
 
   private employes: Array<Employe>;
 
-  constructor(private employeService : EmployeService, private formBuilder: FormBuilder) { }
+  constructor(private employeService : EmployeService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role']
     this.employeService.getAllEmployes().subscribe(
       data => this.employes = data
     )

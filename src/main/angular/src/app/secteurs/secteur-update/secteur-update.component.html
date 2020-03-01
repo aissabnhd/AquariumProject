@@ -22,8 +22,8 @@
     </label>
   </div>
   <div class="button">
-    <button routerLink="/secteurs" (click)="onSubmit()" type="submit" class="button" [disabled]="!secteurForm.valid">Créer</button>
-    <button routerLink="/secteurs" type="submit" class="button">Retour</button>
+    <button routerLink="/secteurs/{{role}}" (click)="onSubmit()" type="submit" class="button" [disabled]="!secteurForm.valid">Modifier</button>
+    <button routerLink="/secteurs/{{role}}" type="submit" class="button">Retour</button>
 
   </div>
 

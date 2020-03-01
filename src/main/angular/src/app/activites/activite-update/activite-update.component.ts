@@ -5,7 +5,7 @@ import {BassinService} from "../../bassins/bassin.service";
 import {Activite} from "../activite";
 import {ActiviteService} from "../activite.service";
 import {ActivatedRoute} from "@angular/router";
-import {Employe} from "../../employes/employe";
+import {Employe, Role} from "../../employes/employe";
 import {EmployeService} from "../../employes/employe.service";
 
 
@@ -19,6 +19,7 @@ export class ActiviteUpdateComponent implements OnInit {
   activiteForm: FormGroup;
   bassins : Array<Bassin>;
   nbResponsable = [1];
+  role : Role;
 
   employes : Array<Employe>;
   id:number;
@@ -31,7 +32,7 @@ export class ActiviteUpdateComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     let activite: Activite;
 
-
+  this.role = this.route.snapshot.params['role']
       this.activiteService.getActivite(this.id).subscribe(data => {
         console.log(data);
 

@@ -7,10 +7,10 @@
 <br>
 <div class="menace"> Menacé : {{espece.menace}} </div>
 <br>
-  <div class="plus"><a routerLink="/espece_fiche/{{espece.id}}">En savoir plus ...</a></div>
+  <div class="plus"><a routerLink="/espece_fiche/{{role}}/{{espece.id}}">En savoir plus ...</a></div>
 
   <div class="links">
-<a title="delete" mat-fab (click)="onDelete()" routerLink="/especes"><mat-icon>delete</mat-icon></a>
-<a title="update" mat-fab routerLink="/especes_update/{{espece.id}}"> <mat-icon >ballot</mat-icon></a>
+<a *ngIf="role == 'responsable'" title="delete" mat-fab (click)="onDelete()" routerLink="/especes/{{role}}"><mat-icon>delete</mat-icon></a>
+<a *ngIf="role == 'responsable'" title="update" mat-fab routerLink="/especes_update/{{role}}/{{espece.id}}"> <mat-icon >ballot</mat-icon></a>
 </div>
 </div>

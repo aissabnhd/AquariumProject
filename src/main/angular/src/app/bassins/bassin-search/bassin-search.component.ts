@@ -5,7 +5,7 @@ import {Espece} from "../../especes/espece";
 import {EspeceService} from "../../especes/espece.service";
 import {BassinService} from "../bassin.service";
 import {Bassin, State} from "../bassin";
-import {Employe} from "../../employes/employe";
+import {Employe, Role} from "../../employes/employe";
 import {EmployeService} from "../../employes/employe.service";
 
 @Component({
@@ -20,14 +20,16 @@ export class BassinSearchComponent implements OnInit {
     employes: Array<Employe>;
 
     states = [State.propre, State.sale];
+    role : Role;
 
 
   bassinForm : FormGroup;
 
   private especes: Array<Espece>;
 
-  constructor(private bassinService : BassinService, private especeService : EspeceService, private employeService : EmployeService, private formBuilder: FormBuilder) { }
+  constructor(private bassinService : BassinService, private especeService : EspeceService, private employeService : EmployeService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
   ngOnInit() {
+    this.role = this.route.snapshot.params['role']
        this.especeService.getAllEspeces().subscribe(
              data => {
                this.especes = data,

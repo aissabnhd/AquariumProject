@@ -1,16 +1,16 @@
 <div class="title"> <span class="titleee">Voici les employes disponibles : </span>
-  <a title="create" mat-fab routerLink="/employe_create" (createEmploye)="refreshEmployes($event)">Ajouter un employé <mat-icon >create </mat-icon></a>
+  <a *ngIf="role == 'gestionnaire'" title="create" mat-fab routerLink="/employe_create/{{role}}" (createEmploye)="refreshEmployes($event)">Ajouter un employé <mat-icon >create </mat-icon></a>
 </div>
 
 <div class="title">
   <span class="titleee">Effectuer une recherche : </span>
- <a title="create" routerLink="/employe_search">Rechercher un employé </a>
+ <a title="create" routerLink="/employe_search/{{role}}">Rechercher un employé </a>
 </div>
 
 
 <ul class="especes">
   <li *ngFor="let e of employes">
-    <app-employe [employe]="e" (deleteEmploye)="refreshEmployes($event)">
+    <app-employe [employe]="e"  [role]="role" (deleteEmploye)="refreshEmployes($event)">
 
     </app-employe>
     <p><br /></p>

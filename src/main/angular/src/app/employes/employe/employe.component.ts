@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Espece} from "../../especes/espece";
-import {Employe} from "../employe";
+import {Employe, Role} from "../employe";
 import {EmployeService} from "../employe.service";
 
 @Component({
@@ -12,6 +12,9 @@ export class EmployeComponent implements OnInit {
 
   @Input()
   employe : Employe;
+
+  @Input()
+  role : Role;
 
   @Output()
   deleteEmploye = new EventEmitter<Employe>();

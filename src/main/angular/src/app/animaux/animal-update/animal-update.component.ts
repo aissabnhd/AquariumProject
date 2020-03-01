@@ -5,6 +5,7 @@ import {EspeceService} from "../../especes/espece.service";
 import {ActivatedRoute} from "@angular/router";
 import {AnimalService} from "../animal.service";
 import {Animal, Sexe} from "../animal";
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-animal-update',
@@ -18,12 +19,15 @@ export class AnimalUpdateComponent implements OnInit {
   sexes = [Sexe.F, Sexe.M];
   id:number;
 
+  role : Role;
+
   @Output()
   updateAnimal = new EventEmitter<Animal>();
   constructor(private especeService : EspeceService, private animalService : AnimalService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+    this.role = this.route.snapshot.params['role'];
     let animal: Animal;
 
 

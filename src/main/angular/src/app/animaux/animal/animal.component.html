@@ -11,10 +11,10 @@
   <br>
   <div class="date2" *ngIf="animal.date_depart"> Date de départ : {{dateToString(animal.date_depart)}} </div>
   <br>
-  <div class="plus"><a routerLink="/animal_fiche/{{animal.id}}">En savoir plus ...</a></div>
+  <div class="plus"><a routerLink="/animal_fiche/{{role}}/{{animal.id}}">En savoir plus ...</a></div>
 
   <div class="links">
-    <a title="delete" mat-fab (click)="onDelete()" routerLink="/animaux"><mat-icon>delete</mat-icon></a>
-    <a title="update" mat-fab routerLink="/animal_update/{{animal.id}}"> <mat-icon >ballot</mat-icon></a>
+    <a *ngIf="role == 'responsable'" title="delete" mat-fab (click)="onDelete()" routerLink="/animaux/{{role}}"><mat-icon>delete</mat-icon></a>
+    <a *ngIf="role == 'responsable'" title="update" mat-fab routerLink="/animal_update/{{role}}/{{animal.id}}"> <mat-icon >ballot</mat-icon></a>
   </div>
 </div>

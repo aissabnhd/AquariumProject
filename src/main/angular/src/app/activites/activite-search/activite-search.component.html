@@ -67,13 +67,13 @@
   <div class="button">
 
     <button (click)="onSubmit()" type="submit" class="button">Rechercher</button>
-    <button routerLink="/activites" type="submit" class="button">Retour</button>
+    <button routerLink="/activites/{{role}}" type="submit" class="button">Retour</button>
   </div>
 </form>
 
 <ul class="especes">
   <li *ngFor="let activite of activites">
-    <app-activite [activite]="activite" (deleteActivite)="refreshActivites($event)">
+    <app-activite [activite]="activite" [role]="role" (deleteActivite)="refreshActivites($event)">
 
     </app-activite>
     <p><br /></p>

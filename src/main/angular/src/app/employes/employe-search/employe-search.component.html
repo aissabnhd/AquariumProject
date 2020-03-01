@@ -59,13 +59,13 @@
   </div>
   <div class="button">
     <button (click)="onSubmit()" type="submit" class="button">Rechercher</button>
-    <button routerLink="/employes" type="submit" class="button">Retour</button>
+    <button routerLink="/employes/{{role}}" type="submit" class="button">Retour</button>
   </div>
 </form>
 
 <ul class="especes">
   <li *ngFor="let e of employes">
-    <app-employe [employe]="e">
+    <app-employe [employe]="e" [role]="role">
 
     </app-employe>
     <p><br /></p>

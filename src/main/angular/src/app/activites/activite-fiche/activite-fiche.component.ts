@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ActiviteService} from "../activite.service";
 import {Activite} from "../activite";
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-activite-fiche',
@@ -11,10 +12,12 @@ import {Activite} from "../activite";
 export class ActiviteFicheComponent implements OnInit {
 
   activite: Activite;
+  role : Role;
     constructor(private activiteService : ActiviteService, private route: ActivatedRoute) { }
 
     ngOnInit() {
       let id = this.route.snapshot.params['id'];
+      this.role = this.route.snapshot.params['role']
       this.activiteService.getActivite(id).subscribe(data => this.activite = data );
 
     }

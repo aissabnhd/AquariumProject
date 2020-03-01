@@ -1,14 +1,14 @@
 <div class="title"> <span class="titleee">Voici les animaux disponibles :</span>
-  <a title="create" mat-fab routerLink="/animal_create" (createAnimal)="refreshAnimaux($event)"> Ajouter un animal <mat-icon >create </mat-icon></a>
+  <a *ngIf="role == 'responsable'" title="create" mat-fab routerLink="/animal_create/{{role}}" (createAnimal)="refreshAnimaux($event)"> Ajouter un animal <mat-icon >create </mat-icon></a>
 
 </div>
 <div class="title">
   <span class="titleee">Effectuer une recherche : </span>
-  <a title="create" routerLink="/animal_search">Rechercher un animal</a>
+  <a title="create" routerLink="/animal_search/{{role}}">Rechercher un animal</a>
 </div>
 <ul class="especes">
   <li *ngFor="let animal of animaux">
-    <app-animal [animal]="animal" (deleteAnimal)="refreshAnimaux($event)">
+    <app-animal [animal]="animal" [role]="role" (deleteAnimal)="refreshAnimaux($event)">
 
     </app-animal>
     <p><br /></p>

@@ -5,7 +5,8 @@ import {BassinService} from "../../bassins/bassin.service";
 import {Activite} from "../activite";
 import {ActiviteService} from "../activite.service";
 import {EmployeService} from "../../employes/employe.service";
-import {Employe} from "../../employes/employe";
+import {Employe, Role} from "../../employes/employe";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-activite-create',
@@ -16,14 +17,16 @@ export class ActiviteCreateComponent implements OnInit {
   bassins : Array<Bassin>;
   nbResponsable = [1];
   activiteForm : FormGroup;
+  role : Role;
 
 
   @Output()
   createActivite = new EventEmitter<Activite>();
   private employes: Array<Employe>;
-  constructor(private activiteService : ActiviteService, private employeService : EmployeService, private formBuilder: FormBuilder, private bassinService : BassinService) { }
+  constructor(private activiteService : ActiviteService, private employeService : EmployeService, private formBuilder: FormBuilder, private bassinService : BassinService, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role']
     this.bassinService.getAllBassins().subscribe(
       data => {
         this.bassins = data,
@@ -102,7 +105,4 @@ export class ActiviteCreateComponent implements OnInit {
     }
   }
 
-  print() {
-    console.log(this.activiteForm.get('employes').value)
-  }
 }

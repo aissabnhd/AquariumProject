@@ -56,14 +56,14 @@
   </div>
   <div class="button">
     <button (click)="onSubmit()" type="submit" class="button" >Chercher</button>
-    <button routerLink="/bassins" type="submit" class="button">Retour</button>
+    <button routerLink="/bassins/{{role}}" type="submit" class="button">Retour</button>
   </div>
 
 </form>
 </div>
 <ul class="especes">
   <li *ngFor="let bassin of bassins">
-    <app-bassin [bassin]="bassin" (deleteBassin)="refreshBassins($event)">
+    <app-bassin [bassin]="bassin" [role]="role" (deleteBassin)="refreshBassins($event)">
 
     </app-bassin>
     <p><br /></p>

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Activite} from "../activite";
 import {ActiviteService} from "../activite.service";
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-activite',
@@ -11,6 +12,9 @@ export class ActiviteComponent implements OnInit {
 
   @Input()
   activite : Activite;
+
+  @Input()
+  role : Role;
 
   @Output()
   deleteActivite = new EventEmitter<Activite>();

@@ -1,14 +1,14 @@
 <div class="title"> <span class="titleee">Voici les activites disponibles :</span>
-  <a title="create" mat-fab routerLink="/activite_create" (createActivite)="refreshActivites($event)"> Ajouter une activite <mat-icon >create </mat-icon></a>
+  <a *ngIf="role == 'gestionnaire'" title="create" mat-fab routerLink="/activite_create/{{role}}" (createActivite)="refreshActivites($event)"> Ajouter une activite <mat-icon >create </mat-icon></a>
 
 </div>
 <div class="title">
   <span class="titleee">Effectuer une recherche : </span>
-  <a title="create" routerLink="/activite_search">Rechercher une activite </a>
+  <a title="create" routerLink="/activite_search/{{role}}">Rechercher une activite </a>
 </div>
 <ul class="especes">
   <li *ngFor="let activite of activites">
-    <app-activite [activite]="activite" (deleteActivite)="refreshActivites($event)">
+    <app-activite [activite]="activite" [role]="role" (deleteActivite)="refreshActivites($event)">
 
     </app-activite>
     <p><br /></p>

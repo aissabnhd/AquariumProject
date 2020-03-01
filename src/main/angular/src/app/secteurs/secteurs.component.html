@@ -1,16 +1,16 @@
 <div class="title"> <span class="titleee">Voici les secteurs disponibles :</span>
-  <a title="create" mat-fab routerLink="/secteur_create" (createSecteur)="refreshSecteur($event)"> Ajouter un secteur <mat-icon >create </mat-icon></a>
+  <a *ngIf="role == 'gestionnaire'" title="create" mat-fab routerLink="/secteur_create/{{role}}" (createSecteur)="refreshSecteur($event)"> Ajouter un secteur <mat-icon >create </mat-icon></a>
 
 </div>
 
 <div class="title">
   <span class="titleee">Effectuer une recherche : </span>
-  <a title="create" routerLink="/secteur_search">Rechercher un secteur</a>
+  <a title="create" routerLink="/secteur_search/{{role}}">Rechercher un secteur</a>
 </div>
 
 <ul class="especes">
   <li *ngFor="let secteur of secteurs">
-    <app-secteur [secteur]="secteur" (deleteSecteur)="refreshSecteurs($event)">
+    <app-secteur [secteur]="secteur" [role]="role" (deleteSecteur)="refreshSecteurs($event)">
 
     </app-secteur>
     <p><br /></p>

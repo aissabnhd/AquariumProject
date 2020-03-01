@@ -11,6 +11,7 @@ export class AppComponent {
   isConnected = false;
   tryToConnect = false;
   employe : Employe = null;
+  role = "visiteur";
 
   tryConnect() {
     this.tryToConnect = true;
@@ -26,12 +27,14 @@ export class AppComponent {
       return;
 
     this.employe = $event;
+    this.role = this.employe.role;
     this.isConnected = true;
     this.tryToConnect = false;
   }
 
   disconnect(){
     this.employe = null;
+    this.role = "visiteur";
     this.isConnected = false;
     this.tryToConnect = false;
 

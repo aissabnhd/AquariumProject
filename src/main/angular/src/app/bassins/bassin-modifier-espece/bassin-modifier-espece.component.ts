@@ -5,6 +5,7 @@ import {Bassin} from "../bassin";
 import {BassinService} from "../bassin.service";
 import {ActivatedRoute} from "@angular/router";
 import {EspeceService} from "../../especes/espece.service";
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-bassin-modifier-espece',
@@ -16,6 +17,7 @@ export class BassinModifierEspeceComponent implements OnInit {
   espece_ajout: Array<Espece>;
   bassin: Bassin;
   id : number;
+  role : Role;
   updateBassin = new EventEmitter<Bassin>();
 
   constructor(private bassinService : BassinService, private especeService : EspeceService, private route: ActivatedRoute) { }
@@ -40,6 +42,7 @@ export class BassinModifierEspeceComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role'];
     this.id = this.route.snapshot.params['id'];
     this.refresh();
     this.bassinAjoutForm = new FormGroup({

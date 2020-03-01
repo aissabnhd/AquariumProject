@@ -14,10 +14,10 @@
   <br>
   <div class="date2" *ngIf="activite.responsables"> Responsables : {{responsablesToString()}} </div>
   <br>
-  <div class="plus"><a routerLink="/activite_fiche/{{activite.id}}">En savoir plus ...</a></div>
+  <div class="plus"><a routerLink="/activite_fiche/{{role}}/{{activite.id}}">En savoir plus ...</a></div>
 
   <div class="links">
-    <a title="delete" mat-fab (click)="onDelete()" routerLink="/activites"><mat-icon>delete</mat-icon></a>
-   <a title="update" mat-fab routerLink="/activite_update/{{activite.id}}"> <mat-icon >ballot</mat-icon></a>
+    <a *ngIf="role == 'gestionnaire'" title="delete" mat-fab (click)="onDelete()" routerLink="/activites/{{role}}"><mat-icon>delete</mat-icon></a>
+   <a *ngIf="role == 'gestionnaire'" title="update" mat-fab routerLink="/activite_update/{{role}}/{{activite.id}}"> <mat-icon >ballot</mat-icon></a>
   </div>
 </div>

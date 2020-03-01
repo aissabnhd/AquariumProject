@@ -37,7 +37,7 @@
   </div>
 
   <div class="button">
-    <button routerLink="/especes" (click)="onSubmit()" type="submit" class="button" [disabled]="!especeForm.valid">Changer</button>
-    <button routerLink="/especes" type="submit" class="button">Retour</button>
+    <button routerLink="/especes/{{role}}" (click)="onSubmit()" type="submit" class="button" [disabled]="!especeForm.valid">Changer</button>
+    <button routerLink="/especes/{{role}}" type="submit" class="button">Retour</button>
   </div>
 </form>

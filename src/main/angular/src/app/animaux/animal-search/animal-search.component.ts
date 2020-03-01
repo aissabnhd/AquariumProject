@@ -4,6 +4,8 @@ import {Espece} from "../../especes/espece";
 import {EspeceService} from "../../especes/espece.service";
 import {Animal, Sexe} from "../animal";
 import {AnimalService} from "../animal.service";
+import {Role} from "../../employes/employe";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-animal-search',
@@ -18,11 +20,14 @@ export class AnimalSearchComponent implements OnInit {
 
   animalForm : FormGroup;
 
+  role : Role;
+
   private especes: Array<Espece>;
 
-  constructor(private especeService : EspeceService, private animalService : AnimalService, private formBuilder: FormBuilder) { }
+  constructor(private especeService : EspeceService, private animalService : AnimalService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role'];
        this.especeService.getAllEspeces().subscribe(
              data => {
                this.especes = data,

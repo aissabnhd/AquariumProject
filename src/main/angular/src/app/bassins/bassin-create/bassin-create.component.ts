@@ -2,8 +2,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Bassin, State} from "../bassin";
 import {BassinService} from "../bassin.service";
-import {Employe} from "../../employes/employe";
+import {Employe, Role} from "../../employes/employe";
 import {EmployeService} from "../../employes/employe.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-bassin-create',
@@ -15,12 +16,15 @@ export class BassinCreateComponent implements OnInit {
 
   employes : Array<Employe>;
 
+  role : Role;
+
   @Output()
   createBassin = new EventEmitter<Bassin>();
   states = [State.propre, State.sale];
-  constructor(private bassinService : BassinService, private employeService : EmployeService, private formBuilder: FormBuilder) { }
+  constructor(private bassinService : BassinService, private employeService : EmployeService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role']
       this.employeService.getAllEmployes().subscribe(
         data => {
           this.employes = data;

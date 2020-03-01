@@ -5,6 +5,7 @@ import {SecteurService} from "../secteur.service";
 import {ActivatedRoute} from "@angular/router";
 import {Bassin} from "../../bassins/bassin";
 import {BassinService} from "../../bassins/bassin.service";
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-secteur-modifier-bassin',
@@ -15,6 +16,7 @@ export class SecteurModifierBassinComponent implements OnInit {
   bassin_ajout: Array<Bassin>;
   secteur: Secteur;
   id : number;
+  role : Role;
   updateSecteur = new EventEmitter<Secteur>();
 
   constructor(private secteurService : SecteurService, private bassinService : BassinService, private route: ActivatedRoute) { }
@@ -36,6 +38,7 @@ export class SecteurModifierBassinComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role']
     this.id = this.route.snapshot.params['id'];
     this.refresh();
   }

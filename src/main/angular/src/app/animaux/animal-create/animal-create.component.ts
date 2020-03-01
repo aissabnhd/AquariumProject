@@ -4,6 +4,8 @@ import {Espece} from "../../especes/espece";
 import {EspeceService} from "../../especes/espece.service";
 import {Animal, Sexe} from "../animal";
 import {AnimalService} from "../animal.service";
+import {Role} from "../../employes/employe";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-animal-create',
@@ -15,12 +17,14 @@ export class AnimalCreateComponent implements OnInit {
 
   animalForm : FormGroup;
 
+  role : Role;
   @Output()
   createAnimal = new EventEmitter<Animal>();
   sexes = [Sexe.F, Sexe.M];
-  constructor(private animalService : AnimalService, private formBuilder: FormBuilder, private especeService : EspeceService) { }
+  constructor(private animalService : AnimalService, private formBuilder: FormBuilder, private especeService : EspeceService, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role'];
     this.especeService.getAllEspeces().subscribe(
       data => {
         this.especes = data,

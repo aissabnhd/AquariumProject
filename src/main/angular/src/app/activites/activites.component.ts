@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Activite} from "./activite";
 import {ActiviteService} from "./activite.service";
+import {ActivatedRoute} from "@angular/router";
+import {Role} from "../employes/employe";
 
 @Component({
   selector: 'app-activites',
@@ -10,9 +12,11 @@ import {ActiviteService} from "./activite.service";
 export class ActivitesComponent implements OnInit {
 
     private activites : Array<Activite>;
-    constructor(private activiteService : ActiviteService) { }
+    role : Role;
+    constructor(private activiteService : ActiviteService, private route : ActivatedRoute) { }
 
     ngOnInit() {
+        this.role = this.route.snapshot.params['role']
       this.refreshActivites();
     }
 

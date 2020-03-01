@@ -3,6 +3,7 @@ import {FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { Espece } from '../espece';
 import { EspeceService } from '../espece.service'
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-espece-update',
@@ -14,12 +15,15 @@ export class EspeceUpdateComponent implements OnInit {
 
        id:number;
 
+       role : Role;
+
        @Output()
        updateEspece = new EventEmitter<Espece>();
   constructor(private especeService : EspeceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
       this.id = this.route.snapshot.params['id'];
+      this.role = this.route.snapshot.params['role'];
       let esp: Espece;
       this.especeService.getEspece(this.id).subscribe(data => {
 

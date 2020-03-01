@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Employe} from "./employe";
+import {Employe, Role} from "./employe";
 import {EmployeService} from "./employe.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-employes',
@@ -9,9 +10,11 @@ import {EmployeService} from "./employe.service";
 })
 export class EmployesComponent implements OnInit {
   private employes : Array<Employe>;
-  constructor(private employeService : EmployeService) { }
+  role : Role;
+  constructor(private employeService : EmployeService, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role']
     this.refreshEmployes();
   }
 

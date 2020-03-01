@@ -4,6 +4,7 @@ import {EspeceService} from "../../especes/espece.service";
 import {ActivatedRoute} from "@angular/router";
 import {AnimalService} from "../animal.service";
 import {Animal} from "../animal";
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-animal-fiche',
@@ -13,10 +14,12 @@ import {Animal} from "../animal";
 export class AnimalFicheComponent implements OnInit {
 
   animal: Animal;
+  role : Role;
   constructor(private animalService : AnimalService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     let id = this.route.snapshot.params['id'];
+    this.role = this.route.snapshot.params['role'];
     this.animalService.getAnimal(id).subscribe(data => this.animal = data );
 
   }

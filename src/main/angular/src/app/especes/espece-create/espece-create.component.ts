@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Espece } from '../espece';
 import { EspeceService } from '../espece.service'
+import {ActivatedRoute} from "@angular/router";
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-espece-create',
@@ -16,11 +18,13 @@ export class EspeceCreateComponent implements OnInit {
         menace: [null, Validators.required],
       });
 
+  role : Role;
    @Output()
    createEspece = new EventEmitter<Espece>();
-  constructor(private especeService : EspeceService, private formBuilder: FormBuilder) { }
+  constructor(private especeService : EspeceService, private formBuilder: FormBuilder, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role'];
   }
 
   onSubmit(){

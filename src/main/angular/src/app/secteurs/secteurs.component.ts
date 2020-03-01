@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Secteur} from "./secteur";
 import {SecteurService} from "./secteur.service";
+import {ActivatedRoute} from "@angular/router";
+import {Role} from "../employes/employe";
 
 @Component({
   selector: 'app-secteurs',
@@ -9,9 +11,11 @@ import {SecteurService} from "./secteur.service";
 })
 export class SecteursComponent implements OnInit {
  private secteurs : Array<Secteur>;
-  constructor(private secteurService : SecteurService) { }
+ role : Role;
+  constructor(private secteurService : SecteurService, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role'];
     this.refreshSecteurs();
   }
 

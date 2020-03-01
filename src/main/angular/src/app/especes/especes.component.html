@@ -1,13 +1,13 @@
 <div class="title"> <span class="titleee">Voici les espèces disponibles : </span>
-  <a title="create" mat-fab routerLink="/especes_create" (createEspece)="refreshEspeces($event)">Ajouter une espèce <mat-icon >create </mat-icon></a>
+  <a *ngIf="role == 'responsable'" title="create" mat-fab routerLink="/especes_create/{{role}}" (createEspece)="refreshEspeces($event)">Ajouter une espèce <mat-icon >create </mat-icon></a>
 </div>
 <div class="title">
   <span class="titleee">Effectuer une recherche : </span>
-  <a title="create" routerLink="/espece_search">Rechercher une espèce</a>
+  <a title="create" routerLink="/espece_search/{{role}}">Rechercher une espèce</a>
 </div>
 <ul class="especes">
   <li *ngFor="let e of especes">
-    <app-espece [espece]="e" (deleteEspece)="refreshEspeces($event)">
+    <app-espece [espece]="e" [role]="role" (deleteEspece)="refreshEspeces($event)">
 
     </app-espece>
     <p><br /></p>

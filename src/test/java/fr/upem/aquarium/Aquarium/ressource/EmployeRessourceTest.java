@@ -93,7 +93,7 @@ public class EmployeRessourceTest {
 
         when(employeService.createEmploye(employe)).thenReturn(employe);
 
-        Employe employe2 = new Employe("Nom", "Prénom", "Paris", null,2L, Role.admin, "log2", "pwd");
+        Employe employe2 = new Employe("Nom", "Prénom", "Paris", null,2L, Role.gestionnaire, "log2", "pwd");
         employe2.setId(1L);
 
         when(employeService.updateEmploye(1L, employe2)).thenReturn(employe2);

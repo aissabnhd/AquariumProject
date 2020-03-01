@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {Espece} from '../espece';
 import {EspeceService} from '../espece.service';
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-espece',
@@ -11,6 +12,9 @@ export class EspeceComponent implements OnInit {
 
   @Input()
   espece : Espece;
+
+  @Input()
+  role : Role;
 
   @Output()
   deleteEspece = new EventEmitter<Espece>();

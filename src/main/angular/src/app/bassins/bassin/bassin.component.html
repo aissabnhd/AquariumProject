@@ -12,14 +12,14 @@
   <div class="menace"> Capacité maximale : {{bassin.capacite_max}} </div>
 
   <br>
-  <div class="plus"><a routerLink="/bassin_modifier_espece/{{bassin.id}}">Modifier ses espèces</a></div>
+  <div *ngIf="role == 'gestionnaire'" class="plus"><a routerLink="/bassin_modifier_espece/{{role}}/{{bassin.id}}">Modifier ses espèces</a></div>
 
 
   <br>
-  <div class="plus"><a routerLink="/bassin_fiche/{{bassin.id}}">En savoir plus ...</a></div>
+  <div class="plus"><a routerLink="/bassin_fiche/{{role}}/{{bassin.id}}">En savoir plus ...</a></div>
 
   <div class="links">
-    <a title="delete" mat-fab (click)="onDelete()" routerLink="/bassins"><mat-icon>delete</mat-icon></a>
-    <a title="update" mat-fab routerLink="/bassin_update/{{bassin.id}}"> <mat-icon >ballot</mat-icon></a>
+    <a *ngIf="role == 'gestionnaire'" title="delete" mat-fab (click)="onDelete()" routerLink="/bassins/{{role}}"><mat-icon>delete</mat-icon></a>
+    <a *ngIf="role == 'gestionnaire'" title="update" mat-fab routerLink="/bassin_update/{{role}}/{{bassin.id}}"> <mat-icon >ballot</mat-icon></a>
   </div>
 </div>
