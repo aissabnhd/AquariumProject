@@ -1,0 +1,22 @@
+
+li {
+  list-style: none;
+  display:block; float:left;;
+  width:20%;
+  margin-left: 20px;
+
+}
+div.item{
+  text-align: center;
+  margin-left:25%;
+  width:50%;
+  border: solid 1px black;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background: linear-gradient(#F4F9DC, #D09AC1);}
+
+
+div.button{
+  text-align: center;
+
+}

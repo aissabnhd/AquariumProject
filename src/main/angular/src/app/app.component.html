@@ -3,14 +3,14 @@
   <mat-toolbar color="primary">
     <mat-toolbar-row>
       <span><a title="Home" class="icone" routerLink="home/{{role}}"> <img class="home" src="../../assets/img/logo.png" /> </a></span>
-      <a class="head" routerLink="/especes/{{role}}">  <span class="title">Especes </span></a>
+      <a class="head" routerLink="/especes/{{role}}">  <span class="title">Espèces </span></a>
       <a class="head" routerLink="/animaux/{{role}}">  <span class="title">Animaux </span></a>
       <a class="head" routerLink="/bassins/{{role}}">  <span class="title">Bassins </span></a>
       <a class="head" routerLink="/secteurs/{{role}}">  <span class="title">Secteurs </span></a>
-      <a class="head" routerLink="/activites/{{role}}">  <span class="title">Activites </span></a>
-      <a *ngIf="role == 'gestionnaire'" class="head" routerLink="/employes/{{role}}">  <span class="title">Employes </span></a>
+      <a class="head" routerLink="/activites/{{role}}">  <span class="title">Activités </span></a>
+      <a *ngIf="role == 'gestionnaire'" class="head" routerLink="/employes/{{role}}">  <span class="title">Employés </span></a>
       <a *ngIf="role == 'gestionnaire'" class="head" routerLink="/calendriers/{{role}}">  <span class="title">Calendriers </span></a>
-      <a *ngIf="role != 'visiteur' &&  role != 'gestionnaire'" class="head" routerLink="/calendrier/{{role}}/{{employe.id}}">  <span class="title">Calendriers </span></a>
+      <a *ngIf="role != 'visiteur' &&  role != 'gestionnaire'" class="head" routerLink="/calendrier/{{role}}/{{employe.id}}">  <span class="title">Calendrier </span></a>
 
       <span class="log" *ngIf="!isConnected && !tryToConnect">
        <div class="updown">
@@ -25,7 +25,7 @@
        Bienvenue {{employe.prenom}} :
        </div>
        <div class="updown">
-         <a class="login" (click)="disconnect()"> Se déconnecter </a>
+         <a class="login" href="/" (click)="disconnect()"> Se déconnecter </a>
        </div>
       </span>
 

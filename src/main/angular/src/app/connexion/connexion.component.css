@@ -1,3 +1,11 @@
+
+div.box{
+  background-color: thistle;
+  border: 1px black solid;
+
+
+}
+
 input{
   width: 100px;
 }
@@ -45,4 +53,3 @@ img.logo{
   height: 20px;
   width: 20px;
 }
-
