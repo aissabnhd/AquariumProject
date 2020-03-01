@@ -18,6 +18,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,22 +62,24 @@ public class BassinRessourceTest {
 
     @Test
     public void postBassin() {
-       /* Bassin bassin = new Bassin("bassin 1", 100, 10, State.sale);
+        Bassin bassin = new Bassin("bassin 1", 100, 10, State.sale);
         bassin.setId(1L);
-        when(bassinService.createBassin(bassin)).thenReturn(bassin);
+        Employe employe2 = new Employe("Nom", "Prénom", "Paris", null,2L, Role.gestionnaire, "log2", "pwd");
+        employe2.setId(2L);
+        when(bassinService.createBassin(bassin, Optional.of(employe2))).thenReturn(bassin);
+        when(employeService.getOne(2L)).thenReturn(Optional.of(employe2));
+        Bassin result = this.restTemplate.postForObject("http://localhost:" + port + "/bassinCreate/2", bassin, Bassin.class);
+        assertEquals(bassin, result);
 
-        Bassin result = this.restTemplate.postForObject("http://localhost:" + port + "/bassin", bassin, Bassin.class);
-        assertEquals(bassin, result);*/
-    }
+        this.restTemplate.postForObject("http://localhost:" + port + "/employe", employe2, Employe.class);
 
-    @Test
-    public void assignEspeceBassin(){
-       // TODO
-    }
+        HttpEntity<Bassin> request = new HttpEntity<>(bassin);
 
-    @Test
-    public void removeEspeceBassin(){
-        // TODO
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassinCreate/2",
+                HttpMethod.POST, request, Bassin.class).getStatusCode(), HttpStatus.CREATED);
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassinCreate/23",
+                HttpMethod.POST, request, Bassin.class).getStatusCode(), HttpStatus.NOT_FOUND);
     }
 
     @Test
@@ -91,22 +94,88 @@ public class BassinRessourceTest {
 
         Bassin resultGet = this.restTemplate.getForObject("http://localhost:" + port + "/bassin/1", Bassin.class);
         assertEquals(bassin, resultGet);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassin/1",
+                HttpMethod.GET, request, Activite.class).getStatusCode(), HttpStatus.OK);
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassin/2",
+                HttpMethod.GET, request, Activite.class).getStatusCode(), HttpStatus.NOT_FOUND);
+
+    }
+
+    @Test
+    public void assignEspeceBassin(){
+        Bassin bassin = new Bassin("bassin 1", 100, 10, State.sale);
+        bassin.setId(1L);
+        Espece e = new Espece();
+        e.setId(2L);
+        when(bassinService.getOne(1L)).thenReturn(Optional.of(bassin));
+        when(especeService.getOne(2L)).thenReturn(Optional.of(e));
+        HttpEntity<Bassin> request = new HttpEntity<>(bassin);
+        this.restTemplate.exchange("http://localhost:" + port + "/bassin",
+                HttpMethod.POST, request, Bassin.class);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassins/1/48",
+                HttpMethod.GET, request, Bassin.class).getStatusCode(), HttpStatus.NOT_FOUND);
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassins/6/2",
+                HttpMethod.GET, request, Bassin.class).getStatusCode(), HttpStatus.NOT_FOUND);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassins/1/2",
+                HttpMethod.GET, request, Bassin.class).getStatusCode(), HttpStatus.OK);
+
+    }
+
+    @Test
+    public void removeEspeceBassin(){
+        Bassin bassin = new Bassin("bassin 1", 100, 10, State.sale);
+        bassin.setId(1L);
+        Espece e = new Espece();
+        e.setId(2L);
+        when(bassinService.getOne(1L)).thenReturn(Optional.of(bassin));
+        when(especeService.getOne(2L)).thenReturn(Optional.of(e));
+        HttpEntity<Bassin> request = new HttpEntity<>(bassin);
+        this.restTemplate.exchange("http://localhost:" + port + "/bassin",
+                HttpMethod.POST, request, Bassin.class);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassins/1/48",
+                HttpMethod.DELETE, request, Bassin.class).getStatusCode(), HttpStatus.NOT_FOUND);
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassins/6/2",
+                HttpMethod.DELETE, request, Bassin.class).getStatusCode(), HttpStatus.NOT_FOUND);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassins/1/2",
+                HttpMethod.DELETE, request, Bassin.class).getStatusCode(), HttpStatus.OK);
+
     }
 
     @Test
     public void deleteBassin() {
-        // TODO
+
+        Bassin bassin = new Bassin("bassin 1", 100, 10, State.propre);
+        bassin.setId(1L);
+        when(bassinService.getOne(1L)).thenReturn(Optional.of(bassin));
+        HttpEntity<Bassin> request = new HttpEntity<>(bassin);
+        this.restTemplate.exchange("http://localhost:" + port + "/bassin",
+                HttpMethod.POST, request, Bassin.class);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassin/48",
+                HttpMethod.DELETE, request, Bassin.class).getStatusCode(), HttpStatus.NOT_FOUND);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassin/1",
+                HttpMethod.DELETE, request, Bassin.class).getStatusCode(), HttpStatus.OK);
 
     }
 
     @Test
     public void deleteAll(){
-        // TODO
+
+        Bassin bassin = new Bassin("bassin 1", 100, 10, State.propre);
+        bassin.setId(1L);
+        when(bassinService.getOne(1L)).thenReturn(Optional.of(bassin));
+        HttpEntity<Bassin> request = new HttpEntity<>(bassin);
+        this.restTemplate.exchange("http://localhost:" + port + "/bassin",
+                HttpMethod.POST, request, Bassin.class);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassin",
+                HttpMethod.DELETE, request, Bassin.class).getStatusCode(), HttpStatus.OK);
     }
 
     @Test
     public void putBassin() {
-       /* Employe employe = new Employe("Benhamida", "Aïssa", "Torcy", null,1L, Role.employe, "login", "password");
+        Employe employe = new Employe("Benhamida", "Aïssa", "Torcy", null,1L, Role.employe, "login", "password");
         employe.setId(10L);
         Bassin bassin = new Bassin("bassin 1", 100, 10, State.propre);
         bassin.setId(1L);
@@ -115,21 +184,44 @@ public class BassinRessourceTest {
         bassin2.setId(1L);
         bassin2.setResponsable(employe);
 
-        when(employeService.createEmploye(employe)).thenReturn(employe);
-        this.restTemplate.postForObject("http://localhost:" + port + "/employe", employe, Employe.class);
-
-
-        when(employeService.getOne(10L)).thenReturn(Optional.of(employe));
         when(bassinService.createBassin(bassin, Optional.of(employe))).thenReturn(bassin);
-        this.restTemplate.postForObject("http://localhost:" + port + "/bassinCreate/10", bassin, Bassin.class);
-
+        when(bassinService.getOne(1L)).thenReturn(Optional.of(bassin));
+        when(employeService.getOne(10L)).thenReturn(Optional.of(employe));
         when(bassinService.updateBassin(1L, bassin2, Optional.of(employe))).thenReturn(bassin2);
 
-        this.restTemplate.postForObject("http://localhost:" + port + "/bassinUpdate/1/10", bassin, Bassin.class);
+        this.restTemplate.postForObject("http://localhost:" + port + "/bassin", bassin, Espece.class);
         HttpEntity<Bassin> request = new HttpEntity<>(bassin2);
 
-        Bassin result = this.restTemplate.exchange("http://localhost:" + port + "/bassin/1",
+        Bassin result = this.restTemplate.exchange("http://localhost:" + port + "/bassin/1/10",
                 HttpMethod.POST, request, Bassin.class).getBody();
-        assertEquals(result, bassin2);*/
+
+        assertEquals(result, bassin2);
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassin/1/10",
+                HttpMethod.POST, request, Bassin.class).getStatusCode(), HttpStatus.OK);
+
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassin/1/61",
+                HttpMethod.POST, request, Bassin.class).getStatusCode(), HttpStatus.NOT_FOUND);
+
+    }
+
+    @Test
+    public void getFromEspece(){
+        Bassin bassin = new Bassin("bassin 1", 100, 10, State.sale);
+        bassin.setId(1L);
+        Espece e = new Espece();
+        e.setId(2L);
+        when(bassinService.getOne(1L)).thenReturn(Optional.of(bassin));
+        when(especeService.getOne(2L)).thenReturn(Optional.of(e));
+        HttpEntity<Bassin> request = new HttpEntity<>(bassin);
+        this.restTemplate.exchange("http://localhost:" + port + "/bassin",
+                HttpMethod.POST, request, Bassin.class);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassinFromEspece/48",
+                HttpMethod.GET, request, Bassin.class).getStatusCode(), HttpStatus.NOT_FOUND);
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/bassinFromEspece/2",
+                HttpMethod.GET, request, Bassin.class).getStatusCode(), HttpStatus.OK);
+
     }
 }

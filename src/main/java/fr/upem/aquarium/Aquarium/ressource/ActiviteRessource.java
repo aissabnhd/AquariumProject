@@ -66,12 +66,12 @@ public class ActiviteRessource {
     }
 
     @PostMapping("/activite_bassin/{id}")
-    public Activite postActiviteWithBassin(@RequestBody Activite activite, @PathVariable Long id) {
+    public ResponseEntity<Activite> postActiviteWithBassin(@RequestBody Activite activite, @PathVariable Long id) {
         if(!bassinService.getOne(id).isPresent())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Bassin avec l'id " + id + " n'existe pas");
 
         Optional<Bassin> e = (bassinService.getOne(id));
-        return activiteService.createActiviteBassin(activite, e.get());
+        return new ResponseEntity<>(activiteService.createActiviteBassin(activite, e.get()), HttpStatus.CREATED);
     }
 
     @PostMapping("/activite_update_employe/{id}")

@@ -1,6 +1,7 @@
 package fr.upem.aquarium.Aquarium.ressource;
 
 import fr.upem.aquarium.Aquarium.model.Animal;
+import fr.upem.aquarium.Aquarium.model.Employe;
 import fr.upem.aquarium.Aquarium.model.Espece;
 import fr.upem.aquarium.Aquarium.model.Sexe;
 import fr.upem.aquarium.Aquarium.repository.AnimalRepository;
@@ -18,6 +19,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,6 +62,12 @@ public class EspeceRessourceTest {
 
         Espece result = this.restTemplate.postForObject("http://localhost:" + port + "/espece", espece, Espece.class);
         assertEquals(espece, result);
+
+
+        HttpEntity<Espece> request = new HttpEntity<>(espece);
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/espece",
+                HttpMethod.POST, request, Espece.class).getStatusCode(), HttpStatus.CREATED);
     }
 
     @Test
@@ -73,29 +81,52 @@ public class EspeceRessourceTest {
 
         Espece resultGet = this.restTemplate.getForObject("http://localhost:" + port + "/espece/1", Espece.class);
         assertEquals(espece, resultGet);
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/espece/48",
+                HttpMethod.GET, request, Espece.class).getStatusCode(), HttpStatus.NOT_FOUND);
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/espece/1",
+                HttpMethod.GET, request, Espece.class).getStatusCode(), HttpStatus.OK);
     }
 
     @Test
     public void deleteEspece() {
-        // TODO
+        Espece espece = new Espece("Poisson", 10, "aucun", 0);
+        espece.setId(1L);
+        when(especeService.getOne(1L)).thenReturn(Optional.of(espece));
+        HttpEntity<Espece> request = new HttpEntity<>(espece);
+        this.restTemplate.exchange("http://localhost:" + port + "/espece",
+                HttpMethod.POST, request, Espece.class);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/espece/48",
+                HttpMethod.DELETE, request, Espece.class).getStatusCode(), HttpStatus.NOT_FOUND);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/espece/1",
+                HttpMethod.DELETE, request, Espece.class).getStatusCode(), HttpStatus.OK);
 
     }
 
     @Test
     public void deleteAll(){
-        // TODO
+        Espece espece = new Espece("Poisson", 10, "aucun", 0);
+        espece.setId(1L);
+        when(especeService.getOne(1L)).thenReturn(Optional.of(espece));
+        HttpEntity<Espece> request = new HttpEntity<>(espece);
+        this.restTemplate.exchange("http://localhost:" + port + "/espece",
+                HttpMethod.POST, request, Espece.class);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/espece",
+                HttpMethod.DELETE, request, Espece.class).getStatusCode(), HttpStatus.OK);
     }
 
     @Test
     public void putEspece() {
-        /*Espece espece = new Espece("Poisson", 10, "aucun", 0);
+        Espece espece = new Espece("Poisson", 10, "aucun", 0);
         espece.setId(1L);
 
-        when(especeService.createEspece(espece)).thenReturn(espece);
 
         Espece espece2 = new Espece("Poisson-clown", 5, "aucun", 4);
         espece.setId(1L);
 
+        when(especeService.createEspece(espece)).thenReturn(espece);
+        when(especeService.getOne(1L)).thenReturn(Optional.of(espece));
         when(especeService.updateEspece(1L, espece2)).thenReturn(espece2);
 
         this.restTemplate.postForObject("http://localhost:" + port + "/espece", espece, Espece.class);
@@ -104,7 +135,14 @@ public class EspeceRessourceTest {
         Espece result = this.restTemplate.exchange("http://localhost:" + port + "/espece/1",
                 HttpMethod.POST, request, Espece.class).getBody();
 
-        assertEquals(result, espece2);*/
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/espece/48",
+                HttpMethod.POST, request, Espece.class).getStatusCode(), HttpStatus.NOT_FOUND);
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/espece/1",
+                HttpMethod.POST, request, Espece.class).getStatusCode(), HttpStatus.OK);
+
+        assertEquals(result, espece2);
 
     }
 }

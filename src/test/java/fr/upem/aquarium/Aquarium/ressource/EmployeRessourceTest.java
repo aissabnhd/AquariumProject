@@ -18,6 +18,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,6 +61,11 @@ public class EmployeRessourceTest {
 
         Employe result = this.restTemplate.postForObject("http://localhost:" + port + "/employe", employe, Employe.class);
         assertEquals(employe, result);
+
+        HttpEntity<Employe> request = new HttpEntity<>(employe);
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/employe",
+                HttpMethod.POST, request, Employe.class).getStatusCode(), HttpStatus.CREATED);
     }
 
     @Test
@@ -73,29 +79,50 @@ public class EmployeRessourceTest {
 
         Employe resultGet = this.restTemplate.getForObject("http://localhost:" + port + "/employe/1", Employe.class);
         assertEquals(employe, resultGet);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/employe/48",
+                HttpMethod.GET, request, Employe.class).getStatusCode(), HttpStatus.NOT_FOUND);
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/employe/1",
+                HttpMethod.GET, request, Employe.class).getStatusCode(), HttpStatus.OK);
     }
 
     @Test
     public void deleteEmploye() {
-        // TODO
+        Employe employe = new Employe("Benhamida", "Aïssa", "Torcy", null,1L, Role.employe, "login", "password");
+        employe.setId(1L);
+        when(employeService.getOne(1L)).thenReturn(Optional.of(employe));
+        HttpEntity<Employe> request = new HttpEntity<>(employe);
+        this.restTemplate.exchange("http://localhost:" + port + "/employe",
+                HttpMethod.POST, request, Employe.class);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/employe/48",
+                HttpMethod.DELETE, request, Employe.class).getStatusCode(), HttpStatus.NOT_FOUND);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/employe/1",
+                HttpMethod.DELETE, request, Employe.class).getStatusCode(), HttpStatus.OK);
 
     }
 
     @Test
     public void deleteAll(){
-        // TODO
+        Employe employe = new Employe("Benhamida", "Aïssa", "Torcy", null,1L, Role.employe, "login", "password");
+        employe.setId(1L);
+        when(employeService.getOne(1L)).thenReturn(Optional.of(employe));
+        HttpEntity<Employe> request = new HttpEntity<>(employe);
+        this.restTemplate.exchange("http://localhost:" + port + "/employe",
+                HttpMethod.POST, request, Employe.class);
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/employe",
+                HttpMethod.DELETE, request, Employe.class).getStatusCode(), HttpStatus.OK);
     }
 
     @Test
     public void putEmploye() {
-        /*Employe employe = new Employe("Benhamida", "Aïssa", "Torcy", null,1L, Role.employe, "login", "password");
+        Employe employe = new Employe("Benhamida", "Aïssa", "Torcy", null,1L, Role.employe, "login", "password");
         employe.setId(1L);
 
+        Employe employe2 = new Employe("Benhameeeeeeida", "Aïseeeesa", "Torcy", null,1L, Role.employe, "login", "password");
+        employe.setId(2L);
+
         when(employeService.createEmploye(employe)).thenReturn(employe);
-
-        Employe employe2 = new Employe("Nom", "Prénom", "Paris", null,2L, Role.gestionnaire, "log2", "pwd");
-        employe2.setId(1L);
-
+        when(employeService.getOne(1L)).thenReturn(Optional.of(employe));
         when(employeService.updateEmploye(1L, employe2)).thenReturn(employe2);
 
         this.restTemplate.postForObject("http://localhost:" + port + "/employe", employe, Employe.class);
@@ -104,7 +131,15 @@ public class EmployeRessourceTest {
         Employe result = this.restTemplate.exchange("http://localhost:" + port + "/employe/1",
                 HttpMethod.POST, request, Employe.class).getBody();
 
-        assertEquals(result, employe2);*/
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/employe/48",
+                HttpMethod.POST, request, Employe.class).getStatusCode(), HttpStatus.NOT_FOUND);
+
+        assertEquals(this.restTemplate.exchange("http://localhost:" + port + "/employe/1",
+                HttpMethod.POST, request, Employe.class).getStatusCode(), HttpStatus.OK);
+
+        assertEquals(result, employe2);
+
 
     }
 }
