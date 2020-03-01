@@ -6,5 +6,32 @@ pipeline{
                 sh 'mvn clean package'
             }
         }
+        stage('Maven test') {
+            steps {
+                sh'mvn test'
+            }
+        }
+        stage('Copy App') {
+            steps {
+                sh'sh -c "cp target/fr-0.0.1-SNAPSHOT.jar /home/aissa/AquariumApp/bin"'
+            }
+        }
+        stage('Shutdown port 8080 App') {
+            steps {
+                script{
+                    try {
+                        sh'sh -c "curl -x POST http://localhost:8080/actuator/shutdown"'
+                    }catch(Exception e){
+                        //do nothing
+                    }
+                }
+
+            }
+        }
+        stage('Deploy AquariumApp') {
+            steps {
+                sh'sh -c "java -jar  /home/aissa/AquariumApp/bin/fr-0.0.1-SNAPSHOT.jar > /home/aissa/AquariumApp/bin.log.out &"'
+            }
+        }
     }
 }
