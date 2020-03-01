@@ -89,8 +89,8 @@ const routes: Routes = [
   { path: 'employe_search/:role', component: EmployeSearchComponent },
 
   { path: 'calendriers/:role', component: CalendriersComponent },
-  { path: 'calendrier/:id', component: CalendrierComponent },
-  { path: 'calendrierBassin/:id', component: CalendrierBassinComponent }
+  { path: 'calendrier/:role/:id', component: CalendrierComponent },
+  { path: 'calendrierBassin/:role/:id', component: CalendrierBassinComponent }
 
 
 

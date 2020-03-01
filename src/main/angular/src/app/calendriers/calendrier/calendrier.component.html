@@ -19,7 +19,7 @@
 
   <div class="button">
     <button (click)="onSubmit()" type="submit" class="button" [disabled]="!calendrierForm.valid">Recherche</button>
-    <button routerLink="/calendriers" type="submit" class="button">Retour</button>
+    <button *ngIf="role == 'gestionnaire'" routerLink="/calendriers/{{role}}" type="submit" class="button">Retour</button>
   </div>
 
 </form>

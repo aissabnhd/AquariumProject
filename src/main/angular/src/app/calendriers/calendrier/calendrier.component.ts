@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ActiviteService} from "../../activites/activite.service";
 import {Activite} from "../../activites/activite";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {Role} from "../../employes/employe";
 
 @Component({
   selector: 'app-calendrier',
@@ -18,11 +19,12 @@ export class CalendrierComponent implements OnInit {
   calendrierForm: FormGroup;
   begin : Date;
   end : Date;
+  role : Role;
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private activiteService : ActiviteService) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-
+    this.role = this.route.snapshot.params['role'];
     for(let i = 0; i < 54; i++){
       this.semaines.push(i);
     }

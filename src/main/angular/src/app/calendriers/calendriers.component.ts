@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {BassinService} from "../bassins/bassin.service";
 import {EmployeService} from "../employes/employe.service";
-import {Employe} from "../employes/employe";
+import {Employe, Role} from "../employes/employe";
 import {Bassin} from "../bassins/bassin";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-calendriers',
@@ -17,10 +17,12 @@ export class CalendriersComponent implements OnInit {
   bassinForm : FormGroup;
   private employes: Array<Employe>;
   private bassins: Array<Bassin>;
+  role : Role;
 
-  constructor(private bassinService : BassinService, private employeService : EmployeService, private formBuilder : FormBuilder, private router : Router) { }
+  constructor(private bassinService : BassinService, private employeService : EmployeService, private formBuilder : FormBuilder, private router : Router, private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.role = this.route.snapshot.params['role']
     this.employeService.getAllEmployes().subscribe(
       data => {
         this.employes = data,
@@ -41,12 +43,12 @@ export class CalendriersComponent implements OnInit {
 
   onSubmitEmploye() {
     console.log(this.employeForm.get('employe').value)
-    this.router.navigate(['/calendrier/' + this.employeForm.get('employe').value]);
+    this.router.navigate(['/calendrier/' + this.role + '/'  + this.employeForm.get('employe').value ]);
   }
 
   onSubmitBassin() {
     console.log(this.bassinForm.get('bassin').value)
-    this.router.navigate(['/calendrierBassin/' + this.bassinForm.get('bassin').value]);
+    this.router.navigate(['/calendrierBassin/' + this.bassinForm.get('bassin').value + '/' + this.role]);
 
   }
 }
