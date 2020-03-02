@@ -45,6 +45,7 @@ public class SecteurService {
     public Secteur updateSecteur(Long id, Secteur secteur) {
         secteurRepository.findById(id);
         secteur.setId(id);
+        secteur.setLstBassin( secteurRepository.findById(id).get().getLstBassin());
         return secteurRepository.save(secteur);
     }
 

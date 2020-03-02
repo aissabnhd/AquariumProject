@@ -43,6 +43,7 @@ public class BassinService {
         bassinRepository.findById(id);
         bassin.setResponsable(emp.get());
         bassin.setId(id);
+        bassin.setLst(bassinRepository.findById(id).get().getLst());
         return bassinRepository.save(bassin);
     }
 
