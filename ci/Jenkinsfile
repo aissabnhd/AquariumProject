@@ -13,7 +13,7 @@ pipeline{
         }
         stage('Copy App') {
             steps {
-                sh'sh -c "cp target/fr-0.0.1-SNAPSHOT.jar /home/aissa/AquariumApp/bin"'
+                sh'sh -c "cp target/Aquarium-0.0.1-SNAPSHOT.jar /home/aissa/AquariumApp/bin"'
             }
         }
         stage('Shutdown port 8080 App') {
@@ -30,7 +30,7 @@ pipeline{
         }
         stage('Deploy AquariumApp') {
             steps {
-                sh'sh -c "java -jar  /home/aissa/AquariumApp/bin/fr-0.0.1-SNAPSHOT.jar > /home/aissa/AquariumApp/bin.log.out &"'
+                sh'sh -c "java -jar  /home/aissa/AquariumApp/bin/Aquarium-0.0.1-SNAPSHOT.jar > /home/aissa/AquariumApp/bin.log.out &"'
             }
         }
     }
