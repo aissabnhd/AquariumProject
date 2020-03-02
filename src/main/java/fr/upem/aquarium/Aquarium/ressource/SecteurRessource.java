@@ -72,6 +72,10 @@ public class SecteurRessource {
         if(!secteurService.getOne(id).isPresent())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Secteur avec l'id " + id + " n'existe pas");
 
+        if(secteurService.getOne(id).get().getLstBassin().size()>0)
+            throw new ResponseStatusException(HttpStatus.LOCKED, "Le secteur contient des bassins -> suppression impossible");
+
+
         secteurService.deleteSecteur(id);
     }
 

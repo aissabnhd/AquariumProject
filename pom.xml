@@ -62,64 +62,43 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>com.github.eirslett</groupId>
-				<artifactId>frontend-maven-plugin</artifactId>
-				<version>1.9.1</version>
-				<configuration>
-					<nodeVersion>v13.6.0</nodeVersion>
-					<npmVersion>6.13.4</npmVersion>
-					<workingDirectory>src/main/angular/</workingDirectory>
-				</configuration>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
 				<executions>
+
+
+
 					<execution>
-						<id>install node and npm</id>
+						<id>npm-install</id>
+						<phase>generate-sources</phase>
 						<goals>
-							<goal>install-node-and-npm</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>npm install</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>npm run build</id>
-						<goals>
-							<goal>npm</goal>
+							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<arguments>run build</arguments>
+							<workingDirectory>${basedir}/src/main/angular</workingDirectory>
+							<executable>npm</executable>
+							<arguments>
+								<argument>install</argument>
+							</arguments>
 						</configuration>
 					</execution>
+
+
 					<execution>
-						<id>prod</id>
+						<id>npm-ng-build</id>
+						<phase>generate-sources</phase>
 						<goals>
-							<goal>npm</goal>
+							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<arguments>run-script build</arguments>
-						</configuration>
-						<phase>generate-resources</phase>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>target/classes/resources/</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/angular/dist/Aquarium</directory>
-								</resource>
-							</resources>
+							<workingDirectory>${basedir}/src/main/angular</workingDirectory>
+							<executable>npm</executable>
+							<arguments>
+								<argument>run</argument>
+								<argument>ng</argument>
+								<argument>build</argument>
+							</arguments>
 						</configuration>
 					</execution>
 				</executions>
