@@ -30,7 +30,7 @@ pipeline{
         }
         stage('Deploy AquariumApp') {
             steps {
-                sh'sh -c "java -jar  /home/2inl2/abenhami/AquariumApp/bin/Aquarium-0.0.1-SNAPSHOT.jar > /home/2inl2/abenhami/AquariumApp/bin.log.out &"'
+                sh'sh -c "jJENKINS_NODE_COOKIE=cookie java -jar  /home/2inl2/abenhami/AquariumApp/bin/Aquarium-0.0.1-SNAPSHOT.jar > /home/2inl2/abenhami/AquariumApp/bin.log.out &"'
             }
         }
     }
