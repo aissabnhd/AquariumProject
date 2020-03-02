@@ -62,43 +62,64 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.6.0</version>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.9.1</version>
+				<configuration>
+					<nodeVersion>v13.6.0</nodeVersion>
+					<npmVersion>6.13.4</npmVersion>
+					<workingDirectory>src/main/angular/</workingDirectory>
+				</configuration>
 				<executions>
-
-
-
 					<execution>
-						<id>npm-install</id>
-						<phase>generate-sources</phase>
+						<id>install node and npm</id>
 						<goals>
-							<goal>exec</goal>
+							<goal>install-node-and-npm</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>npm run build</id>
+						<goals>
+							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<workingDirectory>${basedir}/src/main/angular</workingDirectory>
-							<executable>npm</executable>
-							<arguments>
-								<argument>install</argument>
-							</arguments>
+							<arguments>run build</arguments>
 						</configuration>
 					</execution>
-
-
 					<execution>
-						<id>npm-ng-build</id>
-						<phase>generate-sources</phase>
+						<id>prod</id>
 						<goals>
-							<goal>exec</goal>
+							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<workingDirectory>${basedir}/src/main/angular</workingDirectory>
-							<executable>npm</executable>
-							<arguments>
-								<argument>run</argument>
-								<argument>ng</argument>
-								<argument>build</argument>
-							</arguments>
+							<arguments>run-script build</arguments>
+						</configuration>
+						<phase>generate-resources</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/classes/resources/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/angular/dist/Aquarium</directory>
+								</resource>
+							</resources>
 						</configuration>
 					</execution>
 				</executions>
